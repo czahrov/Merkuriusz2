@@ -17,8 +17,8 @@
 	// var_dump( $subcat );
 	// var_dump( $orderby );
 	// var_dump( $order );
-	var_dump( $strona );
-	print_r( $items );
+	// var_dump( $strona );
+	// print_r( $items );
 	echo "-->";
 ?>
 	<body class="home-page">
@@ -125,49 +125,7 @@
 						<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
 						<img src="<?php echo get_template_directory_uri(); ?>/media/menubar.png"> &nbsp <span>NASZE PRODUKTY </span>
 						</button>
-						<ul class="dropdown-menu list-unstyled" >
-							<li role="presentation"> <a href="index2.html" role="menuitem" tabindex="-1" class="list-group-item">Biuro i biznes</a></li>
-							<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Czas i pogoda</a></li>
-							<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Do picia</a></li>
-							<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Dom i Ogród</a></li>
-							<li role="presentation"><a href="#" role="menuitem" tabindex="-1"class="list-group-item">Dzieci i zabawa</a></li>
-							<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Elektronika</a></li>
-							<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Materiały piśmiennicze</a></li>
-							<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Narzędzia, latarki, breloki</a></li>
-							<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Odblaski</a></li>
-							<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Parasole i peleryny</a></li>
-							<li role="presentation"><a href="#" role="menuitem" tabindex="-1"class="list-group-item">Torby i plecaki</a></li>
-							<li role="presentation" class="vip-menu-block">
-								<a  role="menuitem" tabindex="-1" class="list-group-item"> VIP Collections</a>
-								<ul class="vip-menu d-flex" >
-									<ul class="d-flex flex-column">
-										<li id="vip-elements">Balaupunkt</li>
-										<li id="vip-elements">Creative</li>
-										<li id="vip-elements">Huawei</li>
-									</ul>
-									<ul class="d-flex flex-column">
-										<li id="vip-elements">JBL</li>
-										<li id="vip-elements">Xiaomi</li>
-										<li id="vip-elements">Samsung</li>
-									</ul>
-									<ul class="d-flex flex-column">
-										<li id="vip-elements">Inne</li>
-										<li id="vip-elements">Wszystkie kategorie</li>
-									</ul>
-								</ul>
-							</li>
-							<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Wakacje, sport i rekreacja</a></li>
-							<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Zakreślacze</a></li>
-							<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Zdrowie i uroda</a></li>
-							<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Święta i okazje specjalne</a></li>
-							<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Odzież reklamowa</a></li>
-							<li role="presentation"><a href="#" role="menuitem" tabindex="-1"  class="list-group-item">Nagrody i trofea</a></li>
-							<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Opakowania</a></li>
-							<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Pinsy, plakietki, odznaki</a></li>
-							<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Breloki akrylowe</a></li>
-							<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Sublimacja - drukuj na kolorowo</a></li>
-							<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Inne produkty</a></li>
-						</ul>
+						<?php genMenu(); ?>
 					</div>
 				</div>
 			</div>
@@ -181,18 +139,39 @@
 			</ul>
 		</div>
 		<div class="container category-text-container">
-			<h1 id="categoryContainerText1">WYBIERZ KATEGORIE SPOŚRÓD:<span id="categoryContainerText2"> ELEKTRONIKA  </span></h1>
+			<h1 id="categoryContainerText1">WYBIERZ KATEGORIE SPOŚRÓD:
+				<span id="categoryContainerText2">
+					<?php
+						if( empty( $subcat ) ){
+							echo strtoupper( $cat );
+						}
+						else{
+							printf(
+								'%s > %s',
+								strtoupper( $cat ),
+								strtoupper( $subcat )
+							);
+						}
+							
+					?>
+				</span>
+			</h1>
 		</div>
 		<div class="container category-electronics-container" id="large-electronic-btn">
-			<div id="electronicstext">Adaptery i huby USB </div>
-			<div id="electronicstext">Akcesoria do smartfonów i tabletów </div>
-			<div id="electronicstext">Dyski twarde </div>
-			<div id="electronicstext">Głośniki i słuchawki</div>
-			<div id="electronicstext">Opakowania USB </div>
-			<div id="electronicstext">Pamięć USB</div>
-			<div id="electronicstext">Pendrive’y Silicon Power</div>
-			<div id="electronicstext">Pendrive’y VIP</div>
-			<div id="electronicstext">Powerbanki</div>
+			<a id="electronicstext" href="<?php echo home_url("kategoria/?nazwa={$cat}"); ?>">
+				Wszystkie
+			</a>
+			<?php
+				$subcats = getSubcatsList( $_GET['nazwa'] );
+				echo "<!--";
+				print_r( $subcats );
+				echo "-->";
+				foreach( $subcats as $subcat ):
+			?>
+			<a id="electronicstext" href='<?php echo home_url("kategoria/?nazwa={$cat}&podkategoria={$subcat['name']}"); ?>'>
+				<?php echo ucfirst( $subcat['name'] ); ?>
+			</a>
+			<?php endforeach; ?>
 		</div>
 		<div class="container electronics-dropdown-container"  id="electronic-dropdown-button">
 			<div class="dropdown">
@@ -219,9 +198,18 @@
 				<button class="btn dropdown-toggle " type="button" data-toggle="dropdown" id="sortbutton" > Sortuj według ceny &nbsp
 				<span class="caret"> <img src="<?php echo get_template_directory_uri(); ?>/media/caret.png" > </span></button>
 				<ul class="dropdown-menu" id="sort-dropdown">
-					<li><a href="#">HTML</a></li>
-					<li><a href="#">CSS</a></li>
-					<li><a href="#">JavaScript</a></li>
+					
+					<li>
+						<a href="?<?php echo http_build_query( array_merge( $_GET, array( 'według' => 'netto', 'sortuj' => 'ASC' ) ) ); ?>">
+							Rosnąco
+						</a>
+					</li>
+					<li>
+						<a href="?<?php echo http_build_query( array_merge( $_GET, array( 'według' => 'netto', 'sortuj' => 'DESC' ) ) ); ?>">
+							Malejąco
+						</a>
+					</li>
+					
 				</ul>
 			</div>
 		</div>
@@ -239,7 +227,9 @@
 									<a href="<?php echo home_url("zapytaj/?kod={$item['code']}"); ?>">wyślij zapytanie</a>
 								</div>
 								<h4 class="card-title grow ">
-									<a href="<?php echo home_url("produkt/?kod={$item['code']}"); ?>">Power bank 2200 mAh, wskaźnik laserowy</a>
+									<a href="<?php echo home_url("produkt/?kod={$item['code']}"); ?>">
+										<?php echo $item['title']; ?>
+									</a>
 								</h4>
 								<div class="price">
 									<h5>
@@ -266,7 +256,8 @@
 			</div>
 		</div>
 		<div class="d-flex justify-content-center pagination-products fifth-container">
-			<?php
+		<?php
+			if( count( $pages ) > 1 ){
 				$nav_links = array();
 				foreach( $pages  as $num => $page ){
 					$http_query = http_build_query( array_merge(
@@ -300,21 +291,9 @@
 				
 				echo implode( "", $nav_links );
 				
-			?>
-			<?php
-			/*
-			<a class="active" href="">1</a>
-			<a href="index2.html">2</a>
-			<a href="">3</a>
-			<a href="" class="hidden-xs-down">4</a>
-			<a href="" class="hidden-xs-down">5</a>
-			<a href="">6</a>
-			<span>...</span>
-			<a href="">7</a>
-			<a href="">8</a>
-			<a href="#">&raquo;</a>
-			*/
-			?>
+			}
+			
+		?>
 		</div>
 		<!-- =================================footer begins================================================================-->
 		

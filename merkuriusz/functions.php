@@ -32,8 +32,8 @@ function doSQL( $sql = "", $out = MYSQLI_ASSOC ){
 function getCategory( $cat_name = null, $subcat_name = null, $orderby = null, $order = null ){
 	
 	if( $cat_name !== null ){
-		if( $orderby === null ) $orderby = 'ID';
-		if( $order === null ) $orderby = 'DESC';
+		if( in_array( $orderby, array( null, '' ) ) ) $orderby = 'ID';
+		if( $order === null ) $order = 'DESC';
 		
 		if( $subcat_name !== null ){
 			$sql = "SELECT prod.*
@@ -56,9 +56,8 @@ function getCategory( $cat_name = null, $subcat_name = null, $orderby = null, $o
 			
 		}
 		
-		// $sql .= " ORDER BY {$orderby} {$order}";
+		$sql .= " ORDER BY prod.{$orderby} {$order}";
 		
-		// return $sql;
 		return doSQL( $sql );
 		
 	}
@@ -69,3 +68,65 @@ function getCategory( $cat_name = null, $subcat_name = null, $orderby = null, $o
 	
 }
 
+function getSubcatsList( $cat_name = null ){
+	$con = getConnect();
+	$sql = "SELECT subcat.name
+	FROM XML_category as cat
+	JOIN XML_category as subcat
+	ON cat.ID = subcat.parent
+	WHERE cat.name = '{$cat_name}'
+	ORDER BY subcat.name ASC";
+	
+	return doSQL( $sql );
+	
+}
+
+function getProduct( $code = null ){
+	$sql = "SELECT * FROM XML_product WHERE code = '{$code}'";
+	return doSQL( $sql );
+	
+}
+
+function genMenu(){
+	$menu = array(
+		'Biuro i biznes',
+		'Czas i pogoda',
+		'Do picia',
+		'Dom i ogród',
+		'Dzieci i zabawa',
+		'Elektronika',
+		'Materiały piśmiennicze',
+		'Narzędzia, latarki, breloki',
+		'Odblaski',
+		'Parasole i peleryny',
+		'Torby i plecaki',
+		'VIP',
+		'Wakacje, sport i rekreacja',
+		'Zakreślacze',
+		'Zdrowie i uroda',
+		'Święta i okazje specjalne',
+		'Odzież reklamowa',
+		'Nagrody i trofea',
+		'Opakowania',
+		'Pinsy, plakietki i odznaki',
+		'Inne produkty',
+		
+	);
+	
+	echo '<ul class="dropdown-menu list-unstyled">';
+	foreach( $menu as $item ){
+		printf(
+			'<li role="presentation">
+				<a href="%s" role="menuitem" tabindex="-1" class="list-group-item">
+					%s
+				</a>
+			</li>',
+			home_url("kategoria/?nazwa={$item}"),
+			$item
+			
+		);
+		
+	}
+	echo '</ul>';
+	
+}

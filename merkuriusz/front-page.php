@@ -104,49 +104,7 @@
 							<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
 							<img src="<?php echo get_template_directory_uri(); ?>/media/menubar.png"> &nbsp <span>NASZE PRODUKTY </span>
 							</button>
-							<ul class="dropdown-menu list-unstyled" >
-								<li role="presentation"> <a href="index2.html" role="menuitem" tabindex="-1" class="list-group-item">Biuro i biznes</a></li>
-								<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Czas i pogoda</a></li>
-								<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Do picia</a></li>
-								<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Dom i Ogród</a></li>
-								<li role="presentation"><a href="#" role="menuitem" tabindex="-1"class="list-group-item">Dzieci i zabawa</a></li>
-								<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Elektronika</a></li>
-								<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Materiały piśmiennicze</a></li>
-								<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Narzędzia, latarki, breloki</a></li>
-								<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Odblaski</a></li>
-								<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Parasole i peleryny</a></li>
-								<li role="presentation"><a href="#" role="menuitem" tabindex="-1"class="list-group-item">Torby i plecaki</a></li>
-								<li role="presentation" class="vip-menu-block">
-									<a  role="menuitem" tabindex="-1" class="list-group-item"> VIP Collections</a>
-									<ul class="vip-menu d-flex" >
-										<ul class="d-flex flex-column">
-											<li id="vip-elements">Balaupunkt</li>
-											<li id="vip-elements">Creative</li>
-											<li id="vip-elements">Huawei</li>
-										</ul>
-										<ul class="d-flex flex-column">
-											<li id="vip-elements">JBL</li>
-											<li id="vip-elements">Xiaomi</li>
-											<li id="vip-elements">Samsung</li>
-										</ul>
-										<ul class="d-flex flex-column">
-											<li id="vip-elements">Inne</li>
-											<li id="vip-elements">Wszystkie kategorie</li>
-										</ul>
-									</ul>
-								</li>
-								<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Wakacje, sport i rekreacja</a></li>
-								<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Zakreślacze</a></li>
-								<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Zdrowie i uroda</a></li>
-								<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Święta i okazje specjalne</a></li>
-								<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Odzież reklamowa</a></li>
-								<li role="presentation"><a href="#" role="menuitem" tabindex="-1"  class="list-group-item">Nagrody i trofea</a></li>
-								<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Opakowania</a></li>
-								<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Pinsy, plakietki, odznaki</a></li>
-								<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Breloki akrylowe</a></li>
-								<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Sublimacja - drukuj na kolorowo</a></li>
-								<li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="list-group-item">Inne produkty</a></li>
-							</ul>
+							<?php genMenu(); ?>
 						</div>
 					</div>
 					<div class="col-md-12 col-lg-9 content-block">
