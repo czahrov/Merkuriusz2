@@ -204,45 +204,45 @@ class EASYGIFTS extends XMLAbstract{
 			
 		}
 		elseif( array_key_exists( 'wenger - bagaże biznesowe i akcesoria podróżne', $this->_cats ) ){
-			$cat_name = 'VIP';
+			$cat_name = 'VIP Collection';
 			$subcat_name = 'Wenger';
 			
 		}
 		elseif( array_key_exists( 'schwarzwolf', $this->_cats ) ){
-			$cat_name = 'VIP';
+			$cat_name = 'VIP Collection';
 			$subcat_name = 'Schwarzwolf';
 			
 		}
 		elseif( array_key_exists( 'victorinox', $this->_cats ) ){
-			$cat_name = 'VIP';
+			$cat_name = 'VIP Collection';
 			$subcat_name = 'Victorinox';
 			
 		}
 		elseif( array_key_exists( 'nina ricci', $this->_cats ) ){
-			$cat_name = 'VIP';
+			$cat_name = 'VIP Collection';
 			$subcat_name = 'Nina Ricci';
 			
 		}
 		elseif( array_key_exists( 'jean-louis scherrer', $this->_cats ) ){
-			$cat_name = 'VIP';
+			$cat_name = 'VIP Collection';
 			$subcat_name = 'Jean-Louis Scherrer';
 			
 		}
 		elseif( array_key_exists( 'christian lacroix', $this->_cats ) ){
-			$cat_name = 'VIP';
+			$cat_name = 'VIP Collection';
 			$subcat_name = 'Christian Lacroix';
 			
 		}
 		elseif( array_key_exists( 'ungaro', $this->_cats ) ){
-			$cat_name = 'VIP';
+			$cat_name = 'VIP Collection';
 			$subcat_name = 'Ungaro';	
 		}
 		elseif( array_key_exists( 'cacharel', $this->_cats ) ){
-			$cat_name = 'VIP';
+			$cat_name = 'VIP Collection';
 			$subcat_name = 'Cacharel';
 		}
 		elseif( array_key_exists( 'cerruti 1881', $this->_cats ) ){
-			$cat_name = 'VIP';
+			$cat_name = 'VIP Collection';
 			$subcat_name = 'Cerruti 1881';
 		}
 		elseif( array_key_exists( 'odpoczynek', $this->_cats ) ){
@@ -274,7 +274,7 @@ class EASYGIFTS extends XMLAbstract{
 		}
 		elseif( array_key_exists( $k = 'elektronika markowa', $this->_cats ) ){
 			$cat_name = 'VIP Elektronika';
-			$subcat_name = $k;	
+			// $subcat_name = $k;
 		}
 		elseif( array_key_exists( $k = 'nowości 2018', $this->_cats ) ){
 			$cat_name = 'Najnowsze produkty';
@@ -319,10 +319,10 @@ class EASYGIFTS extends XMLAbstract{
 		}
 		else{
 			/* generowanie tablicy ze stanem magazynowym */
-			$price_a = array();
+			$stock_a = array();
 			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'stock' ] ) );
 			foreach( $XML->children() as $item ){
-				$price_a[ (string)$item->code_full ] = (int)$item->quantity_24h;
+				$stock_a[ (string)$item->code_full ] = (int)$item->quantity_24h;
 			}
 			
 			// parsowanie danych z XML
@@ -336,7 +336,6 @@ class EASYGIFTS extends XMLAbstract{
 					if( !empty( $s = $single_cat->subcategories->subcategory ) ){
 						foreach( $s as $single_subcat ){
 							$this->_cats[ mb_strtolower( (string)$single_cat->name ) ][] = mb_strtolower( (string)$single_subcat->name );
-							
 						}
 						
 					}
@@ -433,7 +432,7 @@ class EASYGIFTS extends XMLAbstract{
 					'sale' => $sale,
 					'data' => $dt,
 					'marking' => $marking,
-					'instock' => $price_a[ $code ],
+					'instock' => $stock_a[ $code ],
 					'brand' => $brand,
 					
 				);

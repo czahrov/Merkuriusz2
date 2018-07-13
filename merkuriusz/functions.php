@@ -1,5 +1,7 @@
 <?php
 
+add_theme_support( 'menus' );
+
 function printTitle(){
 	printf(
 		'%s | %s',
@@ -93,25 +95,32 @@ function genMenu(){
 		'Czas i pogoda',
 		'Do picia',
 		'Dom i ogród',
-		'Dzieci i zabawa',
+		'Smycze',
+		'Dzieci, zabawa, szkoła',
+		'Pluszaki',
 		'Elektronika',
 		'Materiały piśmiennicze',
-		'Narzędzia, latarki, breloki',
+		'Narzędzia, latarki, breloki, antystresy',
 		'Odblaski',
 		'Parasole i peleryny',
 		'Torby i plecaki',
-		'VIP',
+		'VIP Collection',
 		'Wakacje, sport i rekreacja',
-		'Zakreślacze',
 		'Zdrowie i uroda',
 		'Święta i okazje specjalne',
-		'Odzież reklamowa',
+		'Tekstylia i odzież',
 		'Nagrody i trofea',
 		'Opakowania',
-		'Pinsy, plakietki i odznaki',
-		'Inne produkty',
+		'Etui i portfele',
+		'Pinsy, plakietki, odznaki',
+		'Sublimacja - drukuj na kolorowo',
+		'VIP Skóra',
 		
 	);
+	
+	sort( $menu );
+	
+	$menu[] = 'Inne produkty';
 	
 	echo '<ul class="dropdown-menu list-unstyled">';
 	foreach( $menu as $item ){

@@ -3,3 +3,21 @@ Theme Name: merkuriusz
 Author: SCEPTER Agencja Interaktywna
 Author URI: http://www.scepter.pl
 */
+
+body{
+	
+	&.home-page{
+		
+		#Nav-container
+		{
+			
+			.dropdown-menu{
+				position: static;
+				
+			}
+			
+		}
+		
+	}
+	
+}
