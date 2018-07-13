@@ -8,6 +8,7 @@
 	wp_enqueue_style( "owl", get_template_directory_uri() . "/css/owl.css", array(), $ver );
 	wp_enqueue_style( "owl-theme", get_template_directory_uri() . "/css/owl-theme.css", array(), $ver );
 	wp_enqueue_style( "stylesheet", get_template_directory_uri() . "/css/stylesheet.css", array(), $ver );
+	wp_enqueue_style( "style", get_template_directory_uri() . "/style.css", array(), $ver );
 	
 	// wp_enqueue_script( string $handle, string $src = '', array $deps = array(), string|bool|null $ver = false, bool $in_footer = false )
 	wp_enqueue_script( "jQ", "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js", array(), false, true );
