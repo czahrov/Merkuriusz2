@@ -261,7 +261,7 @@
 						?>
 						<div class="single-item col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 mb-md-0 mb-3">
 							<div class="card h-100 d-flex">
-								<a href="produkt-single.html">
+								<a href="<?php echo home_url("produkt/?kod={$item['code']}"); ?>">
 									<div class="card-img" style="background-image: url( <?php echo $photos[0]; ?> );"></div>
 								</a>
 								<div class="card-body d-flex flex-column">
