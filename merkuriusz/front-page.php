@@ -250,11 +250,18 @@
 			<div class="col-lg-12 footer-container" style="margin-top:40px;">
 				<h1 id="thirdContainerText1">OTRZYMUJ<span id="thirdContainerText2"> Najświeższe informacje </span></h1>
 			</div>
-			<div class=" col-lg-12 subscribe-section text-center">
+			<form class="subscribe-section col-lg-12 text-center">
 				<p>Zapisz sie do naszego newslettera</p>
-				<input type="text" placeholder="Wpisz swoj adres e-mail">
+				<input type="mail" placeholder="Wpisz swoj adres e-mail" required>
+				<div class='zgoda d-flex align-items-center justify-content-start'>
+					<input type="checkbox" id="rodo" required>
+					<label for="rodo">
+						Akceptacja RODO
+					</label>
+				</div>
 				<button type="submit" >Zapisz sie</button>
-			</div>
+				
+			</form>
 		</div>
 		<!--======================= subscribe-container closed =========================-->
 		<!-- =================================footer begins================================================================-->

@@ -58,8 +58,8 @@
 							WHERE cat.name = 'VIP Elektronika'");
 							
 							shuffle( $items );
-							$sub = array_slice( $items, 0, 6 );
-							$chunks = array_chunk( $sub, 2 );
+							$sub = array_slice( $items, 0, 9 );
+							$chunks = array_chunk( $sub, 3 );
 							
 							foreach( $chunks as $chunk ):
 						?>

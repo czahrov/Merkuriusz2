@@ -3,6 +3,9 @@ Theme Name: merkuriusz
 Author: SCEPTER Agencja Interaktywna
 Author URI: http://www.scepter.pl
 */
+* {
+  cursor: default; }
+
 body.home-page #Nav-container .dropdown-menu, body.product-page #Nav-container .dropdown-menu {
   position: static; }
 @media (min-width: 992px) {
@@ -54,8 +57,21 @@ body.single-page .banner {
     font-size: 20px; }
 body.single-page .content {
   line-height: 30px; }
+body .subscribe-section #rodo {
+  margin: initial;
+  width: initial; }
+  body .subscribe-section #rodo + label {
+    margin: initial;
+    padding: 0 20px;
+    font-weight: bold;
+    color: #fff; }
+body .subscribe-section button {
+  top: 44px; }
 
 #owl-demo .owl-item img {
   max-width: 100%; }
+
+.products-block .bx-viewport {
+  height: initial; }
 
 /*# sourceMappingURL=style.css.map */

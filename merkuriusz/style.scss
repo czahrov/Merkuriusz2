@@ -4,6 +4,11 @@ Author: SCEPTER Agencja Interaktywna
 Author URI: http://www.scepter.pl
 */
 
+*{
+	cursor: default;
+	
+}
+
 body{
 	
 	&.home-page,
@@ -151,6 +156,30 @@ body{
 		
 	}
 	
+	.subscribe-section{
+		
+		#rodo
+		{
+			margin: initial;
+			width: initial;
+			
+			&+label{
+				margin: initial;
+				padding: 0 20px;
+				font-weight: bold;
+				color: #fff;
+				
+			}
+			
+		}
+		
+		button{
+			top: 44px;
+			
+		}
+		
+	}
+	
 }
 
 #owl-demo
@@ -162,6 +191,15 @@ body{
 			max-width: 100%;
 			
 		}
+		
+	}
+	
+}
+
+.products-block{
+	
+	.bx-viewport{
+		height: initial;
 		
 	}
 	
