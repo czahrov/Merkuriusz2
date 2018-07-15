@@ -14,16 +14,18 @@
 	<div class="row">
 		<div class="col-lg-3 col-md-6 col-sm-12 col-12  mb-sm-3 mb-3 mt-2 mt-sm-0">
 			<a  href="<?php echo home_url(); ?>" title="Merkuriusz" class="logo-block">
-			<img src="<?php echo get_template_directory_uri(); ?>/media/logo1.jpg" alt="Merkuriusz logo" id="logo" />
+				<img src="<?php echo get_template_directory_uri(); ?>/media/logo1.jpg" alt="Merkuriusz logo" id="logo" />
 			</a>
 		</div>
 		<div class="col-lg-9 col-md-6 col-sm-12" id="top-container-search">
 			<div class="row">
 				<div class="col-lg-7 col-md-12 col-sm-12 mb-sm-3 mb-3">
-					<form class="form-inline" method="get" id="search-small-outline">
+					<form class="form-inline" method="get" action="<?php echo home_url(); ?>" id="search-small-outline">
 						<div class="input-group justify-content-md-end justify-content-sm-center">
-							<input type="text" class="query-small" placeholder="Wpisz nazwę lub kod produktu">
-							<button type="submit" id="searchsubmit-small"> SKUKAJ &nbsp <img src="<?php echo get_template_directory_uri(); ?>/media/search.png" id="Searchimage"> </button> 
+							<input type="text" name='s' class="query-small" placeholder="Wpisz nazwę lub kod produktu">
+							<button type="submit" id="searchsubmit-small">
+								SZUKAJ &nbsp <img src="<?php echo get_template_directory_uri(); ?>/media/search.png" id="Searchimage">
+							</button> 
 						</div>
 					</form>
 				</div>
@@ -46,8 +48,7 @@
 <div class="main-menu-section main-menu-block">
 	<div class="container" >
 		<div class="row">
-			<div class="col-md-3 visible-xl">
-			</div>
+			<div class="col-md-3 visible-xl"></div>
 			<div class="col-md-12 col-lg-9 col-xl-9">
 				<nav class="navbar navbar-expand-lg navbar-dark bg-primary static-top" id="navbar-container">
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -158,7 +159,7 @@ object(WP_Post)#3703 (37) {
 							?>
 						</ul>
 						<a class="ml-auto search- d-flex">
-						<i class=" ion-ios-search-strong"></i>
+							<i class=" ion-ios-search-strong"></i>
 						</a>
 					</div>
 				</nav>

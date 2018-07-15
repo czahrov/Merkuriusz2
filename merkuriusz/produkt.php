@@ -22,11 +22,7 @@
 			</div>
 			<div class="col-md-12 col-lg-9 content-block">
 				<div class="category-third-container">
-					<ul class="breadcrumb">
-						<li class="active"><a href="#">Elektronika</a></li>
-						<li><a href="#"> Power Bank</a></li>
-						<li><a href="#">Power bank 2200mAh, wskaźnik laserowy </a></li>
-					</ul>
+					<?php get_template_part('segment/breadcrumb'); ?>
 				</div>
 				<div class="category-product-title" >
 					<p>
@@ -49,10 +45,9 @@
 							</div>
 							<div class="product-page-main-banner-mobile">
 								<div class="product-page-main-banner-mobile-slider">
-									<div class="item single-product-image"></div>
-									<div class="item single-product-image"></div>
-									<div class="item single-product-image"></div>
-									<div class="item single-product-image"></div>
+									<?php foreach( $imgs as $img ): ?>
+									<div class="item single-product-image" style='background-image:url(<?php echo $img; ?>);'></div>
+									<?php endforeach; ?>
 								</div>
 								<div class="single-product-arrows"> 
 									<a id="single-productarrow-back"> <img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/media/productarrow-back.png" alt=""/> </a>
@@ -70,15 +65,11 @@
 							</div>
 							<div class="product-small-imge-slider-arrows">
 								<div class="product-small-images-slider">
+									<?php foreach( $imgs as $img ): ?>
 									<div class="item">
-										<div id="single-product-img1"> </div>
+										<div id="single-product-img1" style='background-image:url(<?php echo $img; ?>);'></div>
 									</div>
-									<div class="item">
-										<div id="single-product-img1"> </div>
-									</div>
-									<div class="item" >
-										<div id="single-product-img1"> </div>
-									</div>
+									<?php endforeach; ?>
 								</div>
 								<a  id="single-productarrow-back" class="single-productarrow"> <img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/media/productarrow-back.png" alt=""/> </a>
 								<a id="single-productarrow-forward" class="single-productarrow"> <img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/media/productarrow-forward.png" alt=""/> </a>

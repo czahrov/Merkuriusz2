@@ -1,13 +1,16 @@
 <?php
-	/* template name: Produkt - kategoria */
 	get_header();
-	$cat = $_GET['nazwa'];
-	$subcat = $_GET['podkategoria'];
-	$orderby = $_GET['według'];
-	$order = $_GET['sortuj'];
+	$word = $_GET['s'];
+	$orderby = empty($s = $_GET['według'])?( 'ID' ):( $s );
+	$order = empty( $s = $_GET['sortuj'] )?( 'DESC' ):( $s );
+	$fetch = doSQL("SELECT * FROM XML_product WHERE
+	code LIKE '%{$word}%'
+	OR title LIKE '%{$word}%'
+	ORDER BY {$orderby} {$order}
+	");
 	$strona = max( 1, (int)$_GET['strona'] );
 	$perpage = 16;
-	$pages = array_chunk( getCategory( $cat, $subcat, $orderby, $order ), $perpage );
+	$pages = array_chunk( $fetch, $perpage );
 	$items = $pages[ $strona - 1 ];
 	$nav_end = 1;
 	$nav_range = 3;
@@ -38,60 +41,6 @@
 		<!-- end of the menu-section--> 
 		<div class="container category-third-container">
 			<?php get_template_part('segment/breadcrumb'); ?>
-		</div>
-		<div class="container category-text-container">
-			<h1 id="categoryContainerText1">WYBIERZ KATEGORIE SPOŚRÓD:
-				<span id="categoryContainerText2">
-					<?php
-						if( empty( $subcat ) ){
-							echo mb_strtoupper( $cat );
-						}
-						else{
-							echo mb_strtoupper( $cat );
-						}
-							
-					?>
-				</span>
-			</h1>
-		</div>
-		<div class="container category-electronics-container" id="large-electronic-btn">
-			<a id="electronicstext" href="<?php echo home_url("kategoria/?nazwa={$cat}"); ?>">
-				Wszystkie
-			</a>
-			<?php
-				$subcats = getSubcatsList( $_GET['nazwa'] );
-				echo "<!--";
-				print_r( $subcats );
-				echo "-->";
-				foreach( $subcats as $subcat ):
-			?>
-			<a id="electronicstext" href='<?php echo home_url("kategoria/?nazwa={$cat}&podkategoria={$subcat['name']}"); ?>'>
-				<?php echo ucfirst( $subcat['name'] ); ?>
-			</a>
-			<?php endforeach; ?>
-		</div>
-		<div class="container electronics-dropdown-container"  id="electronic-dropdown-button">
-			<div class="dropdown">
-				<div class="dropdown open show">
-					<button class="btn btn-default dropdown-toggle" type="button" id="electronic-dropdown" data-toggle="dropdown">
-					<img src="<?php echo get_template_directory_uri(); ?>/media/menubar.png"> &nbsp WYBIERZ KATEGORIE SPOŚRÓD
-					</button>
-					<ul class="dropdown-menu list-unstyled">
-						<li role="presentation" id="electronic-dropdown-unorderlist" >
-							<a href="<?php echo home_url("kategoria/?nazwa={$cat}"); ?>">
-								Wszystkie
-							</a>
-						</li>
-						<?php foreach( $subcats as $subcat ): ?>
-						<li role="presentation" id="electronic-dropdown-unorderlist">
-							<a class="list-group-item" href="<?php echo home_url("kategoria/?nazwa={$subcat['name']}"); ?>" role="menuitem" tabindex="-1">
-								<?php echo $subcat['name']; ?>
-							</a>
-						</li>
-						<?php endforeach; ?>
-					</ul>
-				</div>
-			</div>
 		</div>
 		<div class="container category-dropdown-container" id="dropdown-category-button">
 			<div class="dropdown">

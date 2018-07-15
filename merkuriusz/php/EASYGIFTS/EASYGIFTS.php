@@ -376,14 +376,13 @@ class EASYGIFTS extends XMLAbstract{
 				$new = (int)$item->attributes->new;
 				$sale = (float)$item->baseinfo->price_sellout > 0?( 1 ):( 0 );
 				$promotion = (float)$item->baseinfo->price_promotion > 0?( 1 ):( 0 );
-				$marking_size = (string)$item->marking_size;
-				$marking = "{$marking_size}<br>>";
+				$marking = "";
 				$marking_a = array();
-				foreach( $item->markgroups->children() as $child ){
+				foreach( $item->markgroups->markgroup as $child ){
 					$marking_a[] = (string)$child->name;
 
 				}
-				$marking .= implode( ", ", $marking_a );
+				$marking .= implode( "<br>", $marking_a );
 				$brand = (string)$item->brand->name;
 				
 				/* if( $code == 'T26013203' ){
