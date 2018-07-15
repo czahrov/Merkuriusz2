@@ -38,48 +38,24 @@
 		<div class="container footer-slider-block">
 			<div class="row footer-slider-width">
 				<div id="owl-demo" class="owl-carousel owl-theme">
+					<?php
+						$slides = get_pages( array(
+							'parent' => get_page_by_path('specjalne/slider-w-stopce')->ID,
+							
+						) );
+						
+						if( DEV ){
+							echo "<!--";
+							print_r( $slides );
+							echo "-->";
+						}
+						
+						foreach( $slides as $slide ):
+					?>
 					<div class="item">
-						<img src="<?php echo get_template_directory_uri(); ?>/media/brand1.png">
+						<img src="<?php echo wp_get_attachment_image_url( get_post_meta( $slide->ID, 'grafika', true ), 'medium' ); ?>">
 					</div>
-					<div class="item">
-						<img src="<?php echo get_template_directory_uri(); ?>/media/brand2.png">
-					</div>
-					<div class="item">
-						<img src="<?php echo get_template_directory_uri(); ?>/media/brand3.png">
-					</div>
-					<div class="item">
-						<img src="<?php echo get_template_directory_uri(); ?>/media/brand4.png">
-					</div>
-					<div class="item">
-						<img style="width:100%;" src="<?php echo get_template_directory_uri(); ?>/media/brand5.png">
-					</div>
-					<div class="item">
-						<img src="<?php echo get_template_directory_uri(); ?>/media/brand6.png">
-					</div>
-					<div class="item">
-						<img src="<?php echo get_template_directory_uri(); ?>/media/brand7.png">
-					</div>
-					<div class="item">
-						<img src="<?php echo get_template_directory_uri(); ?>/media/brand1.png">
-					</div>
-					<div class="item">
-						<img src="<?php echo get_template_directory_uri(); ?>/media/brand2.png">
-					</div>
-					<div class="item">
-						<img src="<?php echo get_template_directory_uri(); ?>/media/brand3.png">
-					</div>
-					<div class="item">
-						<img src="<?php echo get_template_directory_uri(); ?>/media/brand4.png">
-					</div>
-					<div class="item">
-						<img style="width: 100%;" src="<?php echo get_template_directory_uri(); ?>/media/brand5.png">
-					</div>
-					<div class="item">
-						<img src="<?php echo get_template_directory_uri(); ?>/media/brand6.png">
-					</div>
-					<div class="item">
-						<img src="<?php echo get_template_directory_uri(); ?>/media/brand7.png">
-					</div>
+					<?php endforeach; ?>
 				</div>
 			</div>
 			<div class="arrow-circle left prev">
@@ -100,49 +76,50 @@
 								wizerunek marki oraz przekazywać czytelne komunikaty lud wiadomości do 
 								wszystkich Twoich odbiorców.
 							</p>
-							<a class="logo" href="index.html">
+							<a class="logo" href="<?php echo home_url(); ?>">
 							<img src="<?php echo get_template_directory_uri(); ?>/media/footerlogo.png">
 							</a>
 						</div>
 						<div class=" col-md-3 footer-shortcuts">
 							<span id="shortcuts">NA SKRÓTY </span>
-							<br/>
-							<span id="footer-elements">O nas </span>
-							<br/>
-							<span id="footer-elements">Oferta </span>
-							<br/>
-							<span id="footer-elements">Znakowanie </span>
-							<br/>
-							<span id="footer-elements">Drukowanie </span>
-							<br/>
-							<span id="footer-elements">Kalendarze </span>
-							<br/>
-							<span id="footer-elements">Kontakt </span>
+							<?php
+								$menu = wp_get_nav_menu_items('na-skroty');
+								foreach( $menu as $item ){
+									printf(
+										'<div id="footer-elements">
+											<a href="%s">
+												%s
+											</a>
+										</div>',
+										$item->url,
+										$item->title
+									);
+									
+								}
+								
+							?>
+							
 						</div>
 						<div class=" col-md-3  footer-INFORMACJE">
 							<span id="INFORMACJE">
 								INFORMACJE
 							</span>
-							<br/>
-							<span id="footer-elements">
-								Polityka prywatnośc
-							</span>
-							<br/>
-							<span id="footer-elements">
-								Targi
-							</span>
-							<br/>
-							<span id="footer-elements">
-								Projekty ue
-							</span>
-							<br/>
-							<span id="footer-elements">
-								Pliki cookies
-							</span>
-							<br/>
-							<span id="footer-elements">
-								Inne
-							</span>
+							<?php
+								$menu = wp_get_nav_menu_items('informacje');
+								foreach( $menu as $item ){
+									printf(
+										'<div id="footer-elements">
+											<a href="%s">
+												%s
+											</a>
+										</div>',
+										$item->url,
+										$item->title
+									);
+									
+								}
+								
+							?>
 						</div>
 					</div>
 				</div>
@@ -155,7 +132,11 @@
 					<p id="copyright1">Copyright Merkuriusz 2018 </p>
 				</div>
 				<div class="col-md-6">
-					<p id="copyright2"> Project i wykonanie : Scepter Agencja interaktywna </p>
+					<p id="copyright2"> Project i wykonanie : 
+						<a href='http://www.scepter.pl'>
+							Scepter Agencja interaktywna
+						</a>
+					</p>
 				</div>
 			</div>
 		</div>
