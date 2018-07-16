@@ -53,6 +53,17 @@
 		) );
 		
 	}
+	/* strona wyszukiwania */
+	elseif( is_search() ){
+		array_push(
+			$path,
+			array(
+				'name' => "Fraza: {$_GET['s']}",
+				'url' => home_url("/?s={$_GET['s']}"),
+			)
+		);
+		
+	}
 	/* standardowa strona */
 	else{
 		$temp = array();
