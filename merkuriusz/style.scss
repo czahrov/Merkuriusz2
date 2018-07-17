@@ -203,6 +203,39 @@ body{
 		
 	}
 	
+	ul{
+		
+		li{
+			padding: 12px 0;
+			border: solid #ebebeb;
+			border-width: 1px 1px 0 1px;
+			
+			a{
+				display: block !important;
+				color:#020202;
+				font-size: 15px;
+				font-weight: 500;
+				
+			}
+			
+			&:last-child{
+				border-bottom-width: 1px;
+			}
+			
+			&:not(:first-child):hover{
+				background-color: #2a2d3a;
+				
+				a{
+					text-decoration: none;
+					color: #d5d6d7;
+				}
+				
+			}
+			
+		}
+		
+	}
+	
 }
 
 #pdf-popup
@@ -318,3 +351,14 @@ body{
 	
 }
 
+#womanimage
+{
+	width: 100%;
+	background:{
+		position: center top;
+		size: cover;
+		repeat: no-repeat;
+		
+	};
+	
+}

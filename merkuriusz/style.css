@@ -73,6 +73,22 @@ body .subscribe-section button {
 
 .products-block .bx-viewport {
   height: initial; }
+.products-block ul li {
+  padding: 12px 0;
+  border: solid #ebebeb;
+  border-width: 1px 1px 0 1px; }
+  .products-block ul li a {
+    display: block !important;
+    color: #020202;
+    font-size: 15px;
+    font-weight: 500; }
+  .products-block ul li:last-child {
+    border-bottom-width: 1px; }
+  .products-block ul li:not(:first-child):hover {
+    background-color: #2a2d3a; }
+    .products-block ul li:not(:first-child):hover a {
+      text-decoration: none;
+      color: #d5d6d7; }
 
 #pdf-popup {
   position: fixed;
@@ -134,5 +150,11 @@ body .subscribe-section button {
     right: 0;
     bottom: 0;
     z-index: 50; }
+
+#womanimage {
+  width: 100%;
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat; }
 
 /*# sourceMappingURL=style.css.map */
