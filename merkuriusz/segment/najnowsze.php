@@ -1,5 +1,5 @@
 <div class="col-lg-12 third-container all-gap">
-	<h1 id="thirdContainerText1">NAJNOWSZE <span id="thirdContainerText2"> 360 stopni dla Twojej firmy </span></h1>
+	<h1 id="thirdContainerText1">NAJNOWSZE <span id="thirdContainerText2"> produkty</span></h1>
 </div>
 <div class="fourth-container">
 	<div class="row" id="fourth-container-content">
@@ -33,7 +33,14 @@
 						</h4>
 						<div class="price">
 							<h5>
-							<?php printf( '%.2f %s', $item['netto'], $item['currency'] ); ?>
+							<?php
+								if( $item['netto'] > 0 ){
+									printf( '%.2f %s netto', $item['netto'], $item['currency'] );
+								}
+								else{
+									echo "Wycena indywidualna";
+								}
+							?>
 							</h5>
 						</div>
 						<a class='button-show-item' href="<?php echo home_url("produkt/?kod={$item['code']}"); ?>">
