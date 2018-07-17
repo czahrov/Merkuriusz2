@@ -80,14 +80,15 @@
 								<!--
 								<p> Cena katalogowa: 42 zł </p>
 								-->
-								<h3> Cena już od
+								<h3> Cena już od:
 									<span>
 										<?php
-											printf(
-												'%.2f %s',
-												$item['netto'],
-												$item['currency']
-											);
+											if( $item['netto'] > 0 ){
+												printf( '%.2f %s', $item['netto'], $item['currency'] );
+											}
+											else{
+												echo "Wycena indywidualna";
+											}
 										?>
 									</span>
 								</h3>
@@ -113,7 +114,7 @@
 									<a href="tel:48146223364" id="contact-number"> +48 14 622 33 64 </a> 
 									<a href="mailto:biuro@merkuriusz.pl" id="contact-email"> biuro@merkuriusz.pl</a> 
 								</div>
-								<div class="product-social-contacts ">
+								<div class="product-social-contacts " hidden>
 									<p> Udostępnij znajomemu </p>
 									<a href="#"> <img src="<?php echo get_template_directory_uri(); ?>/media/social-contact-image.png"></a>
 								</div>
@@ -175,7 +176,14 @@
 									</h4>
 									<div class="price">
 										<h5>
-										<?php printf( '%.2f %s', $item['netto'], $item['currency'] ); ?>
+										<?php
+											if( $item['netto'] > 0 ){
+												printf( '%.2f %s', $item['netto'], $item['currency'] );
+											}
+											else{
+												echo "Wycena indywidualna";
+											}
+										?>
 										</h5>  
 									</div>
 									<a href="<?php echo home_url("produkt/?kod={$item['code']}"); ?>" class="button-show-item">

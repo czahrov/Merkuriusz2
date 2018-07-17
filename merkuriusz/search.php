@@ -83,11 +83,12 @@
 								<div class="price">
 									<h5>
 									<?php
-										printf(
-											'%.2f %s',
-											$item['netto'],
-											$item['currency']
-										);
+										if( $item['netto'] > 0 ){
+											printf( '%.2f %s', $item['netto'], $item['currency'] );
+										}
+										else{
+											echo "Wycena indywidualna";
+										}
 									?>
 									</h5>  
 								</div>

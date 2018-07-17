@@ -74,4 +74,65 @@ body .subscribe-section button {
 .products-block .bx-viewport {
   height: initial; }
 
+#pdf-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.7); }
+  #pdf-popup .box {
+    position: relative;
+    background-color: #fff; }
+    #pdf-popup .box .exit {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      top: 0;
+      right: 0;
+      background-color: #007bff;
+      color: #fff;
+      font-weight: bold;
+      font-size: 25px; }
+    #pdf-popup .box .view {
+      padding: 30px; }
+      #pdf-popup .box .view .page > .img {
+        height: 300px;
+        width: 300px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat; }
+      #pdf-popup .box .view .page .list {
+        padding: 0 20px;
+        min-width: 200px; }
+        #pdf-popup .box .view .page .list .item {
+          display: block;
+          padding: 0 10px;
+          height: 40px;
+          font-weight: bold;
+          border: 1px solid #e8e8e8;
+          margin-bottom: 10px;
+          cursor: pointer; }
+          #pdf-popup .box .view .page .list .item .img {
+            width: 100%;
+            height: 100%;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat; }
+      #pdf-popup .box .view .page:not(.open) {
+        display: none !important; }
+  #pdf-popup:not(.open) {
+    display: none !important; }
+
+.category-blocks #category-item-slider .item {
+  position: relative; }
+  .category-blocks #category-item-slider .item .hitbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50; }
+
 /*# sourceMappingURL=style.css.map */

@@ -9,6 +9,8 @@
 	wp_enqueue_style( "owl-theme", get_template_directory_uri() . "/css/owl-theme.css", array(), $ver );
 	wp_enqueue_style( "stylesheet", get_template_directory_uri() . "/css/stylesheet.css", array(), $ver );
 	wp_enqueue_style( "style", get_template_directory_uri() . "/style.css", array(), $ver );
+		wp_enqueue_style( "late", get_template_directory_uri() . "/css/late.css", array(), $ver );
+
 	
 	// wp_enqueue_script( string $handle, string $src = '', array $deps = array(), string|bool|null $ver = false, bool $in_footer = false )
 	wp_enqueue_script( "jQ", "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js", array(), false, true );
@@ -17,6 +19,7 @@
 	wp_enqueue_script( "bxslider", get_template_directory_uri() . "/js/jquery.bxslider.js", array(), $ver, true );
 	wp_enqueue_script( "owl", get_template_directory_uri() . "/js/owl.js", array(), $ver, true );
 	wp_enqueue_script( "custom", get_template_directory_uri() . "/js/custom.js", array(), $ver, true );
+	wp_enqueue_script( "FP", get_template_directory_uri() . "/js/facepalm.js", array(), $ver, true );
 	
 ?>
 <!DOCTYPE html>

@@ -1,0 +1,164 @@
+
+a {
+	cursor: pointer;
+}
+
+.content-styles h4{
+	font-weight: 400;
+    font-size: 21px;
+    margin-bottom: 15px;
+}
+
+.content-styles h5{
+	font-weight: 800;
+    font-size: 21px;
+    margin-bottom: 25px;
+}
+
+.content-styles p{
+	font-size: 15px;
+}
+
+.content-styles a{
+    width: 250px;
+    font-size: 12px;
+    color: #fff;
+    border: 0;
+    border-radius: 0;
+    line-height: 0;
+    padding: 22px 0;
+    background-color: #2996fb;
+    margin-top: 15px;
+    font-weight: 700;
+}
+
+.content-styles iframe{
+	margin-bottom: 50px;
+}
+
+
+.content-styles .wpcf7-submit{
+	 font-size: 12px;
+    color: #fff;
+    border: 0;
+    border-radius: 0;
+    line-height: 0;
+    padding: 22px 0;
+    background-color: #2996fb;
+    margin-top: 15px;
+    font-weight: 700;
+    width: 250px;
+}
+
+.wpcf7{
+	    -ms-flex-pack: center!important;
+    justify-content: center!important;
+    display: -ms-flexbox!important;
+    display: flex!important;
+
+}
+
+.wpcf7 input{
+	    width: 100%;
+    height: 44px;
+    padding-left: 10px;
+    border: 1px solid #dadada;
+}
+
+.wpcf7 textarea{
+	   width: 100%;
+    padding-left: 10px;
+    border: 1px solid #dadada;
+}
+
+#contact .content-column{
+	text-align: center;
+
+
+}
+
+.content-column form{
+	width: 100%;
+}
+
+.content-column label{
+	width: 70%;
+	line-height: 3;
+}
+
+/*menu znakowanie */
+
+.menu-menu-znakowanie-container{
+	width: 100%;
+}
+
+ul#menu-menu-znakowanie{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+ul#menu-menu-znakowanie li{
+	border-bottom: 0 !important;
+    border: 1px solid #ebebeb;
+    border-radius: 0;
+=    font-size: 15px !important;
+    color: #020202 !important;
+    font-weight: 500;
+}
+
+ul#menu-menu-znakowanie li:last-child{
+	    border-bottom: 1px solid #ebebeb!important;
+
+}
+
+
+ul#menu-menu-znakowanie li a{
+	 position: relative;
+    display: block;
+    padding: 2.232rem 1.25rem;
+	width: 100%;
+    font-size: 12px;
+    color: #fff;
+    border: 0;
+    border-radius: 0;
+    line-height: 0;
+    background-color: #fff;
+    font-weight: 700;
+    color: #000;
+    margin-top: 0;
+}
+
+ul#menu-menu-znakowanie li a:hover{
+	color: #d0d1d3;
+    background-color: #2a2d3a;
+    text-decoration: none;
+   
+}
+
+
+.galeria-znakowanie img{
+	margin:2px 0;
+	cursor: pointer;
+}
+
+.galeria-znakowanie img:hover{
+opacity: 0.6;
+}
+
+.galeria-znakowanie a{
+background-color: transparent;
+}
+
+
+ul#menu-menu-znakowanie li a:hover{
+	color: #d0d1d3;
+    background-color: #2a2d3a;
+    text-decoration: none;
+   
+}
+.active-menu a{
+	background: #020202 !important;
+	color: #d0d1d3 !important;
+}
+
