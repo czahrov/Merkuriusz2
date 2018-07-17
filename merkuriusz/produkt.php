@@ -43,36 +43,14 @@
 									</div>
 								</div>
 							</div>
-							<div class="product-page-main-banner-mobile">
-								<div class="product-page-main-banner-mobile-slider">
-									<?php foreach( $imgs as $img ): ?>
-									<div class="item single-product-image" style='background-image:url(<?php echo $img; ?>);'></div>
-									<?php endforeach; ?>
-								</div>
-								<div class="single-product-arrows"> 
-									<a id="single-productarrow-back"> <img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/media/productarrow-back.png" alt=""/> </a>
-									<a id="single-productarrow-forward"> <img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/media/productarrow-forward.png" alt=""/> </a>
-								</div>
-							</div>
 							<div class="single-product-gallery">
 								<div class="row">
 									<?php foreach( $imgs as $img ): ?>
 									<div class="col-md-4">
-										<div id="single-product-img1" style='background-image:url(<?php echo $img; ?>);'> </div>
+										<div class="single-product-img1" style='background-image:url(<?php echo $img; ?>);'> </div>
 									</div>
 									<?php endforeach; ?>
 								</div>
-							</div>
-							<div class="product-small-imge-slider-arrows">
-								<div class="product-small-images-slider">
-									<?php foreach( $imgs as $img ): ?>
-									<div class="item">
-										<div id="single-product-img1" style='background-image:url(<?php echo $img; ?>);'></div>
-									</div>
-									<?php endforeach; ?>
-								</div>
-								<a  id="single-productarrow-back" class="single-productarrow"> <img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/media/productarrow-back.png" alt=""/> </a>
-								<a id="single-productarrow-forward" class="single-productarrow"> <img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/media/productarrow-forward.png" alt=""/> </a>
 							</div>
 						</div>
 						<div class="col-md-6 category-single-product-description">
@@ -84,7 +62,7 @@
 									<span>
 										<?php
 											if( $item['netto'] > 0 ){
-												printf( '%.2f %s', $item['netto'], $item['currency'] );
+												printf( '%.2f %s netto', $item['netto'], $item['currency'] );
 											}
 											else{
 												echo "Wycena indywidualna";

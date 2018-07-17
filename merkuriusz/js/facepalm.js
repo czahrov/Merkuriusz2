@@ -48,6 +48,58 @@ $(function(){
 		$('#pdf-popup .box .view .page'),
 		$('#category-item-slider'),
 		$('#category-item-slider .item.inner'),
-	)
+	);
+	
+	/* galeria w widoku produktu */
+	(function( main, imgs, navs ){
+		var current = 0;
+		
+		imgs.click( function( e ){
+			var self = $(this);
+			
+			main
+			.css({
+				backgroundImage: function(){
+					var url = self.css('background-image').match(/http[^"]+/)[0];
+					current = self.parent().index();
+					return "url("+ url +")";
+					
+				},
+				
+			});
+			
+		} );
+		
+		navs.click( function( e ){
+			switch( $(this).index() ){
+				case 0:
+					current--;
+				break;
+				case 1:
+					current++;
+				break;
+			}
+			
+			if( current < 0 ) current = imgs.length - 1;
+			current %= imgs.length;
+			
+			main
+			.css({
+				backgroundImage: function(){
+					var url = imgs.eq( current ).css('background-image').match(/http[^"]+/)[0];
+					return "url("+ url +")";
+					
+				},
+				
+			});
+			
+		} );
+		
+	})
+	(
+		$('.category-single-product .single-product-image:not(.item)'),
+		$('.category-single-product .single-product-gallery .single-product-img1'),
+		$('.category-single-product .single-product-arrows a')
+	);
 	
 });

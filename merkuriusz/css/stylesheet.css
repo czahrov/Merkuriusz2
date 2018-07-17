@@ -1471,7 +1471,7 @@ ul.breadcrumb li a:hover a:active {
     margin-top:30px;
 
 }
-#single-product-img1
+.single-product-img1
 {
     border: 1px solid #e8e8e8;
     background: url(/wp-content/themes/merkuriusz/media/product1-2.png);
@@ -1896,10 +1896,8 @@ ul.breadcrumb li a:hover a:active {
 }
 
 @media (max-width:767px){
-    .product-page-main-banner-desktop{
-        display: none;
-    }   
-    .product-small-imge-slider-arrows{
+    
+	.product-small-imge-slider-arrows{
         display: none !important;
     }
     .carousel-head1{
@@ -1969,7 +1967,7 @@ ul.breadcrumb li a:hover a:active {
     #topHeaderPara2{
         float: none;
     }
-    #single-product-img1{
+    .single-product-img1{
         margin-bottom: 20px;
     }
     .category-single-product-description,
