@@ -347,8 +347,15 @@ class EASYGIFTS extends XMLAbstract{
 				$price = $item->baseinfo->price;
 				$price_promo = $item->baseinfo->price_promotion;
 				$price_sellout = $item->baseinfo->price_sellout;
-				$netto = (float)str_replace( ",", ".", empty( $price_sellout )?( empty( $price_promo )?( $price ):( $price_promo ) ):( $price_sellout ) );
+				if( (int)$item->additional_offer === 1 ){
+					$netto = 0;
+				}
+				else{
+					$netto = (float)str_replace( ",", ".", empty( $price_sellout )?( empty( $price_promo )?( $price ):( $price_promo ) ):( $price_sellout ) );
+					
+				}
 				$brutto = $netto * ( 1 + $this->_vat );
+					
 				// $catalog = addslashes( (string)$item-> );
 				$cat = addslashes( (string)$item->categories->category[0]->name );
 				// $subcat = addslashes( (string)$item->SubCategoryPL );
