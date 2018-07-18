@@ -15,12 +15,12 @@
 
 	
 	// wp_enqueue_script( string $handle, string $src = '', array $deps = array(), string|bool|null $ver = false, bool $in_footer = false )
+	wp_enqueue_script( "popper", "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js", array(), false, true );
 	wp_enqueue_script( "jQ", "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js", array(), false, true );
 	wp_enqueue_script( "bootstrap", "https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js", array(), false, true );
 	wp_enqueue_script( "GASP-CSS", get_template_directory_uri() . "/js/CSSPlugin.min.js", array(), false, true );
 	wp_enqueue_script( "GASP-Timeline", get_template_directory_uri() . "/js/TimelineLite.min.js", array(), false, true );
 	wp_enqueue_script( "GASP-Tween", get_template_directory_uri() . "/js/TweenLite.min.js", array(), false, true );
-	wp_enqueue_script( "popper", "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js", array(), false, true );
 	wp_enqueue_script( "bxslider", get_template_directory_uri() . "/js/jquery.bxslider.js", array(), $ver, true );
 	wp_enqueue_script( "owl", get_template_directory_uri() . "/js/owl.js", array(), $ver, true );
 	wp_enqueue_script( "custom", get_template_directory_uri() . "/js/custom.js", array(), $ver, true );

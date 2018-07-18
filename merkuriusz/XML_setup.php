@@ -3,6 +3,23 @@ require_once __DIR__ . "/php/cfg.php";
 
 $SHOP  = array();
 
+$SHOP['easygifts'] = new EASYGIFTS( array(
+	'products' => 'http://www.easygifts.com.pl/data/webapi/pl/xml/offer.xml',
+	'stock' => 'http://www.easygifts.com.pl/data/webapi/pl/xml/stocks.xml',
+),
+array(
+	'shop' => 'EASYGIFTS',
+) );
+
+
+$SHOP['jaguargift'] = new JAGUARGIFT( array(
+	'products' => '',
+),
+array(
+	'shop' => 'JAGUARGIFT',
+) );
+
+
 /* $SHOP['asgard'] = new ASGARD( array(
 	'products' => 'http://www.asgard.pl/www/xml/oferta.xml',
 ),
@@ -10,13 +27,6 @@ array(
 	'shop' => 'ASGARD',
 ) ); */
 
-/* $SHOP['midoceanbrands'] = new MIDOCEANBRANDS( array(
-	'products' => 'ftp://lucyna:80838286@transfer.midoceanbrands.com/prodinfo_PL.xml',
-	'stock' => 'ftp://lucyna:80838286@transfer.midoceanbrands.com/stock.xml',
-),
-array(
-	'shop' => 'MIDOCEANBRANDS',
-) ); */
 
 /* $SHOP['macma'] = new MACMA( array(
 	'products' => 'http://www.macma.pl/data/webapi/pl/xml/offer.xml',
@@ -40,14 +50,6 @@ array(
 array(
 	'shop' => 'ANDA',
 ) ); */
-
-$SHOP['easygifts'] = new EASYGIFTS( array(
-	'products' => 'http://www.easygifts.com.pl/data/webapi/pl/xml/offer.xml',
-	'stock' => 'http://www.easygifts.com.pl/data/webapi/pl/xml/stocks.xml',
-),
-array(
-	'shop' => 'EASYGIFTS',
-) );
 
 /* $SHOP['axpol'] = new AXPOL( array(
 	'products' => 'ftp://userPL099:QwqChVFh@ftp.axpol.com.pl/axpol_product_data_PL.xml',
