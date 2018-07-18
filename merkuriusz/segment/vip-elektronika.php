@@ -74,7 +74,14 @@
 									<?php echo $item['title']; ?>
 								</div>
 								<div class="col-md-4 product-price">
-									<?php printf( '%.2f %s', $item['netto'], $item['currency'] ); ?>
+									<?php
+										if( $item['netto'] > 0 ){
+											printf( '%.2f %s netto', $item['netto'], $item['currency'] );
+										}
+										else{
+											echo "Wycena indywidualna";
+										}
+									?>
 								</div>
 								<button type="submit">
 									<a href='<?php echo home_url("produkt/?kod={$item['code']}"); ?>'>

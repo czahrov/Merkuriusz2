@@ -5,7 +5,11 @@ class EASYGIFTS extends XMLAbstract{
 	// filtrowanie kategorii
 	protected function _categoryFilter( &$cat_name, &$subcat_name, $item ){
 		
-		if( !empty( $c = $this->_cats['easy siesta'] ) ){
+		if( array_key_exists( $c = 'sety', $this->_cats ) ){
+			$cat_name = 'Sety';
+			
+		}
+		elseif( !empty( $c = $this->_cats['easy siesta'] ) ){
 			
 			if( array_search( 'notesy', $c ) !== false ){
 				$cat_name = 'Biuro i biznes';

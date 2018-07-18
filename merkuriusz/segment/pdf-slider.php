@@ -52,8 +52,10 @@
 			</div>
 			<div class='view'>
 				<?php foreach( $pdf_cat as $cat ): ?>
-				<div class='page d-flex'>
-					<div class='img' style='background-image:url(<?php echo wp_get_attachment_image_url( get_post_meta( $cat->ID, 'grafika', true ), 'large' ); ?>);'></div>
+				<div class='page d-flex flex-column align-items-center'>
+					<div class='title'>
+						Wybierz katalog
+					</div>
 					<div class='list d-flex flex-column'>
 						<?php
 							$pdf_subcat = get_pages( array(

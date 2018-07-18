@@ -3,6 +3,135 @@ Theme Name: merkuriusz
 Author: SCEPTER Agencja Interaktywna
 Author URI: http://www.scepter.pl
 */
+.font-light {
+  color: #fff; }
+
+.bg-light {
+  background-color: #fff; }
+
+.font-dark {
+  color: #212121; }
+
+.bg-dark {
+  background-color: #212121; }
+
+.font-blue {
+  color: #2b97fa; }
+
+.bg-blue {
+  background-color: #2b97fa; }
+
+.font-blue2 {
+  color: #0af; }
+
+.bg-blue2 {
+  background-color: #0af; }
+
+.font-blue3 {
+  color: #2997F9; }
+
+.bg-blue3 {
+  background-color: #2997F9; }
+
+.font-blue4 {
+  color: #00abfd; }
+
+.bg-blue4 {
+  background-color: #00abfd; }
+
+.font-gray {
+  color: #e7e7e7; }
+
+.bg-gray {
+  background-color: #e7e7e7; }
+
+.font-gray2 {
+  color: #ebebeb; }
+
+.bg-gray2 {
+  background-color: #ebebeb; }
+
+.font-gray3 {
+  color: #f8f8f8; }
+
+.bg-gray3 {
+  background-color: #f8f8f8; }
+
+.font-gray4 {
+  color: #c6c6c6; }
+
+.bg-gray4 {
+  background-color: #c6c6c6; }
+
+.font-gray5 {
+  color: #666666; }
+
+.bg-gray5 {
+  background-color: #666666; }
+
+.font-gray6 {
+  color: #cecece; }
+
+.bg-gray6 {
+  background-color: #cecece; }
+
+.font-pink {
+  color: #fb2c4a; }
+
+.bg-pink {
+  background-color: #fb2c4a; }
+
+.font-green {
+  color: #6de021; }
+
+.bg-green {
+  background-color: #6de021; }
+
+.font-green-light {
+  color: #84e641; }
+
+.bg-green-light {
+  background-color: #84e641; }
+
+.font-brown {
+  color: #4c1012; }
+
+.bg-brown {
+  background-color: #4c1012; }
+
+.bg-cover {
+  background-size: cover; }
+
+.bg-contain {
+  background-size: contain; }
+
+.bg-center {
+  background-position: center; }
+
+.bg-top {
+  background-position-y: top; }
+
+.bg-bottom {
+  background-position-y: bottom; }
+
+.bg-left {
+  background-position-x: left; }
+
+.bg-right {
+  background-position-x: right; }
+
+.bg-norepeat {
+  background-repeat: no-repeat; }
+
+.bg-repeat-x {
+  background-repeat: repeat-x; }
+
+.bg-repeat-y {
+  background-repeat: repeat-y; }
+
+.bg-repeat {
+  background-repeat: repeat; }
+
 * {
   cursor: default; }
 
@@ -67,6 +196,65 @@ body .subscribe-section #rodo {
     color: #fff; }
 body .subscribe-section button {
   top: 44px; }
+body.oferta-page .box > .head {
+  margin-top: 74px; }
+  body.oferta-page .box > .head > .title {
+    margin-right: 70px;
+    font-size: 38px; }
+    body.oferta-page .box > .head > .title > .small {
+      font-size: 16px; }
+  body.oferta-page .box > .head > .filters {
+    margin: 50px 0; }
+    body.oferta-page .box > .head > .filters > .item {
+      padding: 10px 0;
+      margin: 0 18px 0 0;
+      font-size: 14px;
+      border-bottom: solid 4px transparent;
+      -webkit-transition: border .3s linear;
+      transition: border .3s linear; }
+      body.oferta-page .box > .head > .filters > .item.active, body.oferta-page .box > .head > .filters > .item:hover {
+        border-bottom-color: #ebebeb; }
+body.oferta-page .box > .kafelki {
+  margin: 0 -10px 0; }
+  body.oferta-page .box > .kafelki > .item {
+    margin-bottom: 36px; }
+    body.oferta-page .box > .kafelki > .item > .box {
+      padding: 10px; }
+      body.oferta-page .box > .kafelki > .item > .box > .img {
+        height: 180px;
+        background-color: silver;
+        background-image: url("https://placeimg.com/100/100/tech"); }
+      body.oferta-page .box > .kafelki > .item > .box > .title {
+        height: 80px;
+        font-size: 16px; }
+body.oferta-page .popup_oferta {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 60; }
+  body.oferta-page .popup_oferta > .box {
+    position: relative;
+    height: 854px;
+    max-height: 90%;
+    background-color: transparent;
+    /* background-image: url( "https://placeimg.com/500/500/tech" ); */ }
+    body.oferta-page .popup_oferta > .box > .top {
+      position: absolute;
+      height: 90px;
+      top: 0;
+      right: 0; }
+      body.oferta-page .popup_oferta > .box > .top > .title {
+        padding: 0 40px;
+        font-size: 18px;
+        background-color: rgba(0, 170, 255, 0.8); }
+      body.oferta-page .popup_oferta > .box > .top > .btn-close {
+        width: 90px;
+        font-size: 40px; }
+  body.oferta-page .popup_oferta:not(.open) {
+    display: none; }
 
 #owl-demo .owl-item img {
   max-width: 100%; }
@@ -113,12 +301,10 @@ body .subscribe-section button {
       font-size: 25px; }
     #pdf-popup .box .view {
       padding: 30px; }
-      #pdf-popup .box .view .page > .img {
-        height: 300px;
-        width: 300px;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat; }
+      #pdf-popup .box .view .page > .title {
+        margin-bottom: 20px;
+        font-weight: bold;
+        text-transform: uppercase; }
       #pdf-popup .box .view .page .list {
         padding: 0 20px;
         min-width: 200px; }

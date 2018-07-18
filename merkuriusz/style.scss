@@ -4,6 +4,88 @@ Author: SCEPTER Agencja Interaktywna
 Author URI: http://www.scepter.pl
 */
 
+// PALETA
+$color-reklamowe: #2a96f8;
+$color-pluszaki: #af0c83;
+$color-elektronika: #0b33af;
+$color-vip: #2b2b2b;
+$color-vip-elektronika: #0baf96;
+$color-vip-pismiennicze: #2b2b2b;
+$color-vip-victorinox: #b00b1b;
+$color-vip-skora: hsl(28, 87%, 57%);
+
+$color-ramka-szara: #e7e7e7;
+$color-menu-hover: #2A96F8;
+$color-pagin-niebieski: rgb(38,155,255);
+$color-pagin-szary: #D3D3D3;
+$color-menu-active: #0af;
+$color-single-title: #2a96f8;
+$color-popup-bg: rgba(0,0,0,0.8);
+$color-szary-jasny: #f7f7f7;
+$color-szary-ciemny: #b0b0b0;
+$color-szary2: #919191;
+$color-szary3: #ebebeb;
+$color-inactive: #6a6a6a;
+
+$generator:(
+	light: #fff,
+	dark: #212121,
+	blue: #2b97fa,
+	blue2: #0af,
+	blue3: #2997F9,
+	blue4: #00abfd,
+	gray: #e7e7e7,
+	gray2: #ebebeb,
+	gray3: #f8f8f8,
+	gray4: #c6c6c6,
+	gray5: #666666,
+	gray6: #cecece,
+	pink: #fb2c4a,
+	green: #6de021,
+	green-light: #84e641,
+	brown: #4c1012
+	
+);
+
+@each $name, $value in $generator{
+	.font-#{$name}{
+		color: $value;
+		
+	}
+	
+	.bg-#{$name}{
+		background-color: $value;
+		
+	}
+	
+}
+
+
+$bg:(
+	( cover, size, cover ), 
+	( contain, size, contain ), 
+	( center, position, center ), 
+	( top, position-y, top ), 
+	( bottom, position-y, bottom ), 
+	( left, position-x, left ), 
+	( right, position-x, right ), 
+	( norepeat, repeat, no-repeat ),
+	( repeat-x, repeat, repeat-x ), 
+	( repeat-y, repeat, repeat-y ), 
+	( repeat, repeat, repeat )
+);
+
+@each $name, $property, $value in $bg
+{
+	
+	.bg-#{$name}{
+		background-#{$property}: $value;
+		
+	}
+	
+}
+
+
 *{
 	cursor: default;
 	
@@ -180,6 +262,124 @@ body{
 		
 	}
 	
+	&.oferta-page{
+		
+		.box{
+			
+			& > .head{
+				margin-top: 74px;
+				
+				& > .title{
+					margin-right: 70px;
+					font-size: 38px;
+					
+					& > .small{
+						font-size: 16px;
+						
+					}
+					
+				}
+				
+				& > .filters{
+					margin: 50px 0;
+					
+					& > .item{
+						padding: 10px 0;
+						margin: 0 18px 0 0;
+						font-size: 14px;
+						border-bottom: solid 4px transparent;
+						transition: border .3s linear;
+						
+						&.active,
+						&:hover{
+							border-bottom-color: #ebebeb;
+							
+						}
+						
+					}
+					
+				}
+				
+			}
+			
+			& > .kafelki{
+				margin: 0 -10px 0;
+				
+				& > .item{
+					margin-bottom: 36px;
+					
+					& > .box{
+						padding: 10px;
+						
+						& > .img{
+							height: 180px;
+							background-color: silver;
+							background-image: url( "https://placeimg.com/100/100/tech" );
+							
+						}
+						
+						& > .title{
+							height: 80px;
+							font-size: 16px;
+							
+						}
+						
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		.popup_oferta{
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: rgba(255,255,255,0.7);
+			z-index: 60;
+			
+			& > .box{
+				position: relative;
+				height: 854px;
+				max-height: 90%;
+				background-color: transparent;
+				/* background-image: url( "https://placeimg.com/500/500/tech" ); */
+				
+				& > .top{
+					position: absolute;
+					height: 90px;
+					top: 0;
+					right: 0;
+					
+					& > .title{
+						padding: 0 40px;
+						font-size: 18px;
+						background-color: transparentize( #0af, 0.2 );
+						
+					}
+					
+					& > .btn-close{
+						width: 90px;
+						font-size: 40px;
+						
+					}
+					
+				}
+				
+			}
+			
+			&:not(.open){
+				display: none;
+				
+			}
+			
+		}
+		
+	}
+	
 }
 
 #owl-demo
@@ -270,14 +470,10 @@ body{
 			
 			.page{
 				
-				& > .img{
-					height: 300px;
-					width: 300px;
-					background:{
-						size: cover;
-						position: center;
-						repeat: no-repeat;
-					};
+				& > .title{
+					margin-bottom: 20px;
+					font-weight: bold;
+					text-transform: uppercase;
 					
 				}
 				

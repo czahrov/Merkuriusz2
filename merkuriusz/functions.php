@@ -116,6 +116,7 @@ function genMenu(){
 		'Pinsy, plakietki, odznaki',
 		'Sublimacja - drukuj na kolorowo',
 		'VIP Skóra',
+		'Sety',
 		
 	);
 	
@@ -139,4 +140,76 @@ function genMenu(){
 	}
 	echo '</ul>';
 	
+}
+
+function genOfertyData(){
+	$ret = array();
+	
+	/* Wyciąganie listy podkategorii kategorii tworzących filtry */
+	$categories = get_terms( array(
+		'taxonomy' => 'category',
+		'hide_empty' => false,
+		'parent' => get_category_by_slug( 'oferty' )->cat_ID,
+		
+	) );
+	
+	/* Tworzenie tablicy z wspisami dla kategorii głównej */
+	$ret[ 'Wszystkie' ] = array();
+	
+	$posts = get_posts( array(
+		'category_name' => 'oferty',
+		'numberposts' => -1,
+			
+	) );
+	
+	foreach( $posts as $post ){
+		$ret[ 'Wszystkie' ][ $post->post_name ] = array(
+			'title' => $post->post_title,
+			'thumb' => get_the_post_thumbnail_url( $post->ID, 'medium' ),
+			'img' => get_the_post_thumbnail_url( $post->ID, 'full' ),
+			'img_alt' => 'https://placeimg.com/100/100/tech',
+			'cats' => array( 'Wszystkie' ),
+			
+		);
+		
+	}
+	
+	/* Przechodzenie po wszystkich znaleizonych podkategoriach, dodawanie nazwy znalezionej podkategorii, dopisywanie nazw kategorii dla wpisów */
+	foreach( $categories as $cat ){
+		$ret[ $cat->name ] = array();
+		
+		$posts = get_posts( array(
+			'category' => $cat->term_id,
+			'numberposts' => -1,
+			
+		) );
+		
+		foreach( $posts as $post ){
+			$ret[ 'Wszystkie' ][ $post->post_name ][ 'cats' ][] = $cat->name;
+			
+		}
+		
+	}
+	
+	
+	// return $categories;
+	return $ret;
+}
+
+function register_my_menus() {
+  register_nav_menus(
+    array(
+      'menu-znakowanie' => __( 'menu-znakowanie' )
+    )
+  );
+}
+add_action( 'init', 'register_my_menus' );
+
+add_filter('nav_menu_css_class' , 'special_nav_class' , 10 , 2);
+
+function special_nav_class ($classes, $item) {
+    if (in_array('current-menu-item', $classes) ){
+        $classes[] = 'active-menu';
+    }
+    return $classes;
 }

@@ -61,7 +61,7 @@ class XMLAbstract{
 
 	// funkcja standaryzująca zapis nazw kategorii ( małe litery )
 	protected function _stdName( $name ){
-		return addslashes( mb_strtolower( strip_tags( trim( str_replace( array( '&', '?' ), '', (string)$name ) ) ) ) );
+		return addslashes( mb_strtolower( strip_tags( trim( str_replace( array( '&', '?', '\'' ), '', (string)$name ) ) ) ) );
 
 	}
 
