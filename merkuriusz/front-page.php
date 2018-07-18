@@ -13,33 +13,7 @@
 						</div>
 					</div>
 					<div class="col-md-12 col-lg-9 content-block">
-						<div class="carousel slide" id="demo" data-ride="carousel">
-							<div class="carousel-inner all-gap">
-								<div class="carousel-item active">
-									<img src="<?php echo get_template_directory_uri(); ?>/media/slider1.jpg" alt="slider1" >
-									<div class="carousel-caption">
-										<h1 class="carousel-head1"> GADZETY SKÓRZANE </h1>
-										<h1 class="carousel-head2"> Z TWOIM LOGO </h1>
-									</div>
-								</div>
-								<div class="carousel-item">
-									<img src="<?php echo get_template_directory_uri(); ?>/media/slider1.jpg" alt="slider1">
-								</div>
-								<div class="carousel-item">
-									<img src="<?php echo get_template_directory_uri(); ?>/media/slider1.jpg" alt="slider1">
-								</div>
-							</div>
-							<a class="carousel-control-prev" href="#demo" data-slide="prev">
-								<div class="arrow-circle">
-									<img src="<?php echo get_template_directory_uri(); ?>/media/arrow-left.png">
-								</div>
-							</a>
-							<a class="carousel-control-next" href="#demo" data-slide="next">
-								<div class="arrow-circle">
-									<img src="<?php echo get_template_directory_uri(); ?>/media/arrow-right.png">
-								</div>
-							</a>
-						</div>
+						<?php get_template_part('segment/top-slider'); ?>
 						<!-- end of the carousel-->
 						<?php get_template_part('segment/top-brands'); ?>
 						<!-- end of the second continer-->

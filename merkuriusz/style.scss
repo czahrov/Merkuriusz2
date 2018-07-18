@@ -436,6 +436,12 @@ body{
 		
 	}
 	
+	.single-item{
+		max-width: 400px;
+		margin: auto;
+		
+	}
+	
 }
 
 #pdf-popup
@@ -550,6 +556,7 @@ body{
 #womanimage
 {
 	width: 100%;
+	min-height: 600px;
 	background:{
 		position: center top;
 		size: cover;
@@ -558,3 +565,28 @@ body{
 	};
 	
 }
+
+#demo
+{
+	
+	.carousel-item{
+		height: 500px;
+		max-height: 100vh;
+		background:{
+			position: top left;
+			size: cover;
+			repeat: no-repeat;
+		};
+		
+		.carousel-head1,
+		.carousel-head2
+		{
+			margin: initial;
+			text-align: left;
+			
+		}
+		
+	}
+	
+}
+

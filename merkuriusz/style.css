@@ -277,6 +277,9 @@ body.oferta-page .popup_oferta {
     .products-block ul li:not(:first-child):hover a {
       text-decoration: none;
       color: #d5d6d7; }
+.products-block .single-item {
+  max-width: 400px;
+  margin: auto; }
 
 #pdf-popup {
   position: fixed;
@@ -339,8 +342,20 @@ body.oferta-page .popup_oferta {
 
 #womanimage {
   width: 100%;
+  min-height: 600px;
   background-position: center top;
   background-size: cover;
   background-repeat: no-repeat; }
+
+#demo .carousel-item {
+  height: 500px;
+  max-height: 100vh;
+  background-position: top left;
+  background-size: cover;
+  background-repeat: no-repeat; }
+  #demo .carousel-item .carousel-head1,
+  #demo .carousel-item .carousel-head2 {
+    margin: initial;
+    text-align: left; }
 
 /*# sourceMappingURL=style.css.map */
