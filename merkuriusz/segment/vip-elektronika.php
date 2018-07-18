@@ -65,7 +65,7 @@
 					?>
 					<div class="available-each">
 						<?php foreach( $chunk as $num => $item ): ?>
-						<div class="owl-item" style="width: 356px;">
+						<div class="owl-item <?php echo $num > 0?( 'd-none d-md-block' ):( '' ); ?>">
 							<div class="single-item item">
 								<div class="card h-100 d-flex">
 									<a href="<?php echo home_url("produkt/?kod={$item['code']}"); ?>">
