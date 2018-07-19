@@ -72,7 +72,7 @@ class FALKROSS extends XMLAbstract{
 					$country = (string)$variant->sku_coo;
 					$color = addslashes( (string)$variant->sku_color_name );
 					$photo_a = array();
-					$photo_a[] = (string)$variant->sku_color_picture_url;
+					if( basename( $c = (string)$variant->sku_color_picture_url ) !== 'picture' ) $photo_a[] = $c;
 					foreach( $item->style_picture_list->style_picture as $img ){
 						$photo_a[] = (string)$img->url;
 					}

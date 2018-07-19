@@ -20,11 +20,19 @@ array(
 ) ); */
 
 
-$SHOP['falkross'] = new FALKROSS( array(
+/* $SHOP['falkross'] = new FALKROSS( array(
 	'products' => 'http://download.falk-ross.eu/download/article/falkross-articles.xml',
 ),
 array(
 	'shop' => 'FALKROSS',
+) ); */
+
+
+$SHOP['anda'] = new ANDA( array(
+	'products' =>  'http://andapresent.hu/admin/system/anda_xml_export2.php?&orszag_id=6&nyelv_id=7&password=92ba3632c8c22ebd65fbce872b317875',
+),
+array(
+	'shop' => 'ANDA',
 ) );
 
 
