@@ -3,6 +3,8 @@ class FALKROSS extends XMLAbstract{
 
 	// filtrowanie kategorii
 	protected function _categoryFilter( &$cat_name, &$subcat_name, $item ){
+		$subcat_name = $cat_name;
+		$cat_name = 'Odzież reklamowa';
 		
 	}
 
@@ -42,134 +44,130 @@ class FALKROSS extends XMLAbstract{
 		else{
 			// parsowanie danych z XML
 			foreach( $XML->children() as $item ){
-				$code = (string)$item->kod;
-				$short = (string)$item->kod;
-				$price = (string)$item->cena_pln;
+				$price = 0;
 				$netto = (float)str_replace( ",", ".", $price );
 				$brutto = $netto * ( 1 + $this->_vat );
 				// $catalog = addslashes( (string)$item-> );
-				$cat = addslashes( (string)$item->kategorie->kategoria[0] );
+				$cat = addslashes( (string)$item->style_category_list->style_category_main->style_category_sub[0]->language->pl );
 				$category = $this->_stdName( $cat );
-				$subcat = "";
+				$subcat = addslashes( (string)$item->style_category_list->style_category_main->style_category_sub[1]->language->pl );
 				$subcategory = $this->_stdName( $subcat );
-				$name = addslashes( (string)$item->nazwa );
-				$dscr = addslashes( (string)$item->opis );
-				$material = addslashes( (string)$item->material_wykonania );
-				$dims = addslashes( (string)$item->wymiary );
-				// $country = addslashes( (string)$item-> );
-				$weight = (float)$item->opakowania->opakowanie_jednostkowe->waga_brutto;
-				$color = addslashes( (string)$item->kolor_podstawowy );
-				$photo_a = array();
-				/* https://www.par.com.pl/shared/zdjecia_katalog/full/R91744_02_c.jpg */
-				foreach( $item->zdjecia->children() as $img ){
-					$photo_a[] = "https://www.par.com.pl/shared/zdjecia_katalog/full/" . basename( (string)$img );
-				}
-				$photo = json_encode( $photo_a );
-				$new = (string)$item->towar_nowosc === "false"?( 0 ):( 1 );
-				$sale = (string)$item->wyprzedaz === "false"?( 0 ):( 1 );
-				$promotion = (string)$item->promocja === "0"?( 0 ):( 1 );
-				$marking_a = array();
-				foreach( $item->techniki_zdobienia->technika as $arg ){
-					$marking_a[] = sprintf(
-						'%s<br>
->%s
->>%s',
-						(string)$arg->miejsce_zdobienia,
-						(string)$arg->technika_zdobienia,
-						(string)$arg->maksymalny_rozmiar_logo
+				$dscr = addslashes( (string)$item->style_description->language->pl );
+				$material = "";
+				$dims = "";
+				$marking = "";
+				
+				foreach( $item->sku_list->sku as $variant ){
+					$code = (string)$variant->sku_artnum;
+					$short = $code;
+					$name = sprintf(
+						'%s %s',
+						addslashes( (string)$item->style_name->language->pl ),
+						addslashes( (string)$variant->sku_size_name )
 					);
+					$new = (int)$variant->sku_new > 0?( 1 ):( 0 );
+					$sale = (int)$variant->sku_closeout > 0?( 1 ):( 0 );
+					$promotion = 0;
+					$weight = (float)$variant->sku_weight * 1000;
+					$country = (string)$variant->sku_coo;
+					$color = addslashes( (string)$variant->sku_color_name );
+					$photo_a = array();
+					$photo_a[] = (string)$variant->sku_color_picture_url;
+					foreach( $item->style_picture_list->style_picture as $img ){
+						$photo_a[] = (string)$img->url;
+					}
+					$photo = json_encode( $photo_a );
+					
+					$this->_categoryFilter( $category, $subcategory, $item );
+					$this->_addCategory( $category, $subcategory );
 
-				}
-				$marking = implode( "<br>", $marking_a );
-
-				$this->_categoryFilter( $category, $subcategory, $item );
-				$this->_addCategory( $category, $subcategory );
-
-				if( empty( $subcategory ) ){
-					$cat_id = $this->getCategory( 'name', $category, 'ID' );
-				}
-				else{
-					$cat_id = $this->getCategory( 'name', $subcategory, 'ID' );
-				}
-
-				/* aktualizacja czy wstawianie? */
-
-				$sql = "SELECT COUNT(*) as num FROM `XML_product` WHERE code = '{$code}'";
-				$query = mysqli_query( $this->_dbConnect(), $sql );
-				$num = mysqli_fetch_assoc( $query )['num'];
-				mysqli_free_result( $query );
-
-				$insert = array(
-					'shop' => $this->_atts['shop'],
-					'code' => $code,
-					'short' => $short,
-					'cat_id' => $cat_id,
-					'brutto' => $brutto,
-					'netto' => $netto,
-					// 'catalog' => $catalog,
-					'title' => $name,
-					'description' => $dscr,
-					'materials' => $material,
-					'dimension' => $dims,
-					// 'country' => $country,
-					'weight' => $weight,
-					'colors' => $color,
-					'photos' => $photo,
-					'new' => $new,
-					'promotion' => $promotion,
-					'sale' => $sale,
-					'data' => $dt,
-					'marking' => $marking,
-					'instock' => $stock_a[ $code ],
-				);
-
-				$t_fields = array();
-				$t_values = array();
-
-				/* aktualizacja */
-				if( $num > 0 ){
-					$t_sql = array();
-
-					unset( $insert['code'] );
-					$sql = "UPDATE XML_product SET ";
-
-					foreach( $insert as $field => $value ){
-						$t_sql[] = "`{$field}` = '{$value}'";
+					if( empty( $subcategory ) ){
+						$cat_id = $this->getCategory( 'name', $category, 'ID' );
+					}
+					else{
+						$cat_id = $this->getCategory( 'name', $subcategory, 'ID' );
 					}
 
-					$sql .= implode( ", ", $t_sql );
+					/* aktualizacja czy wstawianie? */
 
-					$sql .= " WHERE `code` = '{$code}'";
+					$sql = "SELECT COUNT(*) as num FROM `XML_product` WHERE code = '{$code}'";
+					$query = mysqli_query( $this->_dbConnect(), $sql );
+					$num = mysqli_fetch_assoc( $query )['num'];
+					mysqli_free_result( $query );
 
-				}
-				/* wstawianie */
-				else{
+					$insert = array(
+						'shop' => $this->_atts['shop'],
+						'code' => $code,
+						'short' => $short,
+						'cat_id' => $cat_id,
+						'brutto' => $brutto,
+						'netto' => $netto,
+						// 'catalog' => $catalog,
+						'title' => $name,
+						'description' => $dscr,
+						'materials' => $material,
+						'dimension' => $dims,
+						'country' => $country,
+						'weight' => $weight,
+						'colors' => $color,
+						'photos' => $photo,
+						'new' => $new,
+						'promotion' => $promotion,
+						'sale' => $sale,
+						'data' => $dt,
+						'marking' => $marking,
+						'instock' => $stock_a[ $code ],
+					);
 
-					foreach( $insert as $field => $value ){
-						$t_fields[] = "`{$field}`";
-						$t_values[] = "'{$value}'";
+					$t_fields = array();
+					$t_values = array();
+
+					/* aktualizacja */
+					if( $num > 0 ){
+						$t_sql = array();
+
+						unset( $insert['code'] );
+						$sql = "UPDATE XML_product SET ";
+
+						foreach( $insert as $field => $value ){
+							$t_sql[] = "`{$field}` = '{$value}'";
+						}
+
+						$sql .= implode( ", ", $t_sql );
+
+						$sql .= " WHERE `code` = '{$code}'";
+
+					}
+					/* wstawianie */
+					else{
+
+						foreach( $insert as $field => $value ){
+							$t_fields[] = "`{$field}`";
+							$t_values[] = "'{$value}'";
+
+						}
+
+						$sql = sprintf(
+							'INSERT INTO XML_product ( %s ) VALUES ( %s )',
+							implode( ", ", $t_fields ),
+							implode( ", ", $t_values )
+
+						);
+
 
 					}
 
-					$sql = sprintf(
-						'INSERT INTO XML_product ( %s ) VALUES ( %s )',
-						implode( ", ", $t_fields ),
-						implode( ", ", $t_values )
+					// echo "\r\n $sql \r\n";
 
-					);
+					if( mysqli_query( $this->_dbConnect(), $sql ) === false ){
+						$this->_log[] = $sql;
+						$this->_log[] = mysqli_error( $this->_dbConnect() );
 
+					}
 
+					// echo "\r\n{$category} | {$subcategory}";
 				}
-
-				// echo "\r\n $sql \r\n";
-
-				if( mysqli_query( $this->_dbConnect(), $sql ) === false ){
-					$this->_log[] = $sql;
-					$this->_log[] = mysqli_error( $this->_dbConnect() );
-
-				}
-
-				// echo "\r\n{$category} | {$subcategory}";
+				
 
 			}
 
