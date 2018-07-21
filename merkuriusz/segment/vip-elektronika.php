@@ -65,42 +65,29 @@
 					?>
 					<div class="available-each">
 						<?php foreach( $chunk as $num => $item ): ?>
-						<div class="owl-item <?php echo $num > 0?( 'd-none d-md-block' ):( '' ); ?>">
-							<div class="single-item item">
-								<div class="card h-100 d-flex">
-									<a href="<?php echo home_url("produkt/?kod={$item['code']}"); ?>">
-										<div class="card-img" style="background-image: url(<?php echo json_decode( $item['photos'] )[0]; ?>);"></div>
-									</a>
-									<div class="card-body d-flex flex-column">
-										<a href="<?php echo home_url("produkt/?kod={$item['code']}"); ?>"></a>
-										<div class="hover-element-shop">
-											<a href="<?php echo home_url("produkt/?kod={$item['code']}"); ?>"></a>
-											<a href="<?php echo home_url("zapytaj/?kod={$item['code']}"); ?>">
-												wyślij zapytanie
-											</a>
-										</div>
-										<h4 class="card-title grow ">
-											<a href="<?php echo home_url("produkt/?kod={$item['code']}"); ?>">
-												<?php echo $item['title']; ?>
-											</a>
-										</h4>
-										<div class="price">
-											<h5>
-												<?php
-													if( $item['netto'] > 0 ){
-														printf( '%.2f %s netto', $item['netto'], $item['currency'] );
-													}
-													else{
-														echo "Wycena indywidualna";
-													}
-												?>
-											</h5>
-										</div>
-										<a class="button-show-item" href="<?php echo home_url("produkt/?kod={$item['code']}"); ?>">
-											Zobacz
-										</a>
-									</div>
+						<div class="product-each-block <?php if( $num > 0 ) echo "d-none d-md-block"; ?>">
+							<div class="row">
+								<div class="col-md-4 avialable-product-img text-center">
+									<?php $imgs = json_decode( $item['photos'] ); ?>
+									<img class="img-responsive img-center" src="<?php echo $imgs[0]; ?>" alt=""/></div>
+								<div class="col-md-4 product-tittle">
+									<?php echo $item['title']; ?>
 								</div>
+								<div class="col-md-4 product-price">
+									<?php
+										if( $item['netto'] > 0 ){
+											printf( '%.2f %s netto', $item['netto'], $item['currency'] );
+										}
+										else{
+											echo "Wycena indywidualna";
+										}
+									?>
+								</div>
+								<button type="submit">
+									<a href='<?php echo home_url("produkt/?kod={$item['code']}"); ?>'>
+										zobacz
+									</a>
+								</button>
 							</div>
 						</div>
 						<?php endforeach; ?>

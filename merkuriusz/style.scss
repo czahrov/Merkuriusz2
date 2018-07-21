@@ -380,6 +380,86 @@ body{
 		
 	}
 	
+	&.kalkulator-page{
+		
+		form.kalkulator{
+			
+			.segment{
+				display: block;
+				width: 100%;
+				max-width: 700px;
+				margin: 10px 0;
+				border: solid 1px #e8e8e8;
+				border-radius: 20px;
+				overflow: hidden;
+				
+				.title{
+					padding: 10px 20px;
+					text-align: center;
+					background-color: hsla(211, 100%, 50%, 1);
+					color: #fff;
+					font-weight: bold;
+					text-transform: uppercase;
+					
+				}
+				
+				.body{
+					padding: 10px 20px;
+					
+					.line{
+						padding: 10px 0;
+						
+						&:nth-child(even){
+							background-color: #f8f8f8;
+						}
+						
+					}
+					
+					label{
+						margin: 0;
+						padding: 0 10px;
+						
+					}
+					
+					input[type='text'],
+					input[type='number'],
+					select{
+						padding: 5px 10px;
+						
+					}
+					
+				}
+				
+				&.matrice,
+				&.prepare{
+					display: none;
+					
+				}
+				
+				&.summary{
+					
+					.body{
+						
+						.line{
+							
+							&:last-child{
+								font-weight: bold;
+								font-size: 20px;
+								
+							}
+							
+						}
+						
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+	}
+	
 }
 
 #owl-demo

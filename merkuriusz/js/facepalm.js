@@ -241,4 +241,62 @@ $(function(){
 		$( '#oferta > .box  .kafelki > .item' ) 
 	);
 	
+	/* kalkulator znakowania */
+	(function( form, segments, inputs ){
+		form
+		.on({
+			calc: function( e ){
+				$.post(
+					'',
+					form.serializeArray(),
+					function( data, status ){
+						console.log( data );
+						var t = segments.filter('.summary').find('.body');
+						t
+						.fadeOut( 'fast', function(){
+							$(this)
+							.empty()
+							.html( data )
+							.fadeIn( 'fast' )
+							
+						} )
+						
+					}
+				);
+				
+			},
+			submit: function( e ){
+				e.preventDefault();
+				
+			},
+			
+		});
+		
+		segments.filter('.type').find('select').change( function( e ){
+			var prepare_a = [ 'S1', 'S2', 'S3' ];
+			if( prepare_a.indexOf( $(this).val() ) > -1 ){
+				segments.filter('.prepare').slideDown();
+				
+			}
+			else{
+				segments.filter('.prepare').slideUp();
+				
+			}
+			
+		} );
+		
+		inputs.change( function( e ){
+			form.triggerHandler('calc');
+			
+		} );
+		
+		form.triggerHandler('calc');
+		
+	})
+	(
+		$('form.kalkulator'),
+		$('form.kalkulator .segment'),
+		$('form.kalkulator .segment').find('input, select')
+	);
+	
 });
