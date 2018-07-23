@@ -522,6 +522,41 @@ body{
 		
 	}
 	
+	.banner-section{
+		position: relative;
+		
+		.hitbox{
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			
+		}
+		
+		#womanimage
+		{
+			float: none;
+			overflow: initial;
+			
+		}
+		
+	}
+	
+	.avialable-product-slider{
+		
+		.available-each{
+			
+			.single-item{
+				margin: initial;
+				// width: 33%;
+				
+			}
+			
+		}
+		
+	}
+	
 }
 
 #pdf-popup
@@ -636,9 +671,9 @@ body{
 #womanimage
 {
 	width: 100%;
-	min-height: 600px;
+	min-height: 200px;
 	background:{
-		position: center top;
+		position: center;
 		size: cover;
 		repeat: no-repeat;
 		
