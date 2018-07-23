@@ -390,5 +390,11 @@ body.kalkulator-page form.kalkulator .segment {
   #demo .carousel-item .carousel-head2 {
     margin: initial;
     text-align: left; }
+  #demo .carousel-item .hitbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; }
 
 /*# sourceMappingURL=style.css.map */

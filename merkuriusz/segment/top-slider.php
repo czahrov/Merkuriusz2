@@ -7,6 +7,7 @@
 	<div class="carousel-inner all-gap">
 		<?php foreach( $slides as $num => $slide): ?>
 		<div class="carousel-item <?php echo $num == 0?(' active '):(''); ?>" style='background-image:url(<?php echo wp_get_attachment_image_url( get_post_meta( $slide->ID, 'grafika', true ), 'full' ); ?>);'>
+			<a class='hitbox' href='<?php the_permalink( get_post_meta( $slide->ID, 'link', true ) ); ?>'></a>
 			<div class="carousel-caption">
 				<h1 class="carousel-head1">
 					<?php echo get_post_meta( $slide->ID, 'tekst1', true ); ?>

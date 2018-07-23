@@ -650,6 +650,7 @@ body{
 {
 	
 	.carousel-item{
+		// position: relative;
 		height: 500px;
 		max-height: 100vh;
 		background:{
@@ -663,6 +664,15 @@ body{
 		{
 			margin: initial;
 			text-align: left;
+			
+		}
+		
+		.hitbox{
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
 			
 		}
 		
