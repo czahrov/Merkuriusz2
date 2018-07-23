@@ -250,7 +250,7 @@ $(function(){
 					'',
 					form.serializeArray(),
 					function( data, status ){
-						console.log( data );
+						// console.log( data );
 						var t = segments.filter('.summary').find('.body');
 						t
 						.fadeOut( 'fast', function(){
@@ -273,14 +273,29 @@ $(function(){
 		});
 		
 		segments.filter('.type').find('select').change( function( e ){
-			var prepare_a = [ 'S1', 'S2', 'S3' ];
+			var prepare_a = [ 'S1', 'S2', 'S3', 'L1', 'L2', 'L3', 'CO2' ];
+			var matrice_a = [ 'TŁ' ];
+			var color_a = [ 'TT1', 'TT2', 'S1', 'S2', 'S3', 'T1', 'T2', 'T3', 'T4', 'K1', 'K2' ];
+			
 			if( prepare_a.indexOf( $(this).val() ) > -1 ){
 				segments.filter('.prepare').slideDown();
-				
 			}
 			else{
 				segments.filter('.prepare').slideUp();
-				
+			}
+			
+			if( matrice_a.indexOf( $(this).val() ) > -1 ){
+				segments.filter('.matrice').slideDown();
+			}
+			else{
+				segments.filter('.matrice').slideUp();
+			}
+			
+			if( color_a.indexOf( $(this).val() ) > -1 ){
+				segments.filter('.colors').slideDown();
+			}
+			else{
+				segments.filter('.colors').slideUp();
 			}
 			
 		} );
