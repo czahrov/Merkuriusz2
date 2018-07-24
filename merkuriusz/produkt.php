@@ -3,9 +3,12 @@
 	get_header();
 	$items = getProduct( $_GET['kod'] );
 	$item = $items[0];
-	echo "<!--";
-	print_r( $item );
-	echo "-->";
+	if( DEV ){
+		echo "<!--";
+		print_r( $item );
+		echo "-->";
+	}
+		
 ?>
 
 <body class="product-page">
@@ -55,9 +58,6 @@
 						</div>
 						<div class="col-md-6 category-single-product-description">
 							<div class="product-price-details">
-								<!--
-								<p> Cena katalogowa: 42 zł </p>
-								-->
 								<h3> Cena już od:
 									<span>
 										<?php
@@ -92,9 +92,12 @@
 									<a href="tel:48146223364" id="contact-number"> +48 14 622 33 64 </a> 
 									<a href="mailto:biuro@merkuriusz.pl" id="contact-email"> biuro@merkuriusz.pl</a> 
 								</div>
-								<div class="product-social-contacts " hidden>
+								<div class="product-social-contacts col-12 d-flex align-items-center">
 									<p> Udostępnij znajomemu </p>
-									<a href="#"> <img src="<?php echo get_template_directory_uri(); ?>/media/social-contact-image.png"></a>
+									<a href="https://www.facebook.com/sharer.php?u=<?php printf( '%s?kod=%s', the_permalink( get_post()->ID ), $item['code'] ); ?>" target='_blank'>
+										<div class='fa fa-facebook'></div>
+									</a>
+									
 								</div>
 							</div>
 						</div>

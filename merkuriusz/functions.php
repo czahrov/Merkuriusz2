@@ -214,3 +214,55 @@ function special_nav_class ($classes, $item) {
     return $classes;
 }
 
+/* funkcja generująca og tagi do social mediów */
+function OGTags( $obj = null ){
+	/* generowanie tagów dla standardowej strony */
+	if( $obj === null ){
+		$post = get_post();
+		
+		$img = get_the_post_thumbnail_url( $post->ID, 'full' );
+		if( $img === false ) $img = get_template_directory_uri() . "/media/logo1.jpg";
+		
+		
+		printf(
+		'<meta property="og:title" content="%s" />
+		<meta property="og:type" content="%s" />
+		<meta property="og:url" content="%s" />
+		<meta property="og:site_name" content="%s" />
+		<meta property="og:image" content="%s" />
+		<meta property="og:description" content="%s" />',
+		$post->post_title,
+		'article',
+		get_the_permalink( $post->ID ),
+		get_bloginfo('name'),
+		$img,
+		strip_tags( $post->post_content )
+		
+		);
+		
+		
+	}
+	/* generowanie tagów dla strony produktu */
+	else{
+		$item = $obj[0];
+		$imgs = json_decode( $item['photos'] );
+		
+		printf(
+		'<meta property="og:title" content="%s" />
+		<meta property="og:type" content="%s" />
+		<meta property="og:url" content="%s" />
+		<meta property="og:site_name" content="%s" />
+		<meta property="og:image" content="%s" />
+		<meta property="og:description" content="%s" />',
+		$item['title'],
+		'product',
+		home_url( "produkt/?kod={$item['code']}" ),
+		get_bloginfo( 'name' ),
+		$imgs[0],
+		implode( " ", array_slice( explode( " ", strip_tags( trim( $item['description'] ) ) ) , 0, 50 ) )
+		
+		);
+		
+	}
+}
+

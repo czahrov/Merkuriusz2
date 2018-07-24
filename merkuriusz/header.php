@@ -35,5 +35,14 @@
 		<meta name="keywords" content="" />
 		<meta name="description" content="" />
 		<title>Merkuriusz</title>
+		<?php
+			if( get_post()->post_title == 'Produkt' ){
+				OGTags( getProduct( $_GET['kod'] ) );
+			}
+			else{
+				OGTags();
+			}
+			
+		?>
 		<?php wp_head(); ?>
 	</head>

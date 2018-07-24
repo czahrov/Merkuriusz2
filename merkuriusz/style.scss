@@ -93,6 +93,51 @@ $bg:(
 
 body{
 	
+	&.product-page{
+		
+		.category-single-product{
+			
+			.product-social-contacts{
+				
+				a{
+					padding: 10px;
+					
+					&,& *{
+						cursor: pointer;
+						
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+	}
+	
+	&.home-page{
+		
+		#banners-block{
+			
+			.zoom-banner{
+				position: relative;
+				
+				a{
+					position: absolute;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					z-index: 100;
+					
+				}
+				
+			}
+			
+		}
+		
+	}
+	
 	&.home-page,
 	&.product-page
 	{

@@ -33,6 +33,7 @@
 		<div class="banners-block container" id="banners-block" style="margin-top:40px;">
 			<div class="row" id="banners-row" >
 				<div class="zoom-banner even">
+					<a class='hitbox' href='<?php echo home_url('oferta'); ?>'></a>
 					<div class="col-lg-6 col-sm-12 col-12 each-banner-section item">
 						<div id="relativeimage" >
 							<img class="img-responsive img-center" src="<?php echo get_template_directory_uri(); ?>/media/sub-banner1.png" alt=""/> 
@@ -42,6 +43,7 @@
 					</div>
 				</div>
 				<div class="zoom-banner odd">
+					<a class='hitbox' href='<?php echo home_url('oferta'); ?>'></a>
 					<div class="col-lg-6 col-sm-12 each-banner-section item">
 						<div id="relativeimage" > 
 							<img class="img-responsive img-center" src="<?php echo get_template_directory_uri(); ?>/media/sub-banner2.png" alt=""/>
@@ -51,6 +53,7 @@
 					</div>
 				</div>
 				<div class="zoom-banner even">
+					<a class='hitbox' href='<?php echo home_url('oferta'); ?>'></a>
 					<div class="col-lg-6 col-sm-12 each-banner-section item">
 						<div id="relativeimage" >   
 							<img class="img-responsive img-center" src="<?php echo get_template_directory_uri(); ?>/media/sub-banner3.png" alt=""/>
@@ -60,6 +63,7 @@
 					</div>
 				</div>
 				<div class="zoom-banner odd">
+					<a class='hitbox' href='<?php echo home_url('oferta'); ?>'></a>
 					<div class="col-lg-6 col-sm-12 each-banner-section item">
 						<div id="relativeimage" > 
 							<img class="img-responsive img-center" src="<?php echo get_template_directory_uri(); ?>/media/sub-banner4.png" alt=""/>

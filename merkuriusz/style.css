@@ -135,6 +135,19 @@ Author URI: http://www.scepter.pl
 * {
   cursor: default; }
 
+body.product-page .category-single-product .product-social-contacts a {
+  padding: 10px; }
+  body.product-page .category-single-product .product-social-contacts a, body.product-page .category-single-product .product-social-contacts a * {
+    cursor: pointer; }
+body.home-page #banners-block .zoom-banner {
+  position: relative; }
+  body.home-page #banners-block .zoom-banner a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100; }
 body.home-page #Nav-container .dropdown-menu, body.product-page #Nav-container .dropdown-menu {
   position: static; }
 @media (min-width: 992px) {
