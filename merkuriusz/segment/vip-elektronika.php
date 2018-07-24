@@ -11,7 +11,7 @@
 <div class="container">
 	<div class="products-block">
 		<div class="row">
-			<div class="col-12 col-md-6 col-lg-3 menu-section mb-3 mb-md-0">
+			<div class="col-12 col-lg-3 menu-section mb-3 mb-md-0">
 				<ul class="list-unstyled">
 					<li class="active"><span class="green-bar"><span style="font-weight:600;">VIP</span> ELEKTRONIKA</span></li>
 					<?php
@@ -36,7 +36,7 @@
 					</li>
 				</ul>
 			</div>
-			<div  class="col-12 col-md-6 col-lg-9">
+			<div  class="col-12 col-lg-9">
 				<div  class="col-12 banner-section" >
 					<div id="womanimage" class="h-100" style='background-image:url(<?php echo get_template_directory_uri(); ?>/media/vip-electronika.png);'></div>
 					<a class='hitbox' href="<?php echo home_url("kategoria/?nazwa=VIP Elektronika"); ?>">
@@ -59,14 +59,14 @@
 							WHERE cat.name = 'VIP Elektronika'");
 							
 							shuffle( $items );
-							$sub = array_slice( $items, 0, 3 );
+							$sub = array_slice( $items, 0, 9 );
 							$chunks = array_chunk( $sub, 3 );
 							
 							foreach( $chunks as $chunk ):
 						?>
 						<div class="available-each d-flex">
 							<?php foreach( $chunk as $num => $item ): ?>
-							<div class="single-item item col-12 col-md-4">
+							<div class="single-item item col-12 col-md-4 <?php echo $num > 0?(' d-none d-md-block '):('') ?>">
 								<div class="card h-100 d-flex">
 									<a href="<?php echo home_url("produkt/?kod={$item['code']}"); ?>">
 										<?php $imgs = json_decode( $item['photos'] ); ?>
