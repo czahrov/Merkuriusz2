@@ -101,4 +101,10 @@ class XMLMan{
 		
 	}
 	
+	/*  */
+	public function clear( $data = null ){
+		$this->_proxy[0]->clear( $data );
+		
+	}
+	
 }

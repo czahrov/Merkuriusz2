@@ -143,13 +143,13 @@ class XMLAbstract{
 		return $doImport;
 	}
 
-	// funkcja czyszcząca nieaktualne wpisy z danego sklepu po aktualizacji
-	protected function _clear( $data = null ){
+	// funkcja czyszcząca nieaktualne produkty ze wszystkich sklepów po aktualizacji
+	public function clear( $data = null ){
 		$dt = $data===null?( date("Y-m-d H:i:s") ):( $data );
-		$sql = "DELETE FROM XML_product WHERE shop = '{$this->_atts[ 'shop' ]}' AND data < '{$dt}'";
+		$sql = "DELETE FROM XML_product WHERE data < '{$dt}'";
 		echo "\r\n $sql \r\n";
-		if( mysqli_query( $this->_connect, $sql ) === false ){
-			$this->_log[] = mysqli_error( $this->_connect );
+		if( mysqli_query( $this->_dbConnect(), $sql ) === false ){
+			$this->_log[] = mysqli_error( $this->_dbConnect() );
 
 		}
 
