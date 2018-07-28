@@ -209,6 +209,12 @@ body .subscribe-section #rodo {
     color: #fff; }
 body .subscribe-section button {
   top: 44px; }
+body.oferta-page .banner {
+  min-height: 300px;
+  background-position: left center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #f8f8f8; }
 body.oferta-page .box > .head {
   margin-top: 74px; }
   body.oferta-page .box > .head > .title {

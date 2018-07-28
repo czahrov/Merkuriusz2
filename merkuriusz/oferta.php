@@ -63,7 +63,7 @@
 							$thumb = empty( $oferta[ 'thumb' ] )?( $oferta[ 'img_alt' ] ):( $oferta[ 'thumb' ] );
 							$img = empty( $oferta[ 'img' ] )?( $oferta[ 'img_alt' ] ):( $oferta[ 'img' ] );
 							?>
-						<div class='item pointer base5' cats='<?php echo implode( " ", $oferta[ 'cats' ] ); ?>'>
+						<div class='item pointer base1 base2-ms base3-mm base4-ml base5-ds' cats='<?php echo implode( " ", $oferta[ 'cats' ] ); ?>'>
 							<div class='box'>
 								<div class='img bg-cover bg-center' style='background-image:url(<?php echo $thumb; ?>);' img='<?php echo $img; ?>'></div>
 								<div class='title flex flex-items-center semibold'>

@@ -1,5 +1,10 @@
 <?php
 	/* template name: Produkt - kategoria */
+	if( empty( $_GET ) ){
+		header("Location:" . home_url() );
+		exit;
+	}
+	
 	get_header();
 	$cat = $_GET['nazwa'];
 	$subcat = $_GET['podkategoria'];

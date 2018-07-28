@@ -168,9 +168,12 @@ class XMLAbstract{
 	// funkcja dodająca kategorię do tablicy
 	protected function _addCategory( $cat_name, $subcat_name ){
 		$dt = date( 'Y-m-d H:i:s' );
-
+		
 		// sprawdza czy nie istnieje już kategoria główna o takiej nazwie, jeśli nie - dodaje ją
-		if( $this->getCategory( 'name', $cat_name ) === null ){
+		$sql = "SELECT COUNT( ID ) as num FROM XML_category WHERE parent IS NULL AND name = '{$cat_name}'";
+		$query = mysqli_query( $this->_dbConnect(), $sql );
+		$fetch = mysqli_fetch_assoc( $query );
+		if( (int)$fetch['num'] === 0 ){
 			$sql = "INSERT INTO `XML_category` ( `name`, `slug`, `data` ) VALUES ( '{$cat_name}', '{$this->_slug( $cat_name )}', '{$dt}' )";
 			if( mysqli_query( $this->_connect, $sql ) === false ) $this->_log[] = mysqli_error( $this->_connect );
 
@@ -180,18 +183,30 @@ class XMLAbstract{
 		if( !empty( $subcat_name ) ){
 			$parent = $this->getCategory( 'name', $cat_name, 'ID' );
 			// sprawdza czy istnieje kategoria o takiej nazwie, jeśli nie - dodaje, jeśli tak - aktualizuje ją
-			if( $this->getCategory( 'name', $subcat_name ) === null ){
+			$sql = "SELECT COUNT( ID ) as num FROM XML_category WHERE parent = {$parent} AND name = '{$subcat_name}'";
+			$query = mysqli_query( $this->_dbConnect(), $sql );
+			$fetch = mysqli_fetch_assoc( $query );
+			mysqli_free_result( $query );
+			
+			if( (int)$fetch['num'] === 0 ){
 				$sql = "INSERT INTO `XML_category` ( `name`, `parent`, `slug`, `data` ) VALUES ( '{$subcat_name}', '{$parent}', '{$this->_slug( $subcat_name )}', '{$dt}' )";
 
 			}
 			// aktualizacja już istniejącej kategorii
 			else{
-				$cat_id = $this->getCategory( 'name', $subcat_name, 'ID' );
+				// $cat_id = $this->getCategory( 'name', $subcat_name, 'ID' );
+				$sql = "SELCT sub.ID
+				FROM XML_category as cat
+				JOIN XML_category as sub
+				ON cat.ID = sub.parent
+				WHERE sub.name = '{$subcat_name}' AND parent = {$parent}";
+				$query = mysqli_query( $this->_dbConnect(), $sql );
+				$fetch = mysqli_fetch_assoc( $query );
 				$sql = "UPDATE `XML_category` SET parent = '{$parent}', data = '{$dt}' WHERE ID = '{$cat_id}'";
-
+				
 			}
 
-			if( mysqli_query( $this->_connect, $sql ) === false ) $this->_log[] = mysqli_error( $this->_connect );
+			if( mysqli_query( $this->_dbConnect(), $sql ) === false ) $this->_log[] = mysqli_error( $this->_connect );
 
 		}
 

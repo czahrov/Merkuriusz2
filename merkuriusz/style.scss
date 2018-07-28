@@ -117,7 +117,8 @@ body{
 	
 	&.home-page{
 		
-		#banners-block{
+		#banners-block
+		{
 			
 			.zoom-banner{
 				position: relative;
@@ -308,6 +309,17 @@ body{
 	}
 	
 	&.oferta-page{
+		
+		.banner{
+			min-height: 300px;
+			background:{
+				position: left center;
+				size: cover;
+				repeat: no-repeat;
+				color: #f8f8f8;
+			};
+			
+		}
 		
 		.box{
 			

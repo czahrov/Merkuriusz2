@@ -162,3 +162,62 @@ ul#menu-menu-znakowanie li a:hover{
 	color: #d0d1d3 !important;
 }
 
+#searchsubmit-small {
+    font-size: 12px;
+    font-weight: 700;
+    float: right;
+    background: #0087ef;
+    padding: 11px 10px;
+    cursor: pointer;
+    border: 1px solid #ebebeb;
+    color: white;
+}
+
+#searchsubmit-small img{
+	width: 17%;
+}
+
+#absoluteborder {
+    border: 1px solid #ffffff3d;
+}
+
+#pdf-popup .box .exit {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 0;
+    right: 0;
+    background-color: #007bff;
+    color: #fff;
+    font-weight: 800;
+    font-size: 11px;
+}
+
+#pdf-popup .box .view {
+    padding: 60px;
+}
+
+.product-enquiry-details button:hover{
+background: #3b3b3b;
+
+
+}
+
+.product-enquiry-details button a{
+color: #fff;
+text-decoration:none;
+
+
+}
+
+
+.products-block {
+    border: 0;
+    border-top: 5px solid #4fed00;
+
+}
+
+.banner-section {
+
+        padding: 0px;
+}

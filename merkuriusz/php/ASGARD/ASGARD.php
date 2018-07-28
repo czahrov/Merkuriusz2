@@ -3,6 +3,92 @@ class ASGARD extends XMLAbstract{
 
 	// filtrowanie kategorii
 	protected function _categoryFilter( &$cat_name, &$subcat_name, $item ){
+		if( $cat_name === 'biuro i praca' ){
+			
+			if( in_array( $subcat_name, array( 'akcesoria', 'artykuły biurowe', 'komplety upominkowe', 'komputerowe', 'notesy', 'produkty z papierem kamiennym', 'teczki konferencyjne', 'telefoniczne', 'wizytowniki i etui na wizytówki' ) ) ){
+				$cat_name = 'Biuro i biznes';
+				
+			}
+			
+		}
+		elseif( $cat_name === 'elektronika' ){
+			
+			if( in_array( $subcat_name, array( 'akcesoria biurowe', 'notesy' ) ) ){
+				$cat_name = 'Biuro i biznes';
+				
+			}
+			elseif( in_array( $subcat_name, array( 'stacja pogody', 'zegary', 'stacje pogody' ) ) ){
+				$cat_name = 'Czas i pogoda';
+				
+			}
+			
+		}
+		elseif( $cat_name === 'jedzenie i picie' ){
+			
+			if( in_array( $subcat_name, array( 'bidony', 'kubki metalowe', 'kubki plastikowe', 'kubki termiczne', 'piersiówki', 'termosy' ) ) ){
+				$cat_name = 'Do picia';
+				
+			}
+			elseif( in_array( $subcat_name, array( 'akcesoria do alkoholi', 'kuchenne', 'na grill i piknik' ) ) ){
+				$cat_name = 'Dom i ogród';
+				
+			}
+			
+		}
+		elseif( $cat_name === 'breloki i smycze' ){
+			
+			if( in_array( $subcat_name, array( 'smycze' ) ) ){
+				$cat_name = 'Smycze';
+			}
+			elseif( in_array( $subcat_name, array( 'akcesoria', 'breloki' ) ) ){
+				$cat_name = 'Narzędzia, latarki, breloki, antystresy';
+			}
+			
+		}
+		elseif( $cat_name === 'sport i wypoczynek' ){
+			
+			if( in_array( $subcat_name, array( 'fidget spinner', 'gry' ) ) ){
+				$cat_name = 'Dzieci, zabawa, szkoła';
+				
+			}
+			
+		}
+		elseif( $cat_name === 'do pisania' ){
+			$cat_name = 'Materiały piśmiennicze';
+			
+		}
+		elseif( $cat_name === 'narzędzia i odblaski' ){
+			
+			if( in_array( $subcat_name, array( 'akcesoria', 'breloki', 'latarki', 'miary', 'skrobaczki', 'zestawy narzędzi', 'wyprzedaż' ) ) ){
+				$cat_name = 'Narzędzia, latarki, breloki, antystresy';
+				
+			}
+			elseif( in_array( $subcat_name, array( 'odblaskowe' ) ) ){
+				$cat_name = 'Odblaski';
+				
+			}
+			
+		}
+		elseif( $cat_name === 'torby i parasole' ){
+			
+			if( in_array( $subcat_name, array( 'parasole' ) ) ){
+				$cat_name = 'parasole i peleryny';
+				
+			}
+			elseif( in_array( $subcat_name, array( 'na zakupy', 'plecaki', 'sportowe', 'torby na dokumenty', 'torby na laptopa' ) ) ){
+				$cat_name = 'Torby i plecaki';
+				
+			}
+			
+		}
+		elseif( $cat_name === 'sport i wypoczynek' ){
+			
+			if( in_array( $subcat_name, array( 'koce', 'sportowe' ) ) ){
+				$cat_name = 'Wakacje, sport i rekreacja';
+				
+			}
+			
+		}
 		
 	}
 
@@ -44,9 +130,12 @@ class ASGARD extends XMLAbstract{
 		}
 		else{
 			// parsowanie danych z XML
-			foreach( $XML->children() as $item ){
+			foreach( $XML->produkt as $item ){
 				$code = (string)$item->indeks;
-				$short = $code;
+				
+				preg_match( '/^[^\-]+/', $code, $match );
+				$short = $match[0];
+				
 				$price = (string)$item->cena_netto_katalogowa;
 				$netto = (float)str_replace( ",", ".", $price );
 				$brutto = $netto * ( 1 + $this->_vat );
@@ -78,14 +167,23 @@ class ASGARD extends XMLAbstract{
 				$this->_addCategory( $category, $subcategory );
 
 				if( empty( $subcategory ) ){
-					$cat_id = $this->getCategory( 'name', $category, 'ID' );
+					// $cat_id = $this->getCategory( 'name', $category, 'ID' );
+					$sql = "SELECT ID FROM XML_category WHERE parent IS NULL AND name = '{$category}'";
 				}
 				else{
-					$cat_id = $this->getCategory( 'name', $subcategory, 'ID' );
+					// $cat_id = $this->getCategory( 'name', $subcategory, 'ID' );
+					$sql = "SELECT sub.ID
+					FROM XML_category as cat
+					JOIN XML_category as sub
+					ON cat.ID = sub.parent
+					WHERE cat.name = '{$category}' AND sub.name = '{$subcategory}'";
 				}
-
+				
+				$query = mysqli_query( $this->_dbConnect(), $sql );
+				$fetch = mysqli_fetch_assoc( $query );
+				$cat_id = $fetch['ID'];
+				
 				/* aktualizacja czy wstawianie? */
-
 				$sql = "SELECT COUNT(*) as num FROM `XML_product` WHERE code = '{$code}'";
 				$query = mysqli_query( $this->_dbConnect(), $sql );
 				$fetch = mysqli_fetch_assoc( $query );

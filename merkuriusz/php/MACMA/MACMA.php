@@ -108,14 +108,23 @@ class MACMA extends XMLAbstract{
 				$this->_addCategory( $category, $subcategory );
 
 				if( empty( $subcategory ) ){
-					$cat_id = $this->getCategory( 'name', $category, 'ID' );
+					// $cat_id = $this->getCategory( 'name', $category, 'ID' );
+					$sql = "SELECT ID FROM XML_category WHERE parent IS NULL AND name = '{$category}'";
 				}
 				else{
-					$cat_id = $this->getCategory( 'name', $subcategory, 'ID' );
+					// $cat_id = $this->getCategory( 'name', $subcategory, 'ID' );
+					$sql = "SELECT sub.ID
+					FROM XML_category as cat
+					JOIN XML_category as sub
+					ON cat.ID = sub.parent
+					WHERE cat.name = '{$category}' AND sub.name = '{$subcategory}'";
 				}
-
+				
+				$query = mysqli_query( $this->_dbConnect(), $sql );
+				$fetch = mysqli_fetch_assoc( $query );
+				$cat_id = $fetch['ID'];
+				
 				/* aktualizacja czy wstawianie? */
-
 				$sql = "SELECT COUNT(*) as num FROM `XML_product` WHERE code = '{$code}'";
 				$query = mysqli_query( $this->_dbConnect(), $sql );
 				$fetch = mysqli_fetch_assoc( $query );

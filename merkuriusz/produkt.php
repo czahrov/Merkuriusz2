@@ -1,5 +1,10 @@
 <?php
 	/* template name: Produkt - pojedynczy */
+	if( empty( $_GET ) ){
+		header("Location:" . home_url() );
+		exit;
+	}
+	
 	get_header();
 	$items = getProduct( $_GET['kod'] );
 	$item = $items[0];
