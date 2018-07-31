@@ -1382,7 +1382,8 @@ ul.breadcrumb li a:hover a:active {
     cursor: pointer;
 }
 
-#electronicstext:hover
+#electronicstext:hover,
+#electronicstext.active
 {
     color:#fafafa;
     background-color:#3b3b3b;

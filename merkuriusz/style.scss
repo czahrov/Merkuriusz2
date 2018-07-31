@@ -517,6 +517,43 @@ body{
 		
 	}
 	
+	&.shop-page{
+		
+		#fourth-container-content
+		{
+			padding: 0 15px;
+			
+			.category{
+				margin: 0 0 10px 0;
+				padding: 5px;
+				
+				.title{
+					padding: 10px 0;
+					font:{
+						weight: bold;
+						size: 20px;
+					};
+					background-color: hsla(0, 0%, 87%, 1);
+					
+				}
+				
+				.item{
+					padding: 4px;
+					transition: background .3s linear;
+					
+					&:hover{
+						background-color: hsla(0, 0%, 97%, 1);
+						
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+	}
+	
 }
 
 #owl-demo

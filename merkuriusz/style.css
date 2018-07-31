@@ -307,6 +307,22 @@ body.kalkulator-page form.kalkulator .segment {
   body.kalkulator-page form.kalkulator .segment.summary .body .line:last-child {
     font-weight: bold;
     font-size: 20px; }
+body.shop-page #fourth-container-content {
+  padding: 0 15px; }
+  body.shop-page #fourth-container-content .category {
+    margin: 0 0 10px 0;
+    padding: 5px; }
+    body.shop-page #fourth-container-content .category .title {
+      padding: 10px 0;
+      font-weight: bold;
+      font-size: 20px;
+      background-color: #dedede; }
+    body.shop-page #fourth-container-content .category .item {
+      padding: 4px;
+      -webkit-transition: background .3s linear;
+      transition: background .3s linear; }
+      body.shop-page #fourth-container-content .category .item:hover {
+        background-color: #f7f7f7; }
 
 #owl-demo .owl-item img {
   max-width: 100%; }

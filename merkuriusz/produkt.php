@@ -6,8 +6,20 @@
 	}
 	
 	get_header();
-	$items = getProduct( $_GET['kod'] );
-	$item = $items[0];
+	
+	$kod = $_GET['kod'];
+	$sql = "SELECT cat.name AS cat_name, subcat.name AS subcat_name, prod.*
+FROM XML_product AS prod
+JOIN XML_hash AS hash
+ON prod.code = hash.PID
+JOIN XML_category AS subcat
+ON hash.CID = subcat.ID
+JOIN XML_category AS cat
+ON subcat.parent = cat.ID
+WHERE prod.code = '{$kod}'";
+
+	$fetch = doSQL( $sql );
+	$item = $fetch[0];
 	if( DEV ){
 		echo "<!--";
 		print_r( $item );
@@ -30,7 +42,41 @@
 			</div>
 			<div class="col-md-12 col-lg-9 content-block">
 				<div class="category-third-container">
-					<?php get_template_part('segment/breadcrumb'); ?>
+					<ul class="breadcrumb">
+						<?php
+							$path = array(
+								array(
+									'name' => 'Strona główna',
+									'url' => home_url(),
+								),
+								array(
+									'name' => $item['shop'],
+									'url' => home_url("sklep/?nazwa={$item['shop']}"),
+								),
+								array(
+									'name' => $item['cat_name'],
+									'url' => home_url("kategoria/?dostawca={$item['shop']}&nazwa={$item['cat_name']}"),
+								),
+								array(
+									'name' => $item['subcat_name'],
+									'url' => home_url("kategoria/?dostawca={$item['shop']}&nazwa={$item['cat_name']}&podkategoria={$item['subcat_name']}"),
+								),
+								array(
+									'name' => $item['title'],
+									'url' => home_url("produkt/?kod={$item['code']}"),
+								),
+								
+							);
+							
+							foreach( $path as $num => $segment ):
+						?>
+						<li class="<?php if( $num == count( $path ) - 1 ) echo " active "; ?>">
+							<a href="<?php echo $segment['url']; ?>">
+								<?php echo ucfirst( $segment['name'] ); ?>
+							</a>
+						</li>
+						<?php endforeach; ?>
+					</ul>
 				</div>
 				<div class="category-product-title" >
 					<p>

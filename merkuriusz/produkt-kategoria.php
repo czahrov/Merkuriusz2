@@ -6,13 +6,47 @@
 	}
 	
 	get_header();
+	
+	$shop = $_GET['dostawca'];
 	$cat = $_GET['nazwa'];
 	$subcat = $_GET['podkategoria'];
-	$orderby = $_GET['według'];
-	$order = $_GET['sortuj'];
+	$orderby = empty( $t = $_GET['według'] )?( 'prod.ID' ):( "prod.{$t}" );
+	$order = empty( $t = $_GET['sortuj'] )?( 'DESC' ):( "{$t}" );
+	
+	if( empty( $subcat ) ){
+		$sql = "SELECT prod.*
+FROM XML_product AS prod
+JOIN XML_hash AS hash
+ON prod.code = hash.PID
+JOIN XML_category AS subcat
+ON hash.CID = subcat.ID
+JOIN XML_category AS cat
+ON subcat.parent = cat.ID
+WHERE prod.shop = '{$shop}'
+AND cat.name= '{$cat}'
+ORDER BY {$orderby} {$order}";
+	}
+	else{
+		$sql = "SELECT prod.*
+FROM XML_product AS prod
+JOIN XML_hash AS hash
+ON prod.code = hash.PID
+JOIN XML_category AS subcat
+ON hash.CID = subcat.ID
+JOIN XML_category AS cat
+ON subcat.parent = cat.ID
+WHERE prod.shop = '{$shop}'
+AND cat.name= '{$cat}'
+AND subcat.name = '{$subcat}'
+ORDER BY {$orderby} {$order}";
+		
+	}
+	$fetch = doSQL( $sql );
+	
 	$strona = max( 1, (int)$_GET['strona'] );
 	$perpage = 16;
-	$pages = array_chunk( getCategory( $cat, $subcat, $orderby, $order ), $perpage );
+	// $pages = array_chunk( getCategory( $cat, $subcat, $orderby, $order ), $perpage );
+	$pages = array_chunk( $fetch, $perpage );
 	$items = $pages[ $strona - 1 ];
 	$nav_end = 1;
 	$nav_range = 3;
@@ -24,9 +58,10 @@
 	// var_dump( $order );
 	// var_dump( $strona );
 	// print_r( $items );
+	print_r( $fetch );
 	echo "-->";
 ?>
-	<body class="home-page">
+	<body class="kategoria-page">
 		<?php get_template_part('segment/top'); ?>
 		<div class="container flex-wrap main-content-section mt-4 mt-lg-0">
 			<div class="row">
@@ -42,7 +77,38 @@
 		</div>
 		<!-- end of the menu-section--> 
 		<div class="container category-third-container">
-			<?php get_template_part('segment/breadcrumb'); ?>
+			<ul class="breadcrumb">
+				<?php
+					$path = array(
+						array(
+							'name' => 'Strona główna',
+							'url' => home_url(),
+						),
+						array(
+							'name' => $shop,
+							'url' => home_url("sklep/?nazwa={$shop}"),
+						),
+						array(
+							'name' => $cat,
+							'url' => home_url("kategoria/?dostawca={$shop}&nazwa={$cat}"),
+						),
+						
+					);
+					
+					if( !empty( $subcat ) ) array_push( $path, array(
+						'name' => $subcat,
+						'url' => home_url("kategoria/?dostawca={$shop}&nazwa={$cat}&podkategoria={$subcat}"),
+					) );
+					
+					foreach( $path as $num => $segment ):
+				?>
+				<li class="<?php if( $num == count( $path ) - 1 ) echo " active "; ?>">
+					<a href="<?php echo $segment['url']; ?>">
+						<?php echo ucfirst( $segment['name'] ); ?>
+					</a>
+				</li>
+				<?php endforeach; ?>
+			</ul>
 		</div>
 		<div class="container category-text-container">
 			<h1 id="categoryContainerText1">WYBIERZ KATEGORIE SPOŚRÓD:
@@ -60,18 +126,33 @@
 			</h1>
 		</div>
 		<div class="container category-electronics-container" id="large-electronic-btn">
-			<a id="electronicstext" href="<?php echo home_url("kategoria/?nazwa={$cat}"); ?>">
+			<a id="electronicstext" class='<?php echo empty( $subcat )?(' active '):(''); ?>' href="<?php echo home_url("kategoria/?dostawca={$shop}&nazwa={$cat}"); ?>">
 				Wszystkie
 			</a>
 			<?php
-				$subcats = getSubcatsList( $_GET['nazwa'] );
+				$sql = "SELECT DISTINCT subcat.name AS subcat_name
+FROM XML_product AS prod
+JOIN XML_hash AS hash
+ON prod.code = hash.PID
+JOIN XML_category AS subcat
+ON hash.CID = subcat.ID
+JOIN XML_category AS cat
+ON subcat.parent = cat.ID
+WHERE prod.shop = '{$shop}'
+AND cat.name = '{$cat}'
+ORDER BY subcat.name ASC";
+				$fetch = doSQL( $sql );
+
+				// $subcats = getSubcatsList( $_GET['nazwa'] );
+				// $subcats = array();
 				echo "<!--";
-				print_r( $subcats );
+				// print_r( $subcats );
+				print_r( $fetch );
 				echo "-->";
-				foreach( $subcats as $subcat ):
+				foreach( $fetch as $sub ):
 			?>
-			<a id="electronicstext" href='<?php echo home_url("kategoria/?nazwa={$cat}&podkategoria={$subcat['name']}"); ?>'>
-				<?php echo ucfirst( $subcat['name'] ); ?>
+			<a id="electronicstext" class='<?php echo strtolower( $sub['subcat_name'] ) == strtolower( $subcat )?(' active '):(''); ?>' href='<?php echo home_url("kategoria/?dostawca={$shop}&nazwa={$cat}&podkategoria={$sub['subcat_name']}"); ?>'>
+				<?php echo ucfirst( $sub['subcat_name'] ); ?>
 			</a>
 			<?php endforeach; ?>
 		</div>
@@ -83,13 +164,13 @@
 					</button>
 					<ul class="dropdown-menu list-unstyled">
 						<li role="presentation" id="electronic-dropdown-unorderlist" >
-							<a href="<?php echo home_url("kategoria/?nazwa={$cat}"); ?>">
+							<a href="<?php echo home_url("kategoria/?dostawca={$shop}&nazwa={$cat}"); ?>">
 								Wszystkie
 							</a>
 						</li>
 						<?php foreach( $subcats as $subcat ): ?>
 						<li role="presentation" id="electronic-dropdown-unorderlist">
-							<a class="list-group-item" href="<?php echo home_url("kategoria/?nazwa={$subcat['name']}"); ?>" role="menuitem" tabindex="-1">
+							<a class="list-group-item" href="<?php echo home_url("kategoria/?dostawca={$shop}&nazwa={$subcat['name']}"); ?>" role="menuitem" tabindex="-1">
 								<?php echo $subcat['name']; ?>
 							</a>
 						</li>

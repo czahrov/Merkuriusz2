@@ -40,8 +40,29 @@
 		</div>
 		<!-- end of the menu-section--> 
 		<div class="container category-third-container">
-			<?php get_template_part('segment/breadcrumb'); ?>
-		</div>
+			<ul class="breadcrumb">
+				<?php
+					$path = array(
+						array(
+							'name' => 'Strona główna',
+							'url' => home_url(),
+						),
+						array(
+							'name' => $word,
+							'url' => home_url("/?s={$word}"),
+						),
+						
+					);
+					
+					foreach( $path as $num => $segment ):
+				?>
+				<li class="<?php if( $num == count( $path ) - 1 ) echo " active "; ?>">
+					<a href="<?php echo $segment['url']; ?>">
+						<?php echo ucfirst( $segment['name'] ); ?>
+					</a>
+				</li>
+				<?php endforeach; ?>
+			</ul>
 		<div class="container category-dropdown-container" id="dropdown-category-button">
 			<div class="dropdown">
 				<button class="btn dropdown-toggle " type="button" data-toggle="dropdown" id="sortbutton" > Sortuj według ceny &nbsp

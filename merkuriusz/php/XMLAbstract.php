@@ -170,26 +170,40 @@ class XMLAbstract{
 		$dt = date( 'Y-m-d H:i:s' );
 		
 		// sprawdza czy nie istnieje już kategoria główna o takiej nazwie, jeśli nie - dodaje ją
-		$sql = "SELECT COUNT( ID ) as num FROM XML_category WHERE parent IS NULL AND name = '{$cat_name}'";
+		$sql = "SELECT *
+		FROM XML_category
+		WHERE parent IS NULL AND name = '{$cat_name}'";
 		$query = mysqli_query( $this->_dbConnect(), $sql );
-		$fetch = mysqli_fetch_assoc( $query );
-		if( (int)$fetch['num'] === 0 ){
+		$parent = mysqli_fetch_assoc( $query );
+		mysqli_free_result( $query );
+		
+		if( $parent === null ){
 			$sql = "INSERT INTO `XML_category` ( `name`, `slug`, `data` ) VALUES ( '{$cat_name}', '{$this->_slug( $cat_name )}', '{$dt}' )";
-			if( mysqli_query( $this->_connect, $sql ) === false ) $this->_log[] = mysqli_error( $this->_connect );
-
+			if( mysqli_query( $this->_dbConnect(), $sql ) === false ) $this->_log[] = mysqli_error( $this->_connect );
+			
+			$sql = "SELECT *
+			FROM XML_category
+			WHERE parent IS NULL AND name = '{$cat_name}'";
+			$query = mysqli_query( $this->_dbConnect(), $sql );
+			$parent = mysqli_fetch_assoc( $query );
+			mysqli_free_result( $query );
 		}
 
 		// dodawanie podkategorii
 		if( !empty( $subcat_name ) ){
-			$parent = $this->getCategory( 'name', $cat_name, 'ID' );
+			// $parent = $this->getCategory( 'name', $cat_name, 'ID' );
 			// sprawdza czy istnieje kategoria o takiej nazwie, jeśli nie - dodaje, jeśli tak - aktualizuje ją
-			$sql = "SELECT COUNT( ID ) as num FROM XML_category WHERE parent = {$parent} AND name = '{$subcat_name}'";
+			$sql = "SELECT COUNT(*) as num
+			FROM XML_category as cat
+			JOIN XML_category as subcat
+			ON cat.ID = subcat.parent
+			WHERE cat.name = '{$cat_name}' AND subcat.name = '{$subcat_name}'";
 			$query = mysqli_query( $this->_dbConnect(), $sql );
 			$fetch = mysqli_fetch_assoc( $query );
 			mysqli_free_result( $query );
 			
 			if( (int)$fetch['num'] === 0 ){
-				$sql = "INSERT INTO `XML_category` ( `name`, `parent`, `slug`, `data` ) VALUES ( '{$subcat_name}', '{$parent}', '{$this->_slug( $subcat_name )}', '{$dt}' )";
+				$sql = "INSERT INTO `XML_category` ( `name`, `parent`, `slug`, `data` ) VALUES ( '{$subcat_name}', '{$parent['ID']}', '{$this->_slug( $subcat_name )}', '{$dt}' )";
 
 			}
 			// aktualizacja już istniejącej kategorii
@@ -199,10 +213,10 @@ class XMLAbstract{
 				FROM XML_category as cat
 				JOIN XML_category as sub
 				ON cat.ID = sub.parent
-				WHERE sub.name = '{$subcat_name}' AND parent = {$parent}";
+				WHERE sub.name = '{$subcat_name}' AND parent = {$parent['ID']}";
 				$query = mysqli_query( $this->_dbConnect(), $sql );
 				$fetch = mysqli_fetch_assoc( $query );
-				$sql = "UPDATE `XML_category` SET parent = '{$parent}', data = '{$dt}' WHERE ID = '{$cat_id}'";
+				$sql = "UPDATE `XML_category` SET parent = '{$parent['ID']}', data = '{$dt}' WHERE ID = '{$cat_id}'";
 				
 			}
 
@@ -214,6 +228,120 @@ class XMLAbstract{
 
 	}
 
+	// funkcja dodająca/aktualizująca produkt do bazy
+	protected function _addItem( $item = array() ){
+		if( empty( $item) ){
+			return false;
+		}
+		else{
+			/* aktualizacja czy wstawianie? */
+			$sql = "SELECT COUNT(*) as num FROM `XML_product` WHERE code = '{$item['code']}'";
+			$query = mysqli_query( $this->_dbConnect(), $sql );
+			$fetch = mysqli_fetch_assoc( $query );
+			$num = $fetch['num'];
+			mysqli_free_result( $query );
+			
+			$t_fields = array();
+			$t_values = array();
+
+			/* aktualizacja */
+			if( (int)$num > 0 ){
+				$t_sql = array();
+
+				// unset( $item['code'] );
+				$sql = "UPDATE XML_product SET ";
+
+				foreach( $item as $field => $value ){
+					$t_sql[] = "`{$field}` = '{$value}'";
+				}
+
+				$sql .= implode( ", ", $t_sql );
+				$sql .= " WHERE `code` = '{$item['code']}'";
+
+			}
+			/* wstawianie */
+			else{
+				foreach( $item as $field => $value ){
+					$t_fields[] = "`{$field}`";
+					$t_values[] = "'{$value}'";
+				}
+
+				$sql = sprintf(
+					'INSERT INTO XML_product ( %s ) VALUES ( %s )',
+					implode( ", ", $t_fields ),
+					implode( ", ", $t_values )
+				);
+
+
+			}
+			
+			if( mysqli_query( $this->_dbConnect(), $sql ) !== false ){
+				return true;
+			}
+			else{
+				return mysqli_error();
+			}
+			
+		}
+		
+	}
+	
+	// funkcja wiążąca produkt z kategorią/podkategorią
+	protected function _bindProduct( $product = null, $cat = '', $subcat = '' ){
+		$main = !empty( $cat );
+		$sub = !empty( $subcat );
+		
+		// przypisywanie do kategorii głównej
+		if( $main and !$sub ){
+			$sql = "SELECT ID
+			FROM XML_category
+			WHERE name = '{$cat}' AND parent IS NULL";
+			$query = mysqli_query( $this->_dbConnect(), $sql );
+			$fetch = mysqli_fetch_assoc( $query );
+			mysqli_free_result( $query );
+			$cat_id = $fetch['ID'];
+		}
+		// przypisywanie do podkategorii
+		elseif( $main and $sub ){
+			$sql = "SELECT sub.ID as ID
+			FROM XML_category as cat
+			JOIN XML_category as sub
+			ON cat.ID = sub.parent
+			WHERE cat.name = '{$cat}' AND sub.name = '{$subcat}'";
+			$query = mysqli_query( $this->_dbConnect(), $sql );
+			$fetch = mysqli_fetch_assoc( $query );
+			mysqli_free_result( $query );
+			$cat_id = $fetch['ID'];
+		}
+		
+		/* base hash
+		SELECT
+		cat.ID AS cat_ID,
+		cat.name AS cat_name,
+		subcat.ID AS subcat_ID,
+		subcat.name AS subcat_name,
+		prod.*
+		FROM XML_category AS cat
+		JOIN XML_category AS subcat
+		ON cat.ID = subcat.parent
+		JOIN XML_hash AS hash
+		ON hash.CID = subcat.ID
+		JOIN XML_product AS prod
+		ON hash.PID = prod.code
+		*/
+		// wiązanie produktu
+		$sql = "INSERT INTO XML_hash ( `PID`, `CID` ) VALUES ( '{$product['code']}', '{$cat_id}' )";
+		$query = mysqli_query( $this->_dbConnect(), $sql );
+		
+		if( $query === false ){
+			return mysqli_error();
+		}
+		else{
+			return true;
+		}
+		
+	}
+	
 	// zwraca kategorię po nazwie
 	public function getCategory( $field, $value, $output = null ){
 		if( empty ( $field ) ) return false;

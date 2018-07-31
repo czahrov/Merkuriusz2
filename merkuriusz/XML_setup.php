@@ -20,12 +20,12 @@ array(
 ) ); */
 
 
-$SHOP['falkross'] = new FALKROSS( array(
+/* $SHOP['falkross'] = new FALKROSS( array(
 	'products' => 'http://download.falk-ross.eu/download/article/falkross-articles.xml',
 ),
 array(
 	'shop' => 'FALKROSS',
-) );
+) ); */
 
 
 /* $SHOP['anda'] = new ANDA( array(

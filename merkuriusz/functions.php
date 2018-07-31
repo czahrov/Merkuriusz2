@@ -92,7 +92,7 @@ function getProduct( $code = null ){
 
 function genMenu(){
 	$menu = array(
-		'Biuro i biznes',
+		/* 'Biuro i biznes',
 		'Czas i pogoda',
 		'Do picia',
 		'Dom i ogród',
@@ -116,24 +116,24 @@ function genMenu(){
 		'Pinsy, plakietki, odznaki',
 		'Sublimacja - drukuj na kolorowo',
 		'VIP Skóra',
-		'Sety',
-		
+		'Sety', */
+		'Easy Gifts' => 'EASYGIFTS',
 	);
 	
-	sort( $menu );
+	// sort( $menu );
 	
-	$menu[] = 'Inne produkty';
+	// $menu[] = 'Inne produkty';
 	
 	echo '<ul class="dropdown-menu list-unstyled">';
-	foreach( $menu as $item ){
+	foreach( $menu as $name => $item ){
 		printf(
 			'<li role="presentation">
 				<a href="%s" role="menuitem" tabindex="-1" class="list-group-item">
 					%s
 				</a>
 			</li>',
-			home_url("kategoria/?nazwa={$item}"),
-			$item
+			home_url("sklep/?nazwa={$item}"),
+			$name
 			
 		);
 		
