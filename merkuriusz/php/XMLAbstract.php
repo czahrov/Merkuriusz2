@@ -27,6 +27,8 @@ class XMLAbstract{
 	);
 	protected $_vat = 0.23;
 	protected $_log = array();
+	protected $_eur = 4.28089748;
+	protected $_usd = 3.66615951;
 
 	// pobiera parametry sklepu, nawiązuje połączenie z bazą
 	public function __construct( $sources, $atts ){

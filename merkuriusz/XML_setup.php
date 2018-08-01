@@ -12,12 +12,12 @@ array(
 ) );
 
 
-/* $SHOP['jaguargift'] = new JAGUARGIFT( array(
+$SHOP['jaguargift'] = new JAGUARGIFT( array(
 	'products' => '',
 ),
 array(
 	'shop' => 'JAGUARGIFT',
-) ); */
+) );
 
 
 /* $SHOP['falkross'] = new FALKROSS( array(

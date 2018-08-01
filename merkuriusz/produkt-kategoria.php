@@ -114,13 +114,7 @@ ORDER BY {$orderby} {$order}";
 			<h1 id="categoryContainerText1">WYBIERZ KATEGORIE SPOŚRÓD:
 				<span id="categoryContainerText2">
 					<?php
-						if( empty( $subcat ) ){
-							echo mb_strtoupper( $cat );
-						}
-						else{
-							echo mb_strtoupper( $cat );
-						}
-							
+						echo mb_strtoupper( $cat );
 					?>
 				</span>
 			</h1>
@@ -169,11 +163,13 @@ ORDER BY subcat.name ASC";
 							</a>
 						</li>
 						<?php foreach( $subcats as $subcat ): ?>
+						<?php if( $subcat['name'] !== '' ): ?>
 						<li role="presentation" id="electronic-dropdown-unorderlist">
 							<a class="list-group-item" href="<?php echo home_url("kategoria/?dostawca={$shop}&nazwa={$subcat['name']}"); ?>" role="menuitem" tabindex="-1">
 								<?php echo $subcat['name']; ?>
 							</a>
 						</li>
+						<?php endif; ?>
 						<?php endforeach; ?>
 					</ul>
 				</div>

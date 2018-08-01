@@ -16,7 +16,7 @@ ON hash.CID = subcat.ID
 JOIN XML_category AS cat
 ON subcat.parent = cat.ID
 WHERE prod.shop = '{$shop}'
-ORDER BY cat_name ASC";
+ORDER BY cat_name, subcat_name ASC";
 	$fetch_grid = doSQL( $sql );
 	
 ?>
@@ -108,9 +108,11 @@ ORDER BY cat_name ASC";
 						<?php echo ucfirst( $cat ); ?>
 					</a>
 					<?php foreach( $subcats as $subcat ): ?>
+					<?php if( $subcat !== 'pozostałe' ): ?>
 					<a class='item col-12 col-lg-6' href='<?php echo home_url("kategoria/?dostawca={$shop}&nazwa={$cat}&podkategoria={$subcat}"); ?>'>
 						<?php echo ucfirst( $subcat ); ?>
 					</a>
+					<?php endif; ?>
 					<?php endforeach; ?>
 				</div>
 				<?php endforeach; ?>

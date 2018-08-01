@@ -3,8 +3,6 @@ class JAGUARGIFT extends XMLAbstract{
 
 	// filtrowanie kategorii
 	protected function _categoryFilter( &$cat_name, &$subcat_name, $item ){
-		$subcat_name = $cat_name;
-		$cat_name = 'VIP Skóra';
 		
 	}
 
@@ -24,8 +22,7 @@ class JAGUARGIFT extends XMLAbstract{
 		$file = file_get_contents( $url, false, $context );
 		if( $file === false ){
 			if( file_exists( $c = __DIR__ . "/DND/" . basename( $url ) ) ){
-				$XML = simplexml_load_string( $file );
-				
+				$XML = simplexml_load_string( $file );	
 			}
 			else{
 				return false;
@@ -42,157 +39,101 @@ class JAGUARGIFT extends XMLAbstract{
 		if( $rehash === true ){
 			// parsowanie danych z XML
 			foreach( $XML->children() as $item ){
-				$code = (string)$item->kod;
-				$category = $this->_stdName( (string)$item->kategorie->kategoria[0] );
-				$subcategory = "";
-
-				$this->_categoryFilter( $category, $subcategory, $item );
-				$this->_addCategory( $category, $subcategory );
-
-				if( empty( $subcategory ) ){
-					$cat_id = $this->getCategory( 'name', $category, 'ID' );
-				}
-				else{
-					$cat_id = $this->getCategory( 'name', $subcategory, 'ID' );
-				}
-
-				$sql = "UPDATE `XML_product` SET cat_id = '{$cat_id}', data = '{$dt}' WHERE code = '{$code}'";
-				if( mysqli_query( $this->_dbConnect(), $sql ) === false ){
-					$this->_log[] = $sql;
-					$this->_log[] = mysqli_error( $this->_dbConnect() );
-				}
-
+				
 			}
 
 		}
 		else{
 			// parsowanie danych z XML
 			foreach( $XML->children() as $item ){
-				$price = (string)$item->price;
-				$netto = (float)str_replace( ",", ".", $price );
-				$brutto = $netto * ( 1 + $this->_vat );
-				// $catalog = addslashes( (string)$item-> );
-				$cat = addslashes( (string)$item->category->{'list-item'}[0]->name );
-				$category = $this->_stdName( $cat );
-				$subcat = "";
-				$subcategory = $this->_stdName( $subcat );
-				$dscr = (string)$item->features->{'list-item'}[0]->value;
-				$material = addslashes( (string)$item->materials->{'list-item'}->value );
-				$dims = addslashes( (string)$item->size );
-				// $country = addslashes( (string)$item-> );
-				$weight = (float)$item->weight * 1000;
-				$new = (string)$item->is_new === "False"?( 0 ):( 1 );
-				$sale = 0;
-				$promotion = 0;
 				$marking_a = array();
 				foreach( $item->marking->{'list-item'} as $arg ){
 					if( (string)$item->availability !== "Niedostępne" ) $marking_a[] = (string)$arg->name;
 
 				}
-				$marking = implode( "<br>", $marking_a );
+				$price = (string)$item->price_eur;
+				$netto = (float)str_replace( ",", ".", $price ) / $this->_eur;
+				$brutto = $netto * ( 1 + $this->_vat );
+				
+				// $catalog = addslashes( (string)$item-> );
+				$cat = addslashes( (string)$item->category->{'list-item'}[0]->name );
+				$category = $this->_stdName( $cat );
+				$subcat = "";
+				$subcategory = $this->_stdName( $subcat );
 				
 				foreach( $item->available_colors->{'list-item'} as $variant ){
-					$code = (string)$variant->id;
-					$short = $code;
-					$color = addslashes( (string)$variant->color->name );
 					$photo_a = array();
 					$i = (string)$variant->main_image->image;
 					if( $i !== "" ) $photo_a[] = $i;
 					foreach( $item->images->{'list-item'} as $img ){
 						$photo_a[] = (string)$img->image;
 					}
-					$photo = json_encode( $photo_a );
-					$instock = (int)$variant->availability_count;
-					$name = addslashes( (string)$variant->name );
 					
-					$this->_categoryFilter( $category, $subcategory, $item );
+					// $this->_categoryFilter( $category, $subcategory, $item );
 					$this->_addCategory( $category, $subcategory );
 
-					if( empty( $subcategory ) ){
-						// $cat_id = $this->getCategory( 'name', $category, 'ID' );
-						$sql = "SELECT ID FROM XML_category WHERE parent IS NULL AND name = '{$category}'";
-					}
-					else{
-						// $cat_id = $this->getCategory( 'name', $subcategory, 'ID' );
-						$sql = "SELECT sub.ID
-						FROM XML_category as cat
-						JOIN XML_category as sub
-						ON cat.ID = sub.parent
-						WHERE cat.name = '{$category}' AND sub.name = '{$subcategory}'";
-					}
-					
-					$query = mysqli_query( $this->_dbConnect(), $sql );
-					$fetch = mysqli_fetch_assoc( $query );
-					$cat_id = $fetch['ID'];
-					
-					/* aktualizacja czy wstawianie? */
-					$sql = "SELECT COUNT(*) as num FROM `XML_product` WHERE code = '{$code}'";
-					$query = mysqli_query( $this->_dbConnect(), $sql );
-					$fetch = mysqli_fetch_assoc( $query );
-					$num = $fetch['num'];
-					mysqli_free_result( $query );
-
-					$insert = array(
+					$product = array(
+						'code' => (string)$variant->id,
+						'short' => (string)$variant->id,
 						'shop' => $this->_atts['shop'],
-						'code' => $code,
-						'short' => $short,
-						'cat_id' => $cat_id,
-						'brutto' => $brutto,
+						'title' => addslashes( (string)$variant->name ),
+						'description' => (string)$item->features->{'list-item'}[0]->value,
+						'catalog' => '',
+						'brand' => '',
+						'marking' => implode( "<br>", $marking_a ),
+						'materials' => addslashes( (string)$item->materials->{'list-item'}->value ),
+						'dimension' => addslashes( (string)$item->size ),
+						'colors' => addslashes( (string)$variant->color->name ),
+						'weight' => (float)$item->weight * 1000,
+						'country' => '',
+						'photos' => json_encode( $photo_a ),
+						'currency' => 'PLN',
 						'netto' => $netto,
-						// 'catalog' => $catalog,
-						'title' => $name,
-						'description' => $dscr,
-						'materials' => $material,
-						'dimension' => $dims,
-						// 'country' => $country,
-						'weight' => $weight,
-						'colors' => $color,
-						'photos' => $photo,
-						'new' => $new,
-						'promotion' => $promotion,
-						'sale' => $sale,
+						'brutto' => $brutto,
+						'price_alt' => '',
+						'price_before' => '',
+						'instock' => (int)$variant->availability_count,
+						'new' => (string)$item->is_new === "False"?( 0 ):( 1 ),
+						'promotion' => 0,
+						'sale' => 0,
 						'data' => $dt,
-						'marking' => $marking,
-						'instock' => $instock,
 					);
-
-					$t_fields = array();
-					$t_values = array();
-
-					/* aktualizacja */
-					if( $num > 0 ){
-						$t_sql = array();
-
-						unset( $insert['code'] );
-						$sql = "UPDATE XML_product SET ";
-
-						foreach( $insert as $field => $value ){
-							$t_sql[] = "`{$field}` = '{$value}'";
-						}
-
-						$sql .= implode( ", ", $t_sql );
-
-						$sql .= " WHERE `code` = '{$code}'";
-
+					
+					if( ( $t = $this->_addItem( $product ) ) !== true ) $this->_log[] = $t;
+					
+					// czyszczenie hash'u produktu przed wiązaniem
+					$sql = "DELETE FROM XML_hash
+					WHERE PID = '{$product['code']}'";
+					$query = mysqli_query( $this->_dbConnect(), $sql );
+					if( $query === false ) $this->_log[] = mysqli_error();
+					
+					foreach( $item->category->{'list-item'} as $cat ){
+						$category = $this->_stdName( (string)$cat->name );
+						$subcategory = '';
+						$this->_addCategory( $category, $subcategory );
+						if( $this->_bindProduct( $product, $category, $subcategory ) === false ) $this->_log[] = mysqli_error();
+						
 					}
-					/* wstawianie */
-					else{
-
-						foreach( $insert as $field => $value ){
-							$t_fields[] = "`{$field}`";
-							$t_values[] = "'{$value}'";
-
+					
+					/* foreach( $item->categories->category as $cat ){
+						$category = $this->_stdName( (string)$cat->name );
+						$subcategory = 'pozostałe';
+						
+						if( count( $cat->subcategories->subcategory ) > 0 ){
+							foreach( $cat->subcategories->subcategory as $subcat ){
+								$subcategory = $this->_stdName( $subcat->name );
+								$this->_addCategory( $category, $subcategory );
+								if( $this->_bindProduct( $product, $category, $subcategory ) === false ) $this->_log[] = mysqli_error();
+							}
+							
 						}
-
-						$sql = sprintf(
-							'INSERT INTO XML_product ( %s ) VALUES ( %s )',
-							implode( ", ", $t_fields ),
-							implode( ", ", $t_values )
-
-						);
-
-
-					}
+						else{
+							$this->_addCategory( $category, $subcategory );
+							if( $this->_bindProduct( $product, $category, $subcategory ) === false ) $this->_log[] = mysqli_error();
+							
+						}
+						
+					} */
 					
 				}
 				

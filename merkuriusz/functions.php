@@ -118,6 +118,7 @@ function genMenu(){
 		'VIP Skóra',
 		'Sety', */
 		'Easy Gifts' => 'EASYGIFTS',
+		'Jaguar Gift' => 'JAGUARGIFT',
 	);
 	
 	// sort( $menu );
