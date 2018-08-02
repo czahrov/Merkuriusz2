@@ -104,7 +104,7 @@ ORDER BY cat_name, subcat_name ASC";
 					foreach( $grid as $cat => $subcats ):
 				?>
 				<div class='category row col-12 col-md-6 col-lg-4 col-xl-3 align-items-start'>
-					<a class='title col-12 text-center' href='<?php echo home_url("kategoria/?dostawca={$shop}&nazwa={$cat}"); ?>'>
+					<a class='title col-12' href='<?php echo home_url("kategoria/?dostawca={$shop}&nazwa={$cat}"); ?>'>
 						<?php echo ucfirst( $cat ); ?>
 					</a>
 					<?php foreach( $subcats as $subcat ): ?>
