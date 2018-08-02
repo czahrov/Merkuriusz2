@@ -528,17 +528,19 @@ body{
 				padding: 5px;
 				
 				.title{
-					padding: 10px 0;
+					padding: 10px 15px;
 					font:{
-						weight: bold;
-						size: 20px;
+						size: 18px;
 					};
-					background-color: hsla(0, 0%, 87%, 1);
 					
 				}
 				
 				.item{
-					padding: 4px;
+					padding: 4px 15px;
+					font:{
+						size: 12px;
+						weight: 400;
+					};
 					transition: background .3s linear;
 					
 					&:hover{

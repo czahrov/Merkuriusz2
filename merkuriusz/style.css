@@ -313,12 +313,12 @@ body.shop-page #fourth-container-content {
     margin: 0 0 10px 0;
     padding: 5px; }
     body.shop-page #fourth-container-content .category .title {
-      padding: 10px 0;
-      font-weight: bold;
-      font-size: 20px;
-      background-color: #dedede; }
+      padding: 10px 15px;
+      font-size: 18px; }
     body.shop-page #fourth-container-content .category .item {
-      padding: 4px;
+      padding: 4px 15px;
+      font-size: 12px;
+      font-weight: 400;
       -webkit-transition: background .3s linear;
       transition: background .3s linear; }
       body.shop-page #fourth-container-content .category .item:hover {
