@@ -91,7 +91,7 @@ class EASYGIFTS extends XMLAbstract{
 				$sql = "DELETE FROM XML_hash
 				WHERE PID = '{$product['code']}'";
 				$query = mysqli_query( $this->_dbConnect(), $sql );
-				if( $query === false ) $this->_log[] = mysqli_error();
+				if( $query === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
 				
 				foreach( $item->categories->category as $cat ){
 					$category = $this->_stdName( (string)$cat->name );
@@ -101,13 +101,13 @@ class EASYGIFTS extends XMLAbstract{
 						foreach( $cat->subcategories->subcategory as $subcat ){
 							$subcategory = $this->_stdName( $subcat->name );
 							$this->_addCategory( $category, $subcategory );
-							if( $this->_bindProduct( $product, $category, $subcategory ) === false ) $this->_log[] = mysqli_error();
+							if( $this->_bindProduct( $product, $category, $subcategory ) === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
 						}
 						
 					}
 					else{
 						$this->_addCategory( $category, $subcategory );
-						if( $this->_bindProduct( $product, $category, $subcategory ) === false ) $this->_log[] = mysqli_error();
+						if( $this->_bindProduct( $product, $category, $subcategory ) === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
 						
 					}
 					

@@ -57,7 +57,7 @@ class XMLAbstract{
 
 	// kończy połączenie z bazą
 	public function __destruct(){
-		if( $this->_connect !== null ) mysqli_close( $this->_connect );
+		if( $this->_dbConnect() !== null ) mysqli_close( $this->_dbConnect() );
 
 	}
 
@@ -181,7 +181,7 @@ class XMLAbstract{
 		
 		if( $parent === null ){
 			$sql = "INSERT INTO `XML_category` ( `name`, `slug`, `data` ) VALUES ( '{$cat_name}', '{$this->_slug( $cat_name )}', '{$dt}' )";
-			if( mysqli_query( $this->_dbConnect(), $sql ) === false ) $this->_log[] = mysqli_error( $this->_connect );
+			if( mysqli_query( $this->_dbConnect(), $sql ) === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
 			
 			$sql = "SELECT *
 			FROM XML_category
@@ -222,7 +222,7 @@ class XMLAbstract{
 				
 			}
 
-			if( mysqli_query( $this->_dbConnect(), $sql ) === false ) $this->_log[] = mysqli_error( $this->_connect );
+			if( mysqli_query( $this->_dbConnect(), $sql ) === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
 
 		}
 
@@ -281,7 +281,7 @@ class XMLAbstract{
 				return true;
 			}
 			else{
-				return mysqli_error();
+				return mysqli_error( $this->_dbConnect() );
 			}
 			
 		}
@@ -336,7 +336,7 @@ class XMLAbstract{
 		$query = mysqli_query( $this->_dbConnect(), $sql );
 		
 		if( $query === false ){
-			return mysqli_error();
+			return mysqli_error( $this->_dbConnect() );
 		}
 		else{
 			return true;
@@ -348,7 +348,7 @@ class XMLAbstract{
 	public function getCategory( $field, $value, $output = null ){
 		if( empty ( $field ) ) return false;
 		$sql = "SELECT * FROM `XML_category` WHERE `{$field}` = '{$value}' LIMIT 1";
-		$query = mysqli_query( $this->_connect, $sql );
+		$query = mysqli_query( $this->_dbConnect(), $sql );
 		$fetch = mysqli_fetch_assoc( $query );
 		mysqli_free_result( $query );
 		if( $output !== null ){
@@ -384,7 +384,7 @@ class XMLAbstract{
 		LEFT JOIN XML_category as cat
 		ON prod.cat_id = cat.ID
 		{$stmt}";
-		$query = mysqli_query( $this->_connect, $sql );
+		$query = mysqli_query( $this->_dbConnect(), $sql );
 		$fetch = mysqli_fetch_all( $query, MYSQLI_ASSOC );
 		mysqli_free_result( $query );
 		return $fetch;
@@ -409,7 +409,7 @@ class XMLAbstract{
 
 		// echo $sql;
 
-		$query = mysqli_query( $this->_connect, $sql );
+		$query = mysqli_query( $this->_dbConnect(), $sql );
 		$fetch = mysqli_fetch_all( $query, MYSQLI_ASSOC );
 		mysqli_free_result( $query );
 		return $fetch;
@@ -431,7 +431,7 @@ JOIN XML_show as visit
 ON prod.code = visit.PID
 ORDER BY visit.visit DESC
 LIMIT {$atts['num']}";
-		$query = mysqli_query( $this->_connect, $sql );
+		$query = mysqli_query( $this->_dbConnect(), $sql );
 		$fetch = mysqli_fetch_all( $query, MYSQLI_ASSOC );
 		mysqli_free_result( $query );
 		return $fetch;
@@ -441,7 +441,7 @@ LIMIT {$atts['num']}";
 	/* funkcja naliczająca kolejne wizyty */
 	public function addVisit( $id ){
 		$sql = "SELECT *, COUNT( * ) as 'num' FROM XML_show WHERE PID = '{$id}'";
-		$query = mysqli_query( $this->_connect, $sql );
+		$query = mysqli_query( $this->_dbConnect(), $sql );
 		$fetch = mysqli_fetch_assoc( $query );
 		mysqli_free_result( $query );
 
@@ -453,13 +453,13 @@ LIMIT {$atts['num']}";
 				$fetch['PID']
 
 			);
-			$query = mysqli_query( $this->_connect, $sql );
+			$query = mysqli_query( $this->_dbConnect(), $sql );
 
 		}
 		/* nowy rekord */
 		else{
 			$sql = "INSERT INTO XML_show ( `PID`, `visit` ) VALUES ( '{$id}', 1 )";
-			$query = mysqli_query( $this->_connect, $sql );
+			$query = mysqli_query( $this->_dbConnect(), $sql );
 
 		}
 
@@ -486,16 +486,16 @@ LIMIT {$atts['num']}";
 	// funkcja usuwająca przypisanie kategorii dla produktów w bazie
 	public function clearHash(){
 		$sql = "UPDATE `XLM_product` SET cat_id = NULL WHERE shop = '{$this->_atts[ 'shop' ]}'";
-		$query = mysqli_query( $this->_connect, $sql );
-		if( mysqli_query( $this->_connect, $sql ) === false ) $this->_log[] = mysqli_error( $this->_connect );
+		$query = mysqli_query( $this->_dbConnect(), $sql );
+		if( mysqli_query( $this->_dbConnect(), $sql ) === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
 
 	}
 
 	// funkcja czyszcząca tablicę kategorii
 	public function clearCats(){
 		$sql = "TRUNCATE `XML_category`";
-		$query = mysqli_query( $this->_connect, $sql );
-		if( mysqli_query( $this->_connect, $sql ) === false ) $this->_log[] = mysqli_error( $this->_connect );
+		$query = mysqli_query( $this->_dbConnect(), $sql );
+		if( mysqli_query( $this->_dbConnect(), $sql ) === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
 
 	}
 
@@ -507,7 +507,7 @@ LEFT JOIN XML_product as prod
 ON cat.ID = prod.cat_id
 WHERE prod.ID IS NULL
 GROUP BY cat.ID";
-		$query = mysqli_query( $this->_connect, $sql );
+		$query = mysqli_query( $this->_dbConnect(), $sql );
 		$fetch = mysqli_fetch_all( $query );
 		mysqli_free_result( $query );
 
@@ -516,7 +516,7 @@ GROUP BY cat.ID";
 
 		}, $fetch ) );
 		$sql = "DELETE FROM XML_category WHERE ID IN ( {$list} )";
-		$query = mysqli_query( $this->_connect, $sql );
+		$query = mysqli_query( $this->_dbConnect(), $sql );
 
 	}
 
@@ -535,7 +535,7 @@ GROUP BY cat.ID";
 		ON subcat.ID = product.cat_id
 		{$stmt}";
 
-		$query = mysqli_query( $this->_connect, $sql );
+		$query = mysqli_query( $this->_dbConnect(), $sql );
 		$fetch = mysqli_fetch_all( $query, MYSQLI_ASSOC );
 		mysqli_free_result( $query );
 		return $fetch;
@@ -552,7 +552,7 @@ GROUP BY cat.ID";
 		ORDER BY subcat.name ASC";
 
 
-		$query = mysqli_query( $this->_connect, $sql );
+		$query = mysqli_query( $this->_dbConnect(), $sql );
 		$fetch = mysqli_fetch_all( $query, MYSQLI_ASSOC );
 		mysqli_free_result( $query );
 

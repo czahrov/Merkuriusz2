@@ -12,27 +12,65 @@ class JAGUARGIFT extends XMLAbstract{
 		/* Ładowanie pliku XML z produktami */
 		$opts = array(
 			'http' => array(
-			'method' => "GET",
-			'header' => "Accept-language: pl\r\n" .
+				'method' => "GET",
+				'header' => "Accept-language: pl\r\n" .
 				"Authorization: Token b877f60a12c850f74a169fa036265f852b38be79\r\n"
 			)
 		);
 		$context = stream_context_create( $opts );
 		$url = "http://www.jaguargift.com/pl/jaguargift.xml";
-		$file = file_get_contents( $url, false, $context );
-		if( $file === false ){
-			if( file_exists( $c = __DIR__ . "/DND/" . basename( $url ) ) ){
-				$XML = simplexml_load_string( $file );	
+		$local = __DIR__ . "/DND/" . basename( $url );
+		mkdir( dirname( $local ), 0755, true );
+		$exist = file_exists( $local );
+		$actual = ( time() - filemtime( $local ) ) < $this->_atts['lifetime'];
+		
+		/* plik lokalny istnieje */
+		if( $exist ){
+			echo "\r\n> Plik lokalny istnieje";
+			
+			/* plik lokalny jest aktualny */
+			if( $actual ){
+				echo "\r\n> Plik lokalny jest aktualny, ładuję dane z dysku";
+				$XML = simplexml_load_file( $local );
 			}
+			/* aktualizaja pliku lokalnego */
 			else{
-				return false;
+				echo "\r\n> Plik lokalny jest nieaktualny, aktualizacja";
+				$file = file_get_contents( $url, false, $context );
+				/* pobieranie udane, zapisywanie do pliku */
+				if( $file !== false ){
+					echo "\r\n> Aktualizacja udana";
+					file_put_contents( $local, $file );
+				}
+				else{
+					echo "\r\n> Aktualizacja nieudana";
+					
+				}
+				
+				echo "\r\n> Wczytywanie danych z pliku\r\n";
+				$XML = simplexml_load_file( $local );
 			}
 			
 		}
 		else{
-			file_put_contents( __DIR__ . "/DND/" . basename( $url ) );
-			$XML = simplexml_load_string( $file );
+			/* nie udało się pobrać pliku, anulowanie */
+			echo "\r\n> Plik lokalny nie istnieje, pobieram";
+			$file = file_get_contents( $url, false, $context );
+			/* pobieranie udane, zapisywanie do pliku */
+			if( $file !== false ){
+				echo "\r\n> Pobieranie udane";
+				file_put_contents( $local, $file );
+				echo "\r\n> Wczytywanie danych z pliku\r\n";
+				$XML = simplexml_load_file( $local );
+				
+			}
+			else{
+				echo "\r\n> Pobieranie nieudane, przerywam!";
+				return false;
+			}
+			
 		}
+		
 		
 		$dt = date( 'Y-m-d H:i:s' );
 
@@ -56,10 +94,10 @@ class JAGUARGIFT extends XMLAbstract{
 				$brutto = $netto * ( 1 + $this->_vat );
 				
 				// $catalog = addslashes( (string)$item-> );
-				$cat = addslashes( (string)$item->category->{'list-item'}[0]->name );
+				/* $cat = addslashes( (string)$item->category->{'list-item'}[0]->name );
 				$category = $this->_stdName( $cat );
 				$subcat = "";
-				$subcategory = $this->_stdName( $subcat );
+				$subcategory = $this->_stdName( $subcat ); */
 				
 				foreach( $item->available_colors->{'list-item'} as $variant ){
 					$photo_a = array();
@@ -69,9 +107,6 @@ class JAGUARGIFT extends XMLAbstract{
 						$photo_a[] = (string)$img->image;
 					}
 					
-					// $this->_categoryFilter( $category, $subcategory, $item );
-					$this->_addCategory( $category, $subcategory );
-
 					$product = array(
 						'code' => (string)$variant->id,
 						'short' => (string)$variant->id,
@@ -105,35 +140,17 @@ class JAGUARGIFT extends XMLAbstract{
 					$sql = "DELETE FROM XML_hash
 					WHERE PID = '{$product['code']}'";
 					$query = mysqli_query( $this->_dbConnect(), $sql );
-					if( $query === false ) $this->_log[] = mysqli_error();
+					if( $query === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
+					
+					// $this->_categoryFilter( $category, $subcategory, $item );
 					
 					foreach( $item->category->{'list-item'} as $cat ){
 						$category = $this->_stdName( (string)$cat->name );
-						$subcategory = '';
+						$subcategory = 'pozostałe';
 						$this->_addCategory( $category, $subcategory );
-						if( $this->_bindProduct( $product, $category, $subcategory ) === false ) $this->_log[] = mysqli_error();
+						if( $this->_bindProduct( $product, $category, $subcategory ) === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
 						
 					}
-					
-					/* foreach( $item->categories->category as $cat ){
-						$category = $this->_stdName( (string)$cat->name );
-						$subcategory = 'pozostałe';
-						
-						if( count( $cat->subcategories->subcategory ) > 0 ){
-							foreach( $cat->subcategories->subcategory as $subcat ){
-								$subcategory = $this->_stdName( $subcat->name );
-								$this->_addCategory( $category, $subcategory );
-								if( $this->_bindProduct( $product, $category, $subcategory ) === false ) $this->_log[] = mysqli_error();
-							}
-							
-						}
-						else{
-							$this->_addCategory( $category, $subcategory );
-							if( $this->_bindProduct( $product, $category, $subcategory ) === false ) $this->_log[] = mysqli_error();
-							
-						}
-						
-					} */
 					
 				}
 				

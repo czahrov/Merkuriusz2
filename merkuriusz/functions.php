@@ -117,8 +117,14 @@ function genMenu(){
 		'Sublimacja - drukuj na kolorowo',
 		'VIP Skóra',
 		'Sety', */
-		'Easy Gifts' => 'EASYGIFTS',
-		'Jaguar Gift' => 'JAGUARGIFT',
+		'Easy Gifts' => 'easygifts',
+		'Jaguar Gift' => 'jaguargift',
+		// 'Falk&Ross' => 'falkross',
+		// 'Asgard' => 'asgard',
+		// 'Inspirion' => 'inspirion',
+		// 'PAR' => 'par',
+		// 'ANDA' => 'anda',
+		// 'Macma' => 'macma',
 	);
 	
 	// sort( $menu );

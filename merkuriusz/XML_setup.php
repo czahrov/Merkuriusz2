@@ -3,6 +3,7 @@ require_once __DIR__ . "/php/cfg.php";
 
 $SHOP  = array();
 
+/* ~40s */
 $SHOP['easygifts'] = new EASYGIFTS( array(
 	'products' => 'http://www.easygifts.com.pl/data/webapi/pl/xml/offer.xml',
 	'stock' => 'http://www.easygifts.com.pl/data/webapi/pl/xml/stocks.xml',
@@ -11,15 +12,15 @@ array(
 	'shop' => 'EASYGIFTS',
 ) );
 
-
+/* ~30s */
 $SHOP['jaguargift'] = new JAGUARGIFT( array(
-	'products' => '',
+ 	'products' => '',
 ),
 array(
 	'shop' => 'JAGUARGIFT',
 ) );
 
-
+/* ~260s */
 /* $SHOP['falkross'] = new FALKROSS( array(
 	'products' => 'http://download.falk-ross.eu/download/article/falkross-articles.xml',
 ),
