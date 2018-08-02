@@ -30,7 +30,7 @@ class JAGUARGIFT extends XMLAbstract{
 			
 			/* plik lokalny jest aktualny */
 			if( $actual ){
-				echo "\r\n> Plik lokalny jest aktualny, ładuję dane z dysku";
+				echo "\r\n> Plik lokalny jest aktualny, ładuję dane z dysku\r\n";
 				$XML = simplexml_load_file( $local );
 			}
 			/* aktualizaja pliku lokalnego */
@@ -93,12 +93,6 @@ class JAGUARGIFT extends XMLAbstract{
 				$netto = (float)str_replace( ",", ".", $price ) / $this->_eur;
 				$brutto = $netto * ( 1 + $this->_vat );
 				
-				// $catalog = addslashes( (string)$item-> );
-				/* $cat = addslashes( (string)$item->category->{'list-item'}[0]->name );
-				$category = $this->_stdName( $cat );
-				$subcat = "";
-				$subcategory = $this->_stdName( $subcat ); */
-				
 				foreach( $item->available_colors->{'list-item'} as $variant ){
 					$photo_a = array();
 					$i = (string)$variant->main_image->image;
@@ -148,7 +142,7 @@ class JAGUARGIFT extends XMLAbstract{
 						$category = $this->_stdName( (string)$cat->name );
 						$subcategory = 'pozostałe';
 						$this->_addCategory( $category, $subcategory );
-						if( $this->_bindProduct( $product, $category, $subcategory ) === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
+						if( $this->_bindProduct( $product, $category, $subcategory ) !== true ) $this->_log[] = mysqli_error( $this->_dbConnect() );
 						
 					}
 					
