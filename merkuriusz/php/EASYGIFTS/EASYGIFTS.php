@@ -23,7 +23,10 @@ class EASYGIFTS extends XMLAbstract{
 			$stock_a = array();
 			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'stock' ] ) );
 			foreach( $XML->children() as $item ){
-				$stock_a[ (string)$item->code_full ] = (int)$item->quantity_24h;
+				$stock_a[ (string)$item->code_full ] = array(
+					'num' => (int)$item->quantity_24h + (int)$item->quantity_37days,
+					'24h' => (int)$item->quantity_24h > 0,
+				);
 			}
 			
 			// parsowanie danych z XML
@@ -78,7 +81,7 @@ class EASYGIFTS extends XMLAbstract{
 					'brutto' => $brutto,
 					'price_alt' => '',
 					'price_before' => !empty( $price_promo )?( (float)str_replace( ",", ".", $price ) ):( 0 ),
-					'instock' => $stock_a[ (string)$item->baseinfo->code_full ],
+					'instock' => $stock_a[ (string)$item->baseinfo->code_full ]['num'],
 					'new' => (int)$item->attributes->new,
 					'promotion' => (float)$item->baseinfo->price_promotion > 0?( 1 ):( 0 ),
 					'sale' => (float)$item->baseinfo->price_sellout > 0?( 1 ):( 0 ),
@@ -110,6 +113,22 @@ class EASYGIFTS extends XMLAbstract{
 						if( $this->_bindProduct( $product, $category, $subcategory ) === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
 						
 					}
+					
+					if( $stock_a[ (string)$item->baseinfo->code_full ]['24h'] ){
+						
+						if( $category == 'import' ){
+							$subcategory = 'produkty importowe dostępne 24h';
+						}
+						elseif( in_array( $category, array( 'pendrivey', 'power banki' ) ) ){
+							$subcategory = "{$category} dostępne 24h";
+							
+						}
+						
+						$this->_addCategory( $category, $subcategory );
+						if( $this->_bindProduct( $product, $category, $subcategory ) === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
+						
+					}
+					
 					
 				}
 				
