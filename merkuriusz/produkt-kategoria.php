@@ -1,6 +1,6 @@
 <?php
 	/* template name: Produkt - kategoria */
-	if( empty( $_GET ) ){
+	if( empty( $_GET ) or empty( $_GET['nazwa'] ) ){
 		header("Location:" . home_url() );
 		exit;
 	}
@@ -12,8 +12,13 @@
 	$subcat = $_GET['podkategoria'];
 	$orderby = empty( $t = $_GET['według'] )?( 'prod.ID' ):( "prod.{$t}" );
 	$order = empty( $t = $_GET['sortuj'] )?( 'DESC' ):( "{$t}" );
+	$where = array(
+		"cat.name = '{$cat}'",
+	);
+	if( !empty( $shop ) ) $where[] = "prod.shop = '{$shop}'";
+	if( !empty( $subcat ) ) $where[] = "subcat.name = '{$subcat}'";
 	
-	if( empty( $subcat ) ){
+	/* if( empty( $subcat ) ){
 		$sql = "SELECT prod.*
 FROM XML_product AS prod
 JOIN XML_hash AS hash
@@ -40,7 +45,20 @@ AND cat.name= '{$cat}'
 AND subcat.name = '{$subcat}'
 ORDER BY {$orderby} {$order}";
 		
-	}
+	} */
+	
+	$sql = "SELECT prod.*
+FROM XML_product AS prod
+JOIN XML_hash AS hash
+ON prod.code = hash.PID
+JOIN XML_category AS subcat
+ON hash.CID = subcat.ID
+JOIN XML_category AS cat
+ON subcat.parent = cat.ID
+WHERE ";
+	$sql .= implode( ' AND ', $where );
+	$sql .= "ORDER BY {$orderby} {$order}";
+	
 	$fetch = doSQL( $sql );
 	
 	$strona = max( 1, (int)$_GET['strona'] );
@@ -84,16 +102,18 @@ ORDER BY {$orderby} {$order}";
 							'name' => 'Strona główna',
 							'url' => home_url(),
 						),
-						array(
-							'name' => $shop,
-							'url' => home_url("sklep/?nazwa={$shop}"),
-						),
-						array(
-							'name' => $cat,
-							'url' => home_url("kategoria/?dostawca={$shop}&nazwa={$cat}"),
-						),
 						
 					);
+					
+					if( !empty( $shop ) ) array_push( $path, array(
+						'name' => $shop,
+						'url' => home_url("sklep/?nazwa={$shop}"),
+					) );
+					
+					if( !empty( $cat ) ) array_push( $path, array(
+						'name' => $cat,
+						'url' => home_url("kategoria/?dostawca={$shop}&nazwa={$cat}"),
+					) );
 					
 					if( !empty( $subcat ) ) array_push( $path, array(
 						'name' => $subcat,
@@ -124,6 +144,12 @@ ORDER BY {$orderby} {$order}";
 				Wszystkie
 			</a>
 			<?php
+				$where = array(
+					"cat.name = '{$cat}'",
+				);
+				
+				if( !empty( $shop ) ) $where[] = "prod.shop = '{$shop}'";
+				
 				$sql = "SELECT DISTINCT subcat.name AS subcat_name
 FROM XML_product AS prod
 JOIN XML_hash AS hash
@@ -132,9 +158,9 @@ JOIN XML_category AS subcat
 ON hash.CID = subcat.ID
 JOIN XML_category AS cat
 ON subcat.parent = cat.ID
-WHERE prod.shop = '{$shop}'
-AND cat.name = '{$cat}'
-ORDER BY subcat.name ASC";
+WHERE ";
+				$sql .= implode( ' AND ', $where );
+				$sql .= "ORDER BY subcat.name ASC";
 				$fetch = doSQL( $sql );
 
 				// $subcats = getSubcatsList( $_GET['nazwa'] );

@@ -1,5 +1,5 @@
 <div class="top-brands-block SecondContainer all-gap" id="top-brands-block">
-	<a href="<?php echo home_url("kategoria/?nazwa=Be Creative"); ?>" class="zoom-banner mt-3 mt-sm-0">
+	<a href="<?php echo home_url(); ?>" class="zoom-banner mt-3 mt-sm-0">
 		<div class="col-md-4 top-brands-img">
 			<img src="<?php echo get_template_directory_uri(); ?>/media/vip-banner1.png" alt=""/>
 			<div class="circletext1"> Be Creative</div>
@@ -9,7 +9,7 @@
 			</div>
 		</div>
 	</a>
-	<a href="<?php echo home_url("kategoria/?nazwa=VIP Collection"); ?>" class="zoom-banner mt-3 mt-sm-0" >
+	<a href="<?php echo home_url("kategoria/?nazwa=Kolekcja VIP"); ?>" class="zoom-banner mt-3 mt-sm-0" >
 		<div class="col-md-4 top-brands-img">
 			<img src="<?php echo get_template_directory_uri(); ?>/media/vip-banner2.png" alt=""/>
 			<div class="watchtext1"> Vip Collection </div>
@@ -19,7 +19,7 @@
 			</div>
 		</div>
 	</a>
-	<a href="<?php echo home_url("kategoria/?nazwa=Odzież reklamowa"); ?>" class="zoom-banner mt-3 mt-sm-3 mt-md-0">
+	<a href="<?php echo home_url(); ?>" class="zoom-banner mt-3 mt-sm-3 mt-md-0">
 		<div class="col-md-4 top-brands-img">
 			<img src="<?php echo get_template_directory_uri(); ?>/media/vip-banner3.png" alt=""/>
 			<div class="odzieztext1"> Odzież reklamowa </div>

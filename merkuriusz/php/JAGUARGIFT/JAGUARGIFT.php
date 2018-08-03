@@ -30,6 +30,7 @@ class JAGUARGIFT extends XMLAbstract{
 			
 			/* plik lokalny jest aktualny */
 			if( $actual ){
+				echo "\r\n> Czas ostatniej aktualizacji: " . date( "Y-m-d H:i:s", filemtime( $local ) );
 				echo "\r\n> Plik lokalny jest aktualny, ładuję dane z dysku\r\n";
 				$XML = simplexml_load_file( $local );
 			}

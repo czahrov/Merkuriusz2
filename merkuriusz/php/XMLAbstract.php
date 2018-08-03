@@ -333,6 +333,7 @@ class XMLAbstract{
 		*/
 		// wiązanie produktu
 		$sql = "INSERT INTO XML_hash ( `PID`, `CID` ) VALUES ( '{$product['code']}', '{$cat_id}' )";
+		// echo "\r\n{$sql}";
 		$query = mysqli_query( $this->_dbConnect(), $sql );
 		
 		if( $query === false ){

@@ -100,6 +100,24 @@ class EASYGIFTS extends XMLAbstract{
 					$category = $this->_stdName( (string)$cat->name );
 					$subcategory = 'pozostałe';
 					
+					if( in_array( $category, array( 'inne', 'katalog świąteczny 2015' ) ) ){
+						continue;
+					}
+					
+					if( in_array( $category, array( 'cerruti 1881', 'cacharel', 'ungaro', 'nina ricci', 'jean-louis scherrer', 'christian lacroix' ) ) ){
+						$this->_addCategory( $c = 'Power of brands - oferta specjalna 24h', $category );
+						if( $this->_bindProduct( $product, $c, $category ) === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
+						
+						$this->_addCategory( $s = 'Kolekcja VIP', $c );
+						if( $this->_bindProduct( $product, $s, $c ) === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
+					}
+					
+					if( in_array( $category, array( 'elektronika markowa', 'cerruti 1881', 'power of brands', 'cacharel', 'ungaro', 'nina ricci', 'jean-louis scherrer', 'christian lacroix', 'wenger - bagaże biznesowe i akcesoria podróżne', 'wenger - bestsellery', 'victorinox', 'victorinox delemont collection', 'victorinox lifestyle - akcesoria podróżne', 'victorinox altmont - plecaki i torby' ) )
+					){
+						$this->_addCategory( $c = 'Kolekcja VIP', $category );
+						if( $this->_bindProduct( $product, $c, $category ) === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
+					}
+					
 					if( count( $cat->subcategories->subcategory ) > 0 ){
 						foreach( $cat->subcategories->subcategory as $subcat ){
 							$subcategory = $this->_stdName( $subcat->name );
