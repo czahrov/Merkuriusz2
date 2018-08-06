@@ -122,9 +122,10 @@ function genMenu(){
 		// 'Falk&Ross' => 'falkross',
 		'Asgard' => 'asgard',
 		'Inspirion' => 'inspirion',
-		// 'PAR' => 'par',
-		// 'ANDA' => 'anda',
-		// 'Macma' => 'macma',
+		'PAR' => 'par',
+		'Macma' => 'macma',
+		// 'Axpol' => 'axpol',
+		// 'Anda' => 'anda',
 	);
 	
 	// sort( $menu );
