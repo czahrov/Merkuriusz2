@@ -7,7 +7,7 @@
 		exit;
 	}
 	
-	$sql = "SELECT cat.name AS cat_name, subcat.name AS subcat_name
+	$sql = "SELECT cat.name AS cat_name
 FROM XML_product AS prod
 JOIN XML_hash AS hash
 ON prod.code = hash.PID
@@ -16,7 +16,7 @@ ON hash.CID = subcat.ID
 JOIN XML_category AS cat
 ON subcat.parent = cat.ID
 WHERE prod.shop = '{$shop}'
-ORDER BY cat_name, subcat_name ASC";
+ORDER BY cat_name ASC";
 	$fetch_grid = doSQL( $sql );
 	
 ?>
@@ -60,60 +60,63 @@ ORDER BY cat_name, subcat_name ASC";
 				<?php endforeach; ?>
 			</ul>
 		</div>
-		<div class="container category-text-container">
-			<h1 id="categoryContainerText1">WYBIERZ KATEGORIE SPOŚRÓD:
-				<span id="categoryContainerText2"></span>
-			</h1>
-		</div>
-		<div class="container electronics-dropdown-container"  id="electronic-dropdown-button">
-			<div class="dropdown">
-				<div class="dropdown open show">
-					<button class="btn btn-default dropdown-toggle" type="button" id="electronic-dropdown" data-toggle="dropdown">
-					<img src="<?php echo get_template_directory_uri(); ?>/media/menubar.png"> &nbsp WYBIERZ KATEGORIE SPOŚRÓD
-					</button>
-					<ul class="dropdown-menu list-unstyled">
-						<li role="presentation" id="electronic-dropdown-unorderlist" >
-							<a href="<?php echo home_url("kategoria/?nazwa={$cat}"); ?>">
-								Wszystkie
-							</a>
-						</li>
-						<?php foreach( $subcats as $subcat ): ?>
-						<li role="presentation" id="electronic-dropdown-unorderlist">
-							<a class="list-group-item" href="<?php echo home_url("kategoria/?nazwa={$subcat['name']}"); ?>" role="menuitem" tabindex="-1">
-								<?php echo $subcat['name']; ?>
-							</a>
-						</li>
-						<?php endforeach; ?>
-					</ul>
+		<div id='kafelki' class=''>
+			<div class='container d-flex flex-wrap'>
+			<?php
+				/* generowanie kafelków promocyjnych, wiązanie na podstawie nazwy sklepu */
+				$items = get_pages( array(
+					'parent' => 982,	/* kafelki promocyjne */
+					'sort_column' => 'menu_order, post_title',
+					'sort_order' => 'ASC',
+					'meta_key' => 'sklep',
+				) );
+				foreach( $items as $item ):
+				$meta = get_post_meta( $item->ID );
+				if( stripos( $meta['sklep'][0], $shop ) !== false ):
+			?>
+				<div class='item col-12 col-md-6 col-lg-4'>
+					<div class='img' style='background-image: url(<?php echo wp_get_attachment_image_url( $meta['grafika'][0], 'full' ); ?>);'></div>
+					<a class='hitbox' href='<?php echo $meta['odnośnik'][0]; ?>'></a>
+					<div class='box'>
+						<div class='title'>
+							<?php echo $meta['tytuł'][0]; ?>
+						</div>
+						<div class='subtitle'>
+							<?php echo $meta['podtytuł'][0]; ?>
+						</div>
+						
+					</div>
+					<div class='icon'>
+						<img src="http://merkuriusz.scepter.pl/wp-content/themes/merkuriusz/media/banner-whiterightarrow.png">
+					</div>
+					
 				</div>
+			<?php endif; ?>
+			<?php endforeach; ?>
 			</div>
 		</div>
+		<h1 id="thirdContainerText1" class='text-uppercase'>
+			Wszystkie
+			<span id="thirdContainerText2">
+				kategorie
+			</span>
+		</h1>
 		<div class= "container fourth-container">
-			<div id="fourth-container-content" class="row align-items-start">
+			<div id="fourth-container-content" class="row">
 				<?php
 					$grid = array();
 					
 					foreach( $fetch_grid as $line ){
 						$c = $line['cat_name'];
-						$s = $line['subcat_name'];
 						if( !array_key_exists( $c, $grid ) ) $grid[ $c ] = array();
-						if( !in_array( $s, $grid[ $c ] ) ) $grid[ $c ][] = $s;
-						
 					}
 					
 					foreach( $grid as $cat => $subcats ):
 				?>
-				<div class='category row col-12 col-md-6 col-lg-4 col-xl-3 align-items-start'>
-					<a class='title col-12' href='<?php echo home_url("kategoria/?dostawca={$shop}&nazwa={$cat}"); ?>'>
+				<div class='category'>
+					<a class='title col-12 d-flex justify-content-between align-items-center' href='<?php echo home_url("kategoria/?dostawca={$shop}&nazwa={$cat}"); ?>'>
 						<?php echo ucfirst( $cat ); ?>
 					</a>
-					<?php foreach( $subcats as $subcat ): ?>
-					<?php if( $subcat !== 'pozostałe' ): ?>
-					<a class='item col-12 col-lg-6' href='<?php echo home_url("kategoria/?dostawca={$shop}&nazwa={$cat}&podkategoria={$subcat}"); ?>'>
-						<?php echo ucfirst( $subcat ); ?>
-					</a>
-					<?php endif; ?>
-					<?php endforeach; ?>
 				</div>
 				<?php endforeach; ?>
 			</div>

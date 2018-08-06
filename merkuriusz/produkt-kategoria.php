@@ -102,7 +102,6 @@ WHERE ";
 							'name' => 'Strona główna',
 							'url' => home_url(),
 						),
-						
 					);
 					
 					if( !empty( $shop ) ) array_push( $path, array(
@@ -170,10 +169,17 @@ WHERE ";
 				print_r( $fetch );
 				echo "-->";
 				foreach( $fetch as $sub ):
+				/* generowanie odnośników dla kolekcji vip */
+				if( in_array( mb_strtolower( $sub['subcat_name'] ), array( 'elektronika markowa', 'cacharel', 'cerruti 1881', 'christian lacroix', 'jean-louis scherrer', 'nina ricci', 'power of brands - oferta specjalna 24h', 'ungaro', 'victorinox', 'victorinox altmont - plecaki i torby', 'victorinox delemont collection', 'victorinox lifestyle - akcesoria podróżne', 'wenger - bagaże biznesowe i akcesoria podróżne', 'wenger - bestsellery' ) ) ):
 			?>
-			<a id="electronicstext" class='<?php echo strtolower( $sub['subcat_name'] ) == strtolower( $subcat )?(' active '):(''); ?>' href='<?php echo home_url("kategoria/?dostawca={$shop}&nazwa={$cat}&podkategoria={$sub['subcat_name']}"); ?>'>
+			<a id="electronicstext" class='<?php echo mb_strtolower( $sub['subcat_name'] ) == mb_strtolower( $subcat )?(' active '):(''); ?>' href='<?php echo home_url("kategoria/?dostawca={$shop}&nazwa={$sub['subcat_name']}"); ?>'>
 				<?php echo ucfirst( $sub['subcat_name'] ); ?>
 			</a>
+			<?php else: ?>
+			<a id="electronicstext" class='<?php echo mb_strtolower( $sub['subcat_name'] ) == mb_strtolower( $subcat )?(' active '):(''); ?>' href='<?php echo home_url("kategoria/?dostawca={$shop}&nazwa={$cat}&podkategoria={$sub['subcat_name']}"); ?>'>
+				<?php echo ucfirst( $sub['subcat_name'] ); ?>
+			</a>
+			<?php endif; ?>
 			<?php endforeach; ?>
 		</div>
 		<div class="container electronics-dropdown-container"  id="electronic-dropdown-button">
