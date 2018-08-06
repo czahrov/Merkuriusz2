@@ -567,71 +567,48 @@ body{
 		{
 			margin-bottom: 120px;
 			
-			.item{
-				position: relative;
-				height: 290px;
-				overflow: hidden;
+			#top-brands-block
+			{
 				
-				.img{
-					position: absolute;
-					top: 0;
-					left: 0;
-					right: 0;
-					bottom: 0;
-					background:{
-						size: cover;
-						position: left top;
-						repeat: no-repeat;
-					};
-					transition: transform .3s linear;
+				.zoom-banner{
+					height: 300px;
 					
-				}
-				
-				.hitbox{
-					position: absolute;
-					top: 0;
-					left: 0;
-					right: 0;
-					bottom: 0;
-					z-index: 10;
-					
-				}
-				
-				.box{
-					position: absolute;
-					margin: 80px 0 0 30px;
-					top: 0;
-					left: 0;
-					color: #fff;
-					
-					.title{
-						font:{
-							size: 32px;
-							weight: bold;
-						};
-						line-height: 40px;
+					.top-brands-img{
+						height: 100%;
+						
+						.img{
+							position: absolute;
+							top: 0;
+							left: 0;
+							right: 0;
+							bottom: 0;
+							background:{
+								size: cover;
+								position: left top;
+								repeat: no-repeat;
+								
+							};
+							transition: transform .3s linear;
+							
+						}
+						
 					}
 					
-					.subtitle{
-						font:{
-							size: 24px;
-						};
-						line-height: 30px;
+					&, & *{
+						cursor: pointer;
+						
 					}
 					
-				}
-				
-				.icon{
-					position: absolute;
-					margin: 20px;
-					bottom: 0;
-					right: 0;
-				}
-				
-				&:hover{
-					
-					.img{
-						transform: scale(1.1);
+					&:hover{
+						
+						.top-brands-img{
+							
+							.img{
+								transform: scale( 1.1 );
+								
+							}
+							
+						}
 						
 					}
 					

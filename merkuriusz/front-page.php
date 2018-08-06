@@ -23,7 +23,7 @@
 			</div>
 		</div>
 		<!--===================================- /sixth container --=============================================== -->
-		<?php get_template_part('segment/vip-elektronika'); ?>
+		<?php //get_template_part('segment/vip-elektronika'); ?>
 		<?php get_template_part('segment/pdf-slider'); ?>
 		<div class="container reklama-container">
 			<div class="col-lg-12 footer-container" style="margin-top:40px;">

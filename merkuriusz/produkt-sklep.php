@@ -60,9 +60,9 @@ ORDER BY cat_name ASC";
 				<?php endforeach; ?>
 			</ul>
 		</div>
-		<div id='kafelki' class=''>
-			<div class='container d-flex flex-wrap'>
-			<?php
+		<div id='kafelki' class='container'>
+			<div class="top-brands-block SecondContainer all-gap" id="top-brands-block">
+				<?php
 				/* generowanie kafelków promocyjnych, wiązanie na podstawie nazwy sklepu */
 				$items = get_pages( array(
 					'parent' => 982,	/* kafelki promocyjne */
@@ -73,27 +73,25 @@ ORDER BY cat_name ASC";
 				foreach( $items as $item ):
 				$meta = get_post_meta( $item->ID );
 				if( stripos( $meta['sklep'][0], $shop ) !== false ):
-			?>
-				<div class='item col-12 col-md-6 col-lg-4'>
-					<div class='img' style='background-image: url(<?php echo wp_get_attachment_image_url( $meta['grafika'][0], 'full' ); ?>);'></div>
-					<a class='hitbox' href='<?php echo $meta['odnośnik'][0]; ?>'></a>
-					<div class='box'>
-						<div class='title'>
+				?>
+				<a class="zoom-banner mt-3 mt-sm-0" href="<?php echo $meta['odnośnik'][0]; ?>">
+					<div class="top-brands-img col-md-4">
+						<div class='img' style="background-image: url(<?php echo wp_get_attachment_image_url( $meta['grafika'][0], 'full' ); ?>);" ></div>
+						<div class="watchtext1">
 							<?php echo $meta['tytuł'][0]; ?>
 						</div>
-						<div class='subtitle'>
+						<div class="watchtext2">
 							<?php echo $meta['podtytuł'][0]; ?>
 						</div>
-						
+						<div class="arrow-circle1">
+							<img src="http://merkuriusz.scepter.pl/wp-content/themes/merkuriusz/media/banner-whiterightarrow.png">
+						</div>
 					</div>
-					<div class='icon'>
-						<img src="http://merkuriusz.scepter.pl/wp-content/themes/merkuriusz/media/banner-whiterightarrow.png">
-					</div>
-					
-				</div>
-			<?php endif; ?>
-			<?php endforeach; ?>
+				</a>
+				<?php endif; ?>
+				<?php endforeach; ?>
 			</div>
+			
 		</div>
 		<h1 id="thirdContainerText1" class='text-uppercase'>
 			Wszystkie
