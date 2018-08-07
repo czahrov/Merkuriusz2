@@ -3,29 +3,6 @@ class AXPOL extends XMLAbstract{
 
 	// filtrowanie kategorii
 	protected function _categoryFilter( &$cat_name, &$subcat_name, $item ){
-		if( stripos( (string)$item->DescriptionPL, 'moleskine' ) !== false ){
-			if(
-				stripos( (string)$item->DescriptionPL, $c = 'notatnik' ) !== false or
-				stripos( (string)$item->DescriptionPL, $c = 'kalendarz' ) !== false
-			){
-				$cat_name = 'Biuro i biznes';
-				$subcat_name = $c;
-			}
-			
-		}
-		elseif( $cat_name === 'biuro' ){
-			$cat_name = 'Biuro i biznes';
-			
-		}
-		elseif( $cat_name === 'voyager plus' ){
-			
-			if( $subcat_name === 'biuro' ){
-				$cat_name = 'Biuro i biznes';
-				$subcat_name = 'Voyager plus';
-				
-			}
-			
-		}
 		
 	}
 
@@ -38,27 +15,9 @@ class AXPOL extends XMLAbstract{
 		if( $rehash === true ){
 			// parsowanie danych z XML
 			foreach( $XML->children() as $item ){
-				$code = (string)$item->CodeERP;
-				$category = $this->_stdName( (string)$item->MainCategoryPL );
-				$subcategory = $this->_stdName( (string)$item->SubCategoryPL );
-
-				if( $this->_categoryFilter( $category, $subcategory, $item ) === false ) continue;
-				$this->_addCategory( $category, $subcategory );
-
-				if( empty( $subcategory ) ){
-					$cat_id = $this->getCategory( 'name', $category, 'ID' );
-
-				}
-				else{
-					$cat_id = $this->getCategory( 'name', $subcategory, 'ID' );
-
-				}
-
-				$sql = "UPDATE `XML_product` SET cat_id = '{$cat_id}', data = '{$dt}' WHERE code = '{$code}'";
-				if( mysqli_query( $this->_dbConnect(), $sql ) === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
-
+				
 			}
-
+			
 		}
 		else{
 			/* generowanie tablicy ze stanem magazynowym */
@@ -97,22 +56,14 @@ class AXPOL extends XMLAbstract{
 			// parsowanie danych z XML
 			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'products' ] ) );
 			foreach( $XML->Row as $item ){
-				$code = (string)$item->CodeERP;
-				preg_match( '/^[^\-]+/', $code, $match );
-				$short = $match[0];
+				preg_match( '/^[^\-]+/', (string)$item->CodeERP, $short );
+				
 				$netto = (float)str_replace( ",", ".", (string)$item->CatalogPricePLN );
 				$brutto = $netto * ( 1 + $this->_vat );
-				$catalog = addslashes( (string)$item->Catalog );
-				$category = $this->_stdName( (string)$item->MainCategoryPL );
-				$subcategory = $this->_stdName( (string)$item->SubCategoryPL );
-				$name = addslashes( (string)$item->TitlePL );
+				
 				$dscr = addslashes( (string)$item->DescriptionPL );
 				if( strlen( (string)$item->ExtraTextPL ) > 0 ) $dscr .= addslashes( "<br><br>" . htmlentities( (string)$item->ExtraTextPL ) );
-				$material = addslashes( (string)$item->MaterialPL );
-				$dims = addslashes( (string)$item->Dimensions );
-				$country = addslashes( (string)$item->CountryOfOrigin );
-				$weight = (integer)$item->ItemWeightG;
-				$color = addslashes( (string)$item->ColorPL );
+				
 				$photo_a = array();
 				for( $i=1; $i<=20; $i++ ){
 					$t = (string)$item->{sprintf( "Foto%'02u", $i )};
@@ -123,108 +74,53 @@ class AXPOL extends XMLAbstract{
 						);
 					}
 				}
-				$photo = json_encode( $photo_a );
-				$new = (int)$item->New;
-				$promotion = (int)$item->Promotion;
-				$sale = (int)$item->Sale;
 				
-				$this->_categoryFilter( $category, $subcategory, $item );
-				$this->_addCategory( $category, $subcategory );
-
-				if( empty( $subcategory ) ){
-					// $cat_id = $this->getCategory( 'name', $category, 'ID' );
-					$sql = "SELECT ID FROM XML_category WHERE parent IS NULL AND name = '{$category}'";
-				}
-				else{
-					// $cat_id = $this->getCategory( 'name', $subcategory, 'ID' );
-					$sql = "SELECT sub.ID
-					FROM XML_category as cat
-					JOIN XML_category as sub
-					ON cat.ID = sub.parent
-					WHERE cat.name = '{$category}' AND sub.name = '{$subcategory}'";
-				}
-				
-				$query = mysqli_query( $this->_dbConnect(), $sql );
-				$fetch = mysqli_fetch_assoc( $query );
-				$cat_id = $fetch['ID'];
-				
-				/* aktualizacja czy wstawianie? */
-				$sql = "SELECT COUNT(*) as num FROM `XML_product` WHERE code = '{$code}'";
-				$query = mysqli_query( $this->_dbConnect(), $sql );
-				$fetch = mysqli_fetch_assoc( $query );
-				$num = $fetch['num'];
-				mysqli_free_result( $query );
-
-				$insert = array(
+				$product = array(
+					'code' => (string)$item->CodeERP,
+					'short' => $short[0],
 					'shop' => $this->_atts['shop'],
-					'code' => $code,
-					'short' => $short,
-					'cat_id' => $cat_id,
-					'brutto' => $brutto,
-					'netto' => $netto,
-					'catalog' => $catalog,
-					'title' => $name,
+					'title' => addslashes( (string)$item->TitlePL ),
 					'description' => $dscr,
-					'materials' => $material,
-					'dimension' => $dims,
-					'country' => $country,
-					'weight' => $weight,
-					'colors' => $color,
-					'photos' => $photo,
-					'new' => $new,
-					'promotion' => $promotions,
-					'sale' => $sale,
+					'catalog' => addslashes( (string)$item->Catalog ),
+					'brand' => '',
+					'marking' => $print_a[ (string)$item->CodeERP ],
+					'materials' => addslashes( (string)$item->MaterialPL ),
+					'dimension' => addslashes( (string)$item->Dimensions ),
+					'colors' => addslashes( (string)$item->ColorPL ),
+					'weight' => (integer)$item->ItemWeightG,
+					'country' => addslashes( (string)$item->CountryOfOrigin ),
+					'photos' => json_encode( $photo_a ),
+					'currency' => 'PLN',
+					'netto' => $netto,
+					'brutto' => $brutto,
+					'price_alt' => '',
+					'price_before' => '',
+					'instock' => $stock_a[ (string)$item->CodeERP ],
+					'new' => (int)$item->New,
+					'promotion' => (int)$item->Promotion,
+					'sale' => (int)$item->Sale,
 					'data' => $dt,
-					'instock' => $stock_a[$code],
-					'marking' => $print_a[$code],
-					
 				);
-
-				$t_fields = array();
-				$t_values = array();
-
-				/* aktualizacja */
-				if( $num > 0 ){
-					$t_sql = array();
-
-					unset( $insert['code'] );
-					$sql = "UPDATE XML_product SET ";
-
-					foreach( $insert as $field => $value ){
-						$t_sql[] = "`{$field}` = '{$value}'";
-					}
-
-					$sql .= implode( ", ", $t_sql );
-
-					$sql .= " WHERE `code` = '{$code}'";
-
-				}
-				/* wstawianie */
-				else{
-
-					foreach( $insert as $field => $value ){
-						$t_fields[] = "`{$field}`";
-						$t_values[] = "'{$value}'";
-
-					}
-
-					$sql = sprintf(
-						'INSERT INTO XML_product ( %s ) VALUES ( %s )',
-						implode( ", ", $t_fields ),
-						implode( ", ", $t_values )
-
-					);
-
-
-				}
-
-				// echo "\r\n $sql \r\n";
-
-				if( mysqli_query( $this->_dbConnect(), $sql ) === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
-
-				// echo "\r\n{$category} | {$subcategory}";
-
+				
+				if( ( $t = $this->_addItem( $product ) ) !== true ) $this->_log[] = $t;
+				
+				// czyszczenie hash'u produktu przed wiązaniem
+				$sql = "DELETE FROM XML_hash
+				WHERE PID = '{$product['code']}'";
+				// echo "\r\n{$sql}\r\n";
+				$query = mysqli_query( $this->_dbConnect(), $sql );
+				if( $query === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
+				
+				$category = $this->_stdName( (string)$item->MainCategoryPL );
+				if( empty( $category ) ) $category = 'Inne';
+				$subcategory = $this->_stdName( (string)$item->SubCategoryPL );
+				if( empty( $subcategory ) ) $subcategory = 'Pozostałe';
+				
+				$this->_addCategory( $category, $subcategory );
+				if( $this->_bindProduct( $product, $category, $subcategory ) !== true ) $this->_log[] = mysqli_error( $this->_dbConnect() );
+				
 			}
+			
 		}
 		
 		// czyszczenie nieaktualnych produktów
