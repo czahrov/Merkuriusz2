@@ -124,8 +124,8 @@ function genMenu(){
 		'Inspirion' => 'inspirion',
 		'PAR' => 'par',
 		'Macma' => 'macma',
-		// 'Axpol' => 'axpol',
-		// 'Anda' => 'anda',
+		'Axpol' => 'axpol',
+		'Anda' => 'anda',
 	);
 	
 	// sort( $menu );
