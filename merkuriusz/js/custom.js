@@ -4,10 +4,10 @@ $(function(){
 	(function(){
 		var owl = $("#product-slider");
 		owl.owlCarousel({
-			items: 3,
-			itemsDesktop: [1184, 3],
+			items: 4,
+			/* itemsDesktop: [1184, 3],
 			itemsDesktopSmall: [976, 2],
-			itemsTablet: [752, 1],
+			itemsTablet: [752, 1], */
 			pagination: false,
 		});
 		
@@ -87,5 +87,30 @@ $(function(){
 			$(".vip-menu").addClass("active");
 		}
 	});
+	
+	/* szerokość slidera głównego na home-page */
+	(function( menu, slider ){
+		$(window).resize( function( e ){
+			if( window.innerWidth >= 992 ){
+				slider
+				.css({
+					marginLeft: menu.outerWidth( true ),
+				});
+				
+			}
+			else{
+				slider
+				.css({
+					marginLeft: 0,
+				});
+			}
+			
+		} )
+		.resize();
+		
+	})(
+		$('body.home-page #Nav-container'),
+		$('body.home-page #demo')
+	);
 	
 })

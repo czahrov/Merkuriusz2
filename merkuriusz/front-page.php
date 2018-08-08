@@ -12,7 +12,7 @@
 							<?php genMenu(); ?>
 						</div>
 					</div>
-					<div class="col-md-12 col-lg-9 content-block">
+					<div class="col-12 content-block">
 						<?php get_template_part('segment/top-slider'); ?>
 						<!-- end of the carousel-->
 						<?php get_template_part('segment/top-brands'); ?>

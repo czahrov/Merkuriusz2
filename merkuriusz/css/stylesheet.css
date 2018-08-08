@@ -1156,9 +1156,7 @@ a.button-show-item{
     transform: scale(1.1);
 }
 #top-brands-block .zoom-banner{
-
-    width: 33.33333333%;
-    float:left;
+	
 }
 #top-brands-block{
     overflow:hidden;

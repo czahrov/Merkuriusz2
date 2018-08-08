@@ -5,7 +5,7 @@
 	<div class="row" id="fourth-container-content">
 		<div class="product-slider" id="product-slider">
 			<?php
-				$new = doSQL("SELECT * FROM XML_product WHERE new = 1 ORDER BY ID DESC LIMIT 6");
+				$new = doSQL("SELECT * FROM XML_product WHERE new = 1 ORDER BY ID DESC LIMIT 12");
 				if( DEV ){
 					echo "<!--";
 					print_r( $new );

@@ -93,13 +93,13 @@ ORDER BY cat_name ASC";
 			</div>
 			
 		</div>
-		<h1 id="thirdContainerText1" class='text-uppercase'>
-			Wszystkie
-			<span id="thirdContainerText2">
-				kategorie
-			</span>
-		</h1>
 		<div class= "container fourth-container">
+			<h1 id="thirdContainerText1" class='text-uppercase'>
+				Wszystkie
+				<span id="thirdContainerText2">
+					kategorie
+				</span>
+			</h1>
 			<div id="fourth-container-content" class="row">
 				<?php
 					$grid = array();

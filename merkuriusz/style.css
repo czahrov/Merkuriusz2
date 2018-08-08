@@ -148,6 +148,10 @@ body.home-page #banners-block .zoom-banner {
     right: 0;
     bottom: 0;
     z-index: 100; }
+@media (min-width: 992px) {
+  body.home-page .home-page-sub-menu #Nav-container {
+    position: absolute;
+    z-index: 10; } }
 body.home-page #Nav-container .dropdown-menu, body.product-page #Nav-container .dropdown-menu {
   position: static; }
 @media (min-width: 992px) {
