@@ -1,43 +1,29 @@
 <div id="top-brands-block" class="top-brands-block SecondContainer all-gap d-flex flex-wrap no-gutters">
-	<a href="<?php echo home_url(); ?>" class="zoom-banner mt-3 mt-sm-0 col-12 col-md-6 col-lg-4 col-xl-3">
+	<?php
+		$pages = get_pages( array(
+			'parent' => get_page_by_title('kafelki VIP')->ID,
+			'sort_order' => 'ASC',
+			'sort_column' => 'menu_order, post_name',
+			
+		) );
+		
+		foreach( $pages as $page ):
+		$meta = get_post_meta( $page->ID );
+	?>
+	<a href="<?php echo $meta['odnośnik'][0]; ?>" class="zoom-banner mt-3 mt-sm-0 col-12 col-md-6 col-lg-4 col-xl-3">
 		<div class="top-brands-img">
-			<div class='img' style="background-image:url(<?php echo get_template_directory_uri(); ?>/media/vip-banner1.png);"></div>
-			<div class="circletext1"> Be Creative</div>
-			<div class="circletext2"> - stwórz swój gadżet </div>
-			<div class="arrow-circle">
-				<img src="<?php echo get_template_directory_uri(); ?>/media/banner-rightarrow.png">
+			<div class='img' style="background-image:url(<?php echo wp_get_attachment_image_url( $meta['grafika'][0], 'full' ); ?>);"></div>
+			<div class="<?php echo $meta['tło'][0] === 'light'?( 'circle' ):( 'watch' ) ?>text1">
+				<?php echo $meta['tytuł'][0]; ?>
+			</div>
+			<div class="<?php echo $meta['tło'][0] === 'light'?( 'circle' ):( 'watch' ) ?>text2">
+				<?php echo $meta['podtytuł'][0]; ?>
+			</div>
+			<div class="arrow-circle<?php echo $meta['tło'][0] === 'light'?( '' ):( '1' ) ?>">
+				<img src="<?php echo get_template_directory_uri(); ?>/media/banner-<?php echo $meta['tło'][0] === 'light'?( '' ):( 'white' ) ?>rightarrow.png">
 			</div>
 		</div>
 	</a>
-	<a href="<?php echo home_url("kategoria/?nazwa=Kolekcja VIP"); ?>" class="zoom-banner mt-3 mt-sm-0 col-12 col-md-6 col-lg-4 col-xl-3" >
-		<div class="top-brands-img">
-			<div class='img' style="background-image:url(<?php echo get_template_directory_uri(); ?>/media/vip-banner2.png);"></div>
-			<div class="watchtext1"> Vip Collection </div>
-			<div class="watchtext2">- ekskluzywne gadżety </div>
-			<div class="arrow-circle1">
-				<img src="<?php echo get_template_directory_uri(); ?>/media/banner-whiterightarrow.png">
-			</div>
-		</div>
-	</a>
-	<a href="<?php echo home_url(); ?>" class="zoom-banner mt-3 mt-sm-3 mt-md-0 col-12 col-md-6 col-lg-4 col-xl-3">
-		<div class="top-brands-img">
-			<div class='img' style="background-image:url(<?php echo get_template_directory_uri(); ?>/media/vip-banner3.png);"></div>
-			<div class="odzieztext1"> Odzież reklamowa </div>
-			<div class="odzieztext2"> - dla każdego </div>
-			<div class="arrow-circle1">
-				<img src="<?php echo get_template_directory_uri(); ?>/media/banner-whiterightarrow.png">
-			</div>
-		</div>
-	</a>
-	<a href="<?php echo home_url(); ?>" class="zoom-banner mt-3 mt-sm-3 mt-md-0 col-12 col-md-6 col-lg-4 col-xl-3">
-		<div class="top-brands-img">
-			<div class='img' style="background-image:url(<?php echo get_template_directory_uri(); ?>/media/vip-banner3.png);"></div>
-			<div class="odzieztext1"> Odzież reklamowa </div>
-			<div class="odzieztext2"> - dla każdego </div>
-			<div class="arrow-circle1">
-				<img src="<?php echo get_template_directory_uri(); ?>/media/banner-whiterightarrow.png">
-			</div>
-		</div>
-	</a>
+	<?php endforeach; ?>
 	
 </div>
