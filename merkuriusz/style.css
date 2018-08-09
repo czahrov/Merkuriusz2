@@ -339,28 +339,6 @@ body.shop-page #fourth-container-content {
         background-color: #f7f7f7; }
 body.shop-page #kafelki {
   margin-bottom: 120px; }
-  body.shop-page #kafelki #top-brands-block .zoom-banner {
-    height: 300px; }
-    body.shop-page #kafelki #top-brands-block .zoom-banner .top-brands-img {
-      height: 100%; }
-      body.shop-page #kafelki #top-brands-block .zoom-banner .top-brands-img .img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-size: cover;
-        background-position: left top;
-        background-repeat: no-repeat;
-        -webkit-transition: -webkit-transform .3s linear;
-        transition: -webkit-transform .3s linear;
-        transition: transform .3s linear;
-        transition: transform .3s linear, -webkit-transform .3s linear; }
-    body.shop-page #kafelki #top-brands-block .zoom-banner, body.shop-page #kafelki #top-brands-block .zoom-banner * {
-      cursor: pointer; }
-    body.shop-page #kafelki #top-brands-block .zoom-banner:hover .top-brands-img .img {
-      -webkit-transform: scale(1.1);
-              transform: scale(1.1); }
 
 #owl-demo .owl-item img {
   max-width: 100%; }
@@ -498,5 +476,29 @@ body.shop-page #kafelki {
 
 .category-third-container .breadcrumb {
   margin-bottom: 42px; }
+
+#top-brands-block .zoom-banner {
+  height: 300px; }
+  #top-brands-block .zoom-banner .top-brands-img {
+    height: 100%;
+    overflow: hidden; }
+    #top-brands-block .zoom-banner .top-brands-img .img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-size: cover;
+      background-position: left top;
+      background-repeat: no-repeat;
+      -webkit-transition: -webkit-transform .3s linear;
+      transition: -webkit-transform .3s linear;
+      transition: transform .3s linear;
+      transition: transform .3s linear, -webkit-transform .3s linear; }
+  #top-brands-block .zoom-banner, #top-brands-block .zoom-banner * {
+    cursor: pointer; }
+  #top-brands-block .zoom-banner:hover .top-brands-img .img {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1); }
 
 /*# sourceMappingURL=style.css.map */

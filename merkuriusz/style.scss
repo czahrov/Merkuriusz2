@@ -151,7 +151,8 @@ body{
 			
 			.content-box{
 				
-				#demo{
+				#demo
+				{
 					
 				}
 				
@@ -589,55 +590,6 @@ body{
 		{
 			margin-bottom: 120px;
 			
-			#top-brands-block
-			{
-				
-				.zoom-banner{
-					height: 300px;
-					
-					.top-brands-img{
-						height: 100%;
-						
-						.img{
-							position: absolute;
-							top: 0;
-							left: 0;
-							right: 0;
-							bottom: 0;
-							background:{
-								size: cover;
-								position: left top;
-								repeat: no-repeat;
-								
-							};
-							transition: transform .3s linear;
-							
-						}
-						
-					}
-					
-					&, & *{
-						cursor: pointer;
-						
-					}
-					
-					&:hover{
-						
-						.top-brands-img{
-							
-							.img{
-								transform: scale( 1.1 );
-								
-							}
-							
-						}
-						
-					}
-					
-				}
-				
-			}
-			
 		}
 		
 	}
@@ -935,6 +887,56 @@ body{
 	
 	.breadcrumb{
 		margin-bottom: 42px;
+		
+	}
+	
+}
+
+#top-brands-block
+{
+	
+	.zoom-banner{
+		height: 300px;
+		
+		.top-brands-img{
+			height: 100%;
+			overflow: hidden;
+			
+			.img{
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background:{
+					size: cover;
+					position: left top;
+					repeat: no-repeat;
+					
+				};
+				transition: transform .3s linear;
+				
+			}
+			
+		}
+		
+		&, & *{
+			cursor: pointer;
+			
+		}
+		
+		&:hover{
+			
+			.top-brands-img{
+				
+				.img{
+					transform: scale( 1.1 );
+					
+				}
+				
+			}
+			
+		}
 		
 	}
 	
