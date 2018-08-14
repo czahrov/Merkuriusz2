@@ -501,4 +501,36 @@ body.shop-page #kafelki {
     -webkit-transform: scale(1.1);
             transform: scale(1.1); }
 
+#newsletter .subscribe-section {
+  height: initial;
+  padding-bottom: 30px; }
+  #newsletter .subscribe-section #rodo + label {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: left; }
+  #newsletter .subscribe-section .zgoda {
+    padding: 10px 0; }
+  #newsletter .subscribe-section .send {
+    top: initial;
+    left: initial; }
+  #newsletter .subscribe-section .status {
+    padding-top: 30px; }
+    #newsletter .subscribe-section .status, #newsletter .subscribe-section .status * {
+      cursor: pointer; }
+    #newsletter .subscribe-section .status > .icons {
+      margin-right: 20px; }
+      #newsletter .subscribe-section .status > .icons > .icon {
+        display: none;
+        font-size: 40px; }
+    #newsletter .subscribe-section .status > .msg {
+      font-size: 16px;
+      line-height: 30px; }
+    #newsletter .subscribe-section .status.pass > .icons > .icon.pass {
+      display: block; }
+    #newsletter .subscribe-section .status.info > .icons > .icon.info {
+      display: block; }
+    #newsletter .subscribe-section .status.fail > .icons > .icon.fail {
+      display: block; }
+
 /*# sourceMappingURL=style.css.map */

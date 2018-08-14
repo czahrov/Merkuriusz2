@@ -275,3 +275,353 @@ function OGTags( $obj = null ){
 	}
 }
 
+// sprawdza czy strona została otworzona poprzez AJAXa
+function isAjax(){
+	return $_SERVER["HTTP_X_REQUESTED_WITH"] === "XMLHttpRequest";
+}
+
+
+// Newsleeter
+class NewsLetter{
+	private $_path = nulll;
+	private $_mailer = nulll;
+	/* _data = array(
+		'registered' => array(
+			[@timestamp] => mail,
+		),
+		'verified' => array(
+			[@timestamp] => mail,
+		),
+		
+	) */
+	private $_data = array(
+		'registered' => array(),
+		'verified' => array(),
+		
+	);
+	
+	public function __construct( PHPMailer $mailer, $file =  null ){
+		$file = $file === null?( __DIR__ . "/lista_mailingowa.php" ):( $file );
+		$this->_path = $file;
+		$this->_mailer = $mailer;
+		$this->setMailer();
+		$this->load();
+		
+	}
+	
+	/* wczytuje z pliku tablicę z mailami */
+	private function load(){
+		$content = @file_get_contents( $this->_path );
+		if( $content !== false ){
+			$json = json_decode( $content, true );
+			if( $json !== null ){
+				$this->_data = $json;
+				return true;
+				
+			}
+			
+		}
+		
+		return false;
+	}
+	
+	/* zapisuję tablicę z mailami do pliku */
+	private function save(){
+		$json = json_encode( $this->_data );
+		if( $json !== false ){
+			return file_put_contents( $this->_path, $json ) !== false;
+			
+		}
+		
+		return false;
+	}
+	
+	/* zwraca tablicę z mailami */
+	public function getData( $verified = false ){
+		if( $verified === false ){
+			return $this->_data;
+			
+		}
+		else{
+			return $this->_data[ 'verified' ];
+			
+		}
+		
+	}
+	
+	/* sprawdza i zwraca stan ( false / registered / verified ) rejestracji adresu mailowego */
+	private function checkMail( $mail = null ){
+		if( in_array( $mail, $this->_data[ 'registered' ] ) !== false ){
+			return 'registered';
+			
+		}
+		elseif( in_array( $mail, $this->_data[ 'verified' ] ) !== false ){
+			return 'verified';
+			
+		}
+		else{
+			return false;
+			
+		}
+		
+	}
+	
+	/* rejestruje mail, dopisuje do listy niezweryfikowanych maili, zwraca true/false/error_info */
+	private function registerMail( $mail = null ){
+		if( $this->checkMail( $mail ) === false ){
+			// $id = "@" . microtime( true );
+			$id = "@" . time();
+			$this->_data[ 'registered' ][ $id ] = $mail;
+			if( $this->save() ){
+				return $this->veryfiMail( $mail );
+				
+			}
+			
+		}
+		
+		return false;
+	}
+	
+	/* wyrejestrowywuje mail ze wszystkich list, zwraca true/false/error_info */
+	private function unregisterMail( $id = null ){
+		$mail = empty( $this->_data[ 'registered' ][ $id ] )?( $this->_data[ 'verified' ][ $id ] ):( $this->_data[ 'registered' ][ $id ] );
+		unset( $this->_data[ 'registered' ][ $id ] );
+		unset( $this->_data[ 'verified' ][ $id ] );
+		
+		if( !empty( $mail ) && $this->save() ){
+			$this->_mailer->addAddress( $mail );
+			$this->_mailer->Subject = "Potwierdzenie wyrejestrowania adresu";
+			$this->_mailer->Body = implode( "\r\n", array(
+				"Witaj ponownie!",
+				"",
+				"Otrzymujesz tą wiadomość ponieważ ten adres został pomyślnie wyrejestrowany",
+				"Od tej pory nie będziesz już otrzymywać od nas żadnych nowych ofert handlowych.",
+				"",
+				"Dziękujemy za wspólnie spędzony czas i zapraszamy ponownie.",
+				"",
+				"---",
+				"Wiadomość została wygenerowana automatycznie na stronie: " . home_url(),
+				
+			) );
+			if( $this->_mailer->send() ){
+				return true;
+				
+			}
+			else{
+				return $this->_mailer->ErrorInfo;
+				
+			}
+			
+		}
+		else{
+			return false;
+			
+		}
+		
+	}
+	
+	/* wstępna konfiguracja mailera */
+	private function setMailer( $from_name = "NewsLetter - Merkuriusz" ){
+		$this->_mailer->CharSet = "utf8";
+		$this->_mailer->Encoding = "base64";
+		$this->_mailer->setLanguage( 'pl' );
+		$this->_mailer->setFrom( "noreply@{$_SERVER[ 'HTTP_HOST' ]}", $from_name );
+		
+	}
+	
+	/* weryfikacja adresu poprzez wysłanie maila z linkiem aktywującym, zwraca true/false/error_info */
+	private function veryfiMail( $mail = null ){
+		$regID = array_search( $mail, $this->_data[ 'registered' ] );
+		if( $regID !== false ){
+			$this->_mailer->addAddress( $mail );
+			$this->_mailer->Subject = "Weryfikacja adresu e-mail";
+			$this->_mailer->Body = implode( "\r\n", array(
+				"Witaj!",
+				"",
+				"Otrzymujesz ten email ponieważ ktoś, mamy nadzieję że to Ty, dodał go do naszego newslettera.",
+				"Jeśli to nie Ty, zignoruj tę wiadomość. W przeciwnym wypadku kliknij poniższy link aby zakończyć proces weryfikacji.",
+				"Od momentu zakończenia weryfikacji będziesz otrzymywać od nas najnowsze oferty handlowe. Otrzymasz również email potwierdzający aktywację usługi.",
+				"Dziękujemy za korzystanie z naszych usług.",
+				"",
+				"Link aktywujący: " . home_url( "newsletter?verifi={$regID}" ),
+				"Otwórz powyższy adres w swojej przeglądarce www.",
+				"",
+				"---",
+				"Wiadomość została wygenerowana automatycznie na stronie: " . home_url(),
+				
+			) );
+			if( $this->_mailer->send() ){
+				return true;
+				
+			}
+			else{
+				return $this->_mailer->ErrorInfo;
+				
+			}
+			
+		}
+		else{
+			return false;
+			
+		}
+		
+	}
+	
+	/* potwierdzenie dodania adresu poprzez link aktywacyjny, przenosi mail z listy zarejestrowanych do listy zweryfikowanych, zwraca true/false/error_info */
+	private function confirmMail( $id = null ){
+		$mail = $this->_data[ 'registered' ][ $id ];
+		if( !empty( $mail ) ){
+			unset( $this->_data[ 'registered' ][ $id] );
+			$this->_data[ 'verified' ][ $id ] = $mail;
+			if( $this->save() ){
+				$this->_mailer->addAddress( $mail );
+				$this->_mailer->Subject = "Potwierdzenie aktywacji usługi";
+				$this->_mailer->Body = implode( "\r\n", array(
+					"Witaj ponownie!",
+					"",
+					"Otrzymujesz ten email ponieważ aktywacja Twojego adresu przebiegła pomyślnie.",
+					"Od teraz będziesz otrzymywać bieżące informacje o wszelkich promocjach, wyprzedażach i wszelkich innych ofertach.",
+					"Poniżej znajduje się link wyłączający usługę. Pamiętaj, że usługą można również wyłączyć bezpośrednio na naszej stronie.",
+					"",
+					"Link dezaktywujący: " . home_url( "newsletter?unreg={$id}" ),
+					"Otwórz powyższy adres w swojej przeglądarce www.",
+					"",
+					"Dziękujemy za skorzystanie z naszych usług",
+					"",
+					"---",
+					"Wiadomość została wygenerowana automatycznie na stronie: " . home_url(),
+					
+				) );
+				
+				if( $this->_mailer->send() ){
+					return true;
+					
+				}
+				else{
+					return $this->_mailer->ErrorInfo;
+					
+				}
+				
+			}
+			
+		}
+		return false;
+		
+	}
+	
+	/* wysyła email z linkiem deaktywacyjnym, zwraca true/false/error_info */
+	private function getUnregLink( $mail = null ){
+		$safe = filter_var( $mail, FILTER_VALIDATE_EMAIL );
+		if( $safe !== false ){
+			$verID = array_search( $safe, $this->_data[ 'verified' ] );
+			
+			if( $verID !== false ){
+				$this->_mailer->addAddress( $mail );
+				$this->_mailer->Subject = "Link deaktywacyjny";
+				$this->_mailer->Body = implode( "\r\n", array(
+					"Witaj ponownie!",
+					"",
+					"Otrzymujesz ten email ponieważ otrzymaliśmy żądanie wysłania linku dezaktywującego usługi newslettera dla tego adresu email.",
+					"Jeśli to nie Ty jesteś autorem tego żądania, proszę zignorować tę wiadomość/",
+					"",
+					"Link dezaktywujący: " . home_url( "newsletter?unreg={$verID}" ),
+					"Otwórz powyższy adres w swojej przeglądarce www.",
+					"",
+					"Dziękujemy za skorzystanie z naszych usług",
+					"",
+					"---",
+					"Wiadomość została wygenerowana automatycznie na stronie: " . home_url(),
+					
+				) );
+				
+				if( $this->_mailer->send() ){
+					return true;
+					
+				}
+				else{
+					return $this->_mailer->ErrorInfo;
+					
+				}
+				
+			}
+			else return false;
+			
+		}
+		else return false;
+		
+	}
+	
+	/* funkcja wysyłająca przygotowany mail do wszystkich zweryfikowanych adresów, zwraca true/false/error_info */
+	private function sendOffer( $subject = null, $content = null ){
+		if( $subject !== null && $content !== null ){
+			if( count( $this->_data[ 'verified' ] ) > 0 ) foreach( $this->_data[ 'verified' ] as $address ){
+				$this->_mailer->addBCC( $address );
+				
+			}
+			
+			$this->_mailer->Subject = $subject;
+			$this->_mailer->Body = $content;
+			
+			if( $this->_mailer->send() ){
+				return true;
+				
+			}
+			else{
+				return $this->_mailer->ErrorInfo;
+				
+			}
+			
+		}
+		else{
+			return false;
+			
+		}
+		
+	}
+	
+	public function zarejestruj( $mail = null ){
+		return $this->registerMail( $mail );
+		
+	}
+	
+	public function aktywuj( $id = null ){
+		return $this->confirmMail( $id );
+		
+	}
+	
+	public function wyrejestruj( $id = null ){
+		return $this->unregisterMail( $id );
+		
+	}
+	
+	public function linkDeaktywacyjny( $mail = null ){
+		return $this->getUnregLink( $mail );
+		
+	}
+	
+	public function wyslij( $tytul = "", $wiadomosc = "" ){
+		return $this->sendOffer( $tytul, $wiadomosc );
+		
+	}
+	
+}
+
+/* zwraca obiekt NewsLetter */
+function newsletter(){
+	static $mailer = null;
+	static $news = null;
+	
+	if( $mailer === null ){
+		require_once __DIR__  . "/php/PHPMailer/PHPMailerAutoload.php";
+		$mailer = new PHPMailer();
+		
+	}
+	
+	if( $news === null ){
+		$news = new NewsLetter( $mailer );
+		
+	}
+	
+	return $news;
+}
+

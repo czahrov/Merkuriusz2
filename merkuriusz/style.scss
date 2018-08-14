@@ -942,3 +942,77 @@ body{
 	
 }
 
+#newsletter
+{
+	
+	.subscribe-section{
+		height: initial;
+		padding-bottom: 30px;
+		
+		#rodo + label
+		{
+			font:{
+				weight: normal;
+				size: 14px;
+			};
+			line-height: 24px;
+			text-align: left;
+			
+		}
+		
+		.zgoda{
+			padding: 10px 0;
+		}
+		
+		.send{
+			top: initial;
+			left: initial;
+			
+		}
+		
+		.status{
+			padding-top: 30px;
+			
+			&, & *{
+				cursor: pointer;
+				
+			}
+			
+			& > .icons{
+				margin-right: 20px;
+				
+				& > .icon{
+					display: none;
+					font-size: 40px;
+					
+				}
+				
+			}
+			
+			& > .msg{
+				font-size: 16px;
+				line-height: 30px;
+				
+			}
+			
+			&.pass > .icons > .icon.pass{
+				display: block;
+				
+			}
+			
+			&.info > .icons > .icon.info{
+				display: block;
+				
+			}
+			
+			&.fail > .icons > .icon.fail{
+				display: block;
+				
+			}
+			
+		}
+		
+	}
+	
+}
+

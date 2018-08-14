@@ -75,23 +75,33 @@
 			</div>
 		</div>
 		<!-- ======================end of the reklama-container  ==================-->
-		<div class="container subscribe-container">
+		<div id='newsletter' class="container subscribe-container">
 			<div class="col-lg-12 footer-container" style="margin-top:40px;">
 				<h1 id="thirdContainerText1">OTRZYMUJ<span id="thirdContainerText2"> Najświeższe informacje </span></h1>
 			</div>
 			<form class="subscribe-section col-lg-12 text-center">
 				<p>Zapisz sie do naszego newslettera</p>
-				<input type="mail" placeholder="Wpisz swoj adres e-mail" required>
+				<input class='mail' name='mail' type="mail" placeholder="Wpisz swoj adres e-mail" required>
 				<div class='zgoda d-flex align-items-center justify-content-start'>
 					<input type="checkbox" id="rodo" required>
 					<label for="rodo">
-						Akceptacja RODO
+						Wyrażam zgodę na przesyłanie informacji handlowych za pomocą środków komunikacji elektronicznej w rozumieniu ustawy z dnia 18 lipca 2002 roku o świadczenie usług drogą elektroniczną (Dz.U.2017.1219 t.j.) na podany adres e-mail na temat usług oferowanych przez Merkuriusz - Techiniki nadruków Tarnów przy ul. Szpitalna 25B, 33-100 Tarnów z siedzibą w Tarnowie. Zgoda jest dobrowolna i może być w każdej chwili wycofana, z formularza rejestracyjnego na stronie internetowej. Wycofanie zgody nie wpływa na zgodność z prawem przetwarzania, którego dokonano na podstawie zgody przez jej wycofaniem.
 					</label>
 				</div>
-				<button type="submit" >Zapisz sie</button>
+				<button type="submit" class='send' >Zapisz sie</button>
+				<div class='status pointer base1 flex flex-items-center flex-wrap flex-justify-center'>
+					<div class='icons flex'>
+						<div class='icon pass font-green-light fa fa-check-circle'></div>
+						<div class='icon info font-light fa fa-info-circle'></div>
+						<div class='icon fail font-pink fa fa-times-circle'></div>
+						
+					</div>
+					<div class='msg font-light'></div>
+					
+				</div>
 				
 			</form>
 		</div>
 		<!--======================= subscribe-container closed =========================-->
-		<!-- =================================footer begins================================================================-->
+		<!-- ================================= footer begins ================================================================-->
 <?php get_footer(); ?>
