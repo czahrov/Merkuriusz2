@@ -9,6 +9,7 @@ class AXPOL extends XMLAbstract{
 	// wczytywanie XML, parsowanie danych XML, zapis do bazy danych
 	// rehash - określa czy wykonać jedynie przypisanie kategorii dla produktów
 	protected function _import( $rehash = false ){
+		
 		// wczytywanie pliku XML z produktami
 		$dt = date( 'Y-m-d H:i:s' );
 
@@ -55,6 +56,7 @@ class AXPOL extends XMLAbstract{
 			
 			// parsowanie danych z XML
 			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'products' ] ) );
+			
 			foreach( $XML->Row as $item ){
 				preg_match( '/^[^\-]+/', (string)$item->CodeERP, $short );
 				
@@ -95,21 +97,21 @@ class AXPOL extends XMLAbstract{
 					'brutto' => $brutto,
 					'price_alt' => '',
 					'price_before' => '',
-					'instock' => $stock_a[ (string)$item->CodeERP ],
+					'instock' => array_key_exists( $k = (string)$item->CodeERP, $stock_a )?( $stock_a[ $k ] ):( 0 ),
 					'new' => (int)$item->New,
 					'promotion' => (int)$item->Promotion,
 					'sale' => (int)$item->Sale,
 					'data' => $dt,
 				);
 				
-				if( ( $t = $this->_addItem( $product ) ) !== true ) $this->_log[] = $t;
+				if( ( $t = $this->_addItem( $product ) ) !== true ) echo "\r\n{$t}";
 				
 				// czyszczenie hash'u produktu przed wiązaniem
 				$sql = "DELETE FROM XML_hash
 				WHERE PID = '{$product['code']}'";
 				// echo "\r\n{$sql}\r\n";
 				$query = mysqli_query( $this->_dbConnect(), $sql );
-				if( $query === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
+				if( $query === false ) echo "\r\n" . mysqli_error( $this->_dbConnect() );
 				
 				$category = $this->_stdName( (string)$item->MainCategoryPL );
 				if( empty( $category ) ) $category = 'Inne';
@@ -117,7 +119,8 @@ class AXPOL extends XMLAbstract{
 				if( empty( $subcategory ) ) $subcategory = 'Pozostałe';
 				
 				$this->_addCategory( $category, $subcategory );
-				if( $this->_bindProduct( $product, $category, $subcategory ) !== true ) $this->_log[] = mysqli_error( $this->_dbConnect() );
+				if( $this->_bindProduct( $product, $category, $subcategory ) !== true ) 
+					echo "\r\n" . mysqli_error( $this->_dbConnect() );
 				
 			}
 			

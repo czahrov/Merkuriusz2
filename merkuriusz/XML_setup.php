@@ -3,23 +3,6 @@ require_once __DIR__ . "/php/cfg.php";
 
 $SHOP  = array();
 
-/* ~80s */
-$SHOP['easygifts'] = new EASYGIFTS( array(
-	'products' => 'http://www.easygifts.com.pl/data/webapi/pl/xml/offer.xml',
-	'stock' => 'http://www.easygifts.com.pl/data/webapi/pl/xml/stocks.xml',
-),
-array(
-	'shop' => 'EASYGIFTS',
-) );
-
-/* ~40s */
-$SHOP['jaguargift'] = new JAGUARGIFT( array(
- 	'products' => '',
-),
-array(
-	'shop' => 'JAGUARGIFT',
-) );
-
 /* ~10s */
 $SHOP['asgard'] = new ASGARD( array(
 	'products' => 'http://www.asgard.pl/www/xml/oferta.xml',
@@ -36,15 +19,6 @@ array(
 	'shop' => 'INSPIRION',
 ) );
 
-/* ~20s */
-$SHOP['par'] = new PAR( array(
-	'products' => 'http://biuro@bagsport.pl:24816vvv@www.par.com.pl/api/products',
-	'stock' => 'http://biuro@bagsport.pl:24816vvv@www.par.com.pl/api/stocks',
-),
-array(
-	'shop' => 'PAR',
-) );
-
 /* ~30s */
 $SHOP['macma'] = new MACMA( array(
 	'products' => 'http://www.macma.pl/data/webapi/pl/xml/offer.xml',
@@ -55,11 +29,37 @@ array(
 	'shop' => 'MACMA',
 ) );
 
+/* ~40s */
+$SHOP['jaguargift'] = new JAGUARGIFT( array(
+ 	'products' => '',
+),
+array(
+	'shop' => 'JAGUARGIFT',
+) );
+
+/* ~80s */
+$SHOP['easygifts'] = new EASYGIFTS( array(
+	'products' => 'http://www.easygifts.com.pl/data/webapi/pl/xml/offer.xml',
+	'stock' => 'http://www.easygifts.com.pl/data/webapi/pl/xml/stocks.xml',
+),
+array(
+	'shop' => 'EASYGIFTS',
+) );
+
+/* ~20-100s */
+$SHOP['par'] = new PAR( array(
+	'products' => 'http://biuro@merkuriusz.pl@merkuriusz345@www.par.com.pl/api/products',
+	'stock' => 'http://biuro@merkuriusz.pl@merkuriusz345@www.par.com.pl/api/stocks',
+),
+array(
+	'shop' => 'PAR',
+) );
+
 /* ~80s */
 $SHOP['axpol'] = new AXPOL( array(
 	'products' => 'ftp://userPL099:QwqChVFh@ftp.axpol.com.pl/axpol_product_data_PL.xml',
 	'stock' => 'ftp://userPL099:QwqChVFh@ftp.axpol.com.pl/axpol_stocklist_pl.xml',
-	'prices' => 'ftp://userPL099:QwqChVFh@ftp.axpol.com.pl/axpol_print_data_PL.xml',
+	'print' => 'ftp://userPL099:QwqChVFh@ftp.axpol.com.pl/axpol_print_data_PL.xml',
 ),
 array(
 	'shop' => 'AXPOL',
@@ -77,12 +77,12 @@ array(
 ) );
 
 /* ~260s */
-/* $SHOP['falkross'] = new FALKROSS( array(
+$SHOP['falkross'] = new FALKROSS( array(
 	'products' => 'http://download.falk-ross.eu/download/article/falkross-articles.xml',
 ),
 array(
 	'shop' => 'FALKROSS',
-) ); */
+) );
 
 $XM = new XMLMan();
 foreach( $SHOP as $item ){

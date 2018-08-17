@@ -1,9 +1,6 @@
 <?php
 /* template name: poligon */
 
-function test( $arg= null ){
-	return $arg;
-	
-}
+// print_r( $_SERVER );
+print_r( ini_get_all() );
 
-var_dump( test() );

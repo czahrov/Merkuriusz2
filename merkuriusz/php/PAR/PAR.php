@@ -30,7 +30,7 @@ class PAR extends XMLAbstract{
 		}
 		else{
 			// parsowanie danych z XML
-			foreach( $XML->children() as $item ){
+			if( $XML !== false ) foreach( $XML->children() as $item ){
 				$price = (string)$item->cena_pln;
 				$netto = (float)str_replace( ",", ".", $price );
 				$brutto = $netto * ( 1 + $this->_vat );

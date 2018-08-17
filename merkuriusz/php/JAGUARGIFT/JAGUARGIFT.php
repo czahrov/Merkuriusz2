@@ -20,7 +20,7 @@ class JAGUARGIFT extends XMLAbstract{
 		$context = stream_context_create( $opts );
 		$url = "http://www.jaguargift.com/pl/jaguargift.xml";
 		$local = __DIR__ . "/DND/" . basename( $url );
-		mkdir( dirname( $local ), 0755, true );
+		@mkdir( dirname( $local ), 0755, true );
 		$exist = file_exists( $local );
 		$actual = ( time() - filemtime( $local ) ) < $this->_atts['lifetime'];
 		
@@ -107,7 +107,7 @@ class JAGUARGIFT extends XMLAbstract{
 						'short' => (string)$variant->id,
 						'shop' => $this->_atts['shop'],
 						'title' => addslashes( (string)$variant->name ),
-						'description' => (string)$item->features->{'list-item'}[0]->value,
+						'description' => @(string)$item->features->{'list-item'}[0]->value,
 						'catalog' => '',
 						'brand' => '',
 						'marking' => implode( "<br>", $marking_a ),

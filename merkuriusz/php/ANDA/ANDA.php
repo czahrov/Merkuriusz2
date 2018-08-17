@@ -50,7 +50,7 @@ class ANDA extends XMLAbstract{
 		$price_a = array();
 		$XML = simplexml_load_file( __DIR__ . "/DND/prices" );
 		foreach( $XML->price as $item ){
-			$price_a[ (string)$item->itemNumber ] = (float)$item->amount;
+			$price_a[ (string)$item->itemNumber ][ (string)$item->type ] = (float)$item->amount;
 		}
 		
 		/* generowanie tablicy ze znakowaniem */
@@ -117,7 +117,7 @@ class ANDA extends XMLAbstract{
 					$photos_a[] = (string)$img;
 				}
 				
-				$netto =  $price_a[ (string)$item->itemNumber ];
+				$netto =  array_key_exists( $k = (string)$item->itemNumber, $price_a )?( $price_a[ $k ][ 'listPrice' ] ):( 0 );
 				$brutto = $netto * ( 1 + $this->_vat );
 				
 				preg_match( '/^[^\-]+/', (string)$item->itemNumber, $short );
@@ -142,7 +142,7 @@ class ANDA extends XMLAbstract{
 					'brutto' => $brutto,
 					'price_alt' => '',
 					'price_before' => '',
-					'instock' => $stock_a[ (string)$item->itemNumber ],
+					'instock' => array_key_exists( $k = (string)$item->itemNumber, $stock_a )?( $stock_a[ $k ] ):( 0 ),
 					'new' => 0,
 					'promotion' => 0,
 					'sale' => 0,
@@ -150,14 +150,14 @@ class ANDA extends XMLAbstract{
 				);
 				
 				
-				if( ( $t = $this->_addItem( $product ) ) !== true ) $this->_log[] = $t;
+				if( ( $t = $this->_addItem( $product ) ) !== true ) echo "\r\naddItem ERROR: {$product['code']}";
 				
 				// czyszczenie hash'u produktu przed wiązaniem
 				$sql = "DELETE FROM XML_hash
 				WHERE PID = '{$product['code']}'";
 				// echo "\r\n{$sql}\r\n";
 				$query = mysqli_query( $this->_dbConnect(), $sql );
-				if( $query === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
+				if( $query === false ) echo "\r\nclearHash Error: " . mysqli_error( $this->_dbConnect() );
 				
 				$category = $this->_stdName( (string)$item->categories->category[0]->name );
 				$subcategory = $this->_stdName( (string)$item->categories->category[1]->name );
@@ -166,7 +166,7 @@ class ANDA extends XMLAbstract{
 				if( empty( $subcategory ) ) $subcategory = 'Pozostałe';
 				
 				$this->_addCategory( $category, $subcategory );
-				if( $this->_bindProduct( $product, $category, $subcategory ) !== true ) $this->_log[] = mysqli_error( $this->_dbConnect() );
+				if( $this->_bindProduct( $product, $category, $subcategory ) !== true ) echo "\r\nbindProduct Error: " . mysqli_error( $this->_dbConnect() );
 				
 			}
 
@@ -175,7 +175,6 @@ class ANDA extends XMLAbstract{
 		// czyszczenie nieaktualnych produktów
 		// $this->_clear();
 		
-
 		if( !empty( $this->_log ) ){
 			echo "<!--ANDA ERROR:" . PHP_EOL;
 			print_r( $this->_log ) . PHP_EOL;

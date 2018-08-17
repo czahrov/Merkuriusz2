@@ -120,7 +120,7 @@ function genMenu(){
 		'Sety', */
 		'Easy Gifts' => 'easygifts',
 		'Jaguar Gift' => 'jaguargift',
-		// 'Falk&Ross' => 'falkross',
+		'Falk&Ross' => 'falkross',
 		'Asgard' => 'asgard',
 		'Inspirion' => 'inspirion',
 		'PAR' => 'par',
@@ -129,7 +129,7 @@ function genMenu(){
 		'Anda' => 'anda',
 	);
 	
-	// sort( $menu );
+	ksort( $menu );
 	
 	// $menu[] = 'Inne produkty';
 	
@@ -279,7 +279,6 @@ function OGTags( $obj = null ){
 function isAjax(){
 	return $_SERVER["HTTP_X_REQUESTED_WITH"] === "XMLHttpRequest";
 }
-
 
 // Newsleeter
 class NewsLetter{

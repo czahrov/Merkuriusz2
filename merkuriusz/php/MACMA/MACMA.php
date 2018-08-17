@@ -44,7 +44,7 @@ class MACMA extends XMLAbstract{
 				
 				/* pobieranie zdjęć */
 				$photo_a = array();
-				foreach( $item->images->children() as $img ){
+				if( $item->images->count() ) foreach( $item->images->children() as $img ){
 					$id = (string)$item->baseinfo->code_full;
 					$remote = (string)$img;
 					$local = __DIR__ . "/IMG/{$id}/" . basename( $remote );
@@ -55,8 +55,13 @@ class MACMA extends XMLAbstract{
 
 					}
 					else{
-						$photo_a[] = "/wp-content/themes/merkuriusz/php/MACMA/IMG/{$id}/" . basename( $remote );
-
+						$photo_a[] = sprintf(
+							'%s/wp-content/themes/merkuriusz/php/MACMA/IMG/%s/%s',
+							$_SERVER['SERVER_NAME'] === 'localhost'?( '/merkuriusz2' ):( '' ),
+							$id,
+							basename( $remote )
+						);
+						
 					}
 					
 				}
@@ -104,12 +109,11 @@ class MACMA extends XMLAbstract{
 				$query = mysqli_query( $this->_dbConnect(), $sql );
 				if( $query === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
 				
-				
-				foreach( $item->categories->category as $cat ){
+				if( $item->categories->count() ) foreach( $item->categories->category as $cat ){
 					$category = $this->_stdName( (string)$cat->name );
 					$subcategory = null;
 					
-					foreach( $cat->subcategories->subcategory as $sub ){
+					if( $cat->subcategories->count() ) foreach( $cat->subcategories->subcategory as $sub ){
 						$subcategory = $this->_stdName( (string)$sub->name );
 						$this->_addCategory( $category, $subcategory );
 						

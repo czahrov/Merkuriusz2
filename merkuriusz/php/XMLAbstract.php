@@ -92,7 +92,14 @@ class XMLAbstract{
 
 		}
 		else{
-			$this->_log[] = mysqli_connect_error();
+			// $this->_log[] = mysqli_connect_error();
+			printf(
+				'%s%s->%s%1$s%s',
+				PHP_EOL,
+				__CLASS__,
+				__FUNCTION__,
+				mysqli_connect_error()
+			);
 			return false;
 		};
 
@@ -115,16 +122,17 @@ class XMLAbstract{
 		// sprawdzanie dostępności i aktualności plików XML
 		foreach( $this->_sources as $source ){
 			if( empty( $source ) ) continue;
+			$filepath_tmp = $this->_getURL( "DND/" . basename( $source ) . ".tmp" );
 			$filepath = $this->_getURL( "DND/" . basename( $source ) );
 
 			if( !file_exists( $filepath ) or time() - filemtime( $filepath ) >= $this->_atts[ 'lifetime' ] ){
 				// XML nie istnieje, albo jest przestarzały -  pobieranie
-				mkdir( dirname( $filepath ), 0755, true );
-				if( copy( $source, $filepath, stream_context_create( $this->_atts[ 'context' ] ) ) ){
+				@mkdir( dirname( $filepath ), 0755, true );
+				if( copy( $source, $filepath_tmp, stream_context_create( $this->_atts[ 'context' ] ) ) and filesize( $filepath_tmp ) > 1024 ){
+					rename( $filepath_tmp, $filepath );
 					$doImport = true;
-
 				}
-
+				
 			}
 
 		}
@@ -145,13 +153,21 @@ class XMLAbstract{
 		return $doImport;
 	}
 
-	// funkcja czyszcząca nieaktualne produkty ze wszystkich sklepów po aktualizacji
-	public function clear( $data = null ){
-		$dt = $data===null?( date("Y-m-d H:i:s") ):( $data );
+	// funkcja czyszcząca nieaktualne produkty z aktualnego sklepu po aktualizacji
+	public function clear( $data = null, $shop = null){
+		$dt = $data === null?( date("Y-m-d H:i:s") ):( $data );
 		$sql = "DELETE FROM XML_product WHERE data < '{$dt}'";
+		if( $shop !== null ) $sql .= " AND shop = '{$shop}'";
 		echo "\r\n $sql \r\n";
 		if( mysqli_query( $this->_dbConnect(), $sql ) === false ){
-			$this->_log[] = mysqli_error( $this->_dbConnect() );
+			// $this->_log[] = mysqli_error( $this->_dbConnect() );
+			printf(
+				'%s%s->%s%1$s%s',
+				PHP_EOL,
+				__CLASS__,
+				__FUNCTION__,
+				mysqli_error( $this->_dbConnect() )
+			);
 
 		}
 
@@ -181,7 +197,15 @@ class XMLAbstract{
 		
 		if( $parent === null ){
 			$sql = "INSERT INTO `XML_category` ( `name`, `slug`, `data` ) VALUES ( '{$cat_name}', '{$this->_slug( $cat_name )}', '{$dt}' )";
-			if( mysqli_query( $this->_dbConnect(), $sql ) === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
+			if( mysqli_query( $this->_dbConnect(), $sql ) === false )
+				printf(
+					'%s%s->%s%1$s%s',
+					PHP_EOL,
+					__CLASS__,
+					__FUNCTION__,
+					mysqli_error( $this->_dbConnect() )
+				);
+				// $this->_log[] = mysqli_error( $this->_dbConnect() );
 			
 			$sql = "SELECT *
 			FROM XML_category
@@ -211,18 +235,26 @@ class XMLAbstract{
 			// aktualizacja już istniejącej kategorii
 			else{
 				// $cat_id = $this->getCategory( 'name', $subcat_name, 'ID' );
-				$sql = "SELCT sub.ID
+				$sql = "SELECT sub.ID, cat.ID AS cat_ID
 				FROM XML_category as cat
 				JOIN XML_category as sub
 				ON cat.ID = sub.parent
-				WHERE sub.name = '{$subcat_name}' AND parent = {$parent['ID']}";
+				WHERE sub.name = '{$subcat_name}' AND sub.parent = {$parent['ID']}";
 				$query = mysqli_query( $this->_dbConnect(), $sql );
 				$fetch = mysqli_fetch_assoc( $query );
-				$sql = "UPDATE `XML_category` SET parent = '{$parent['ID']}', data = '{$dt}' WHERE ID = '{$cat_id}'";
+				$sql = "UPDATE `XML_category` SET parent = '{$parent['ID']}', data = '{$dt}' WHERE ID = '{$fetch['cat_ID']}'";
 				
 			}
 
-			if( mysqli_query( $this->_dbConnect(), $sql ) === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
+			if( mysqli_query( $this->_dbConnect(), $sql ) === false )
+				printf(
+					'%s%s->%s%1$s%s',
+					PHP_EOL,
+					__CLASS__,
+					__FUNCTION__,
+					mysqli_error( $this->_dbConnect() )
+				);
+				// $this->_log[] = mysqli_error( $this->_dbConnect() );
 
 		}
 
@@ -293,23 +325,27 @@ class XMLAbstract{
 		$main = !empty( $cat );
 		$sub = !empty( $subcat );
 		
-		// przypisywanie do kategorii głównej
-		if( $main and !$sub ){
-			$sql = "SELECT ID
-			FROM XML_category
-			WHERE name = '{$cat}' AND parent IS NULL";
-			$query = mysqli_query( $this->_dbConnect(), $sql );
-			$fetch = mysqli_fetch_assoc( $query );
-			mysqli_free_result( $query );
-			$cat_id = $fetch['ID'];
+		if( !$main ){
+			$main = 'Pozostałe';
 		}
+		
 		// przypisywanie do podkategorii
-		elseif( $main and $sub ){
+		if( $sub ){
 			$sql = "SELECT sub.ID as ID
 			FROM XML_category as cat
 			JOIN XML_category as sub
 			ON cat.ID = sub.parent
 			WHERE cat.name = '{$cat}' AND sub.name = '{$subcat}'";
+			$query = mysqli_query( $this->_dbConnect(), $sql );
+			$fetch = mysqli_fetch_assoc( $query );
+			mysqli_free_result( $query );
+			$cat_id = $fetch['ID'];
+		}
+		// przypisywanie do kategorii głównej
+		else{
+			$sql = "SELECT ID
+			FROM XML_category
+			WHERE name = '{$cat}' AND parent IS NULL";
 			$query = mysqli_query( $this->_dbConnect(), $sql );
 			$fetch = mysqli_fetch_assoc( $query );
 			mysqli_free_result( $query );
@@ -488,7 +524,15 @@ LIMIT {$atts['num']}";
 	public function clearHash(){
 		$sql = "UPDATE `XLM_product` SET cat_id = NULL WHERE shop = '{$this->_atts[ 'shop' ]}'";
 		$query = mysqli_query( $this->_dbConnect(), $sql );
-		if( mysqli_query( $this->_dbConnect(), $sql ) === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
+		if( mysqli_query( $this->_dbConnect(), $sql ) === false )
+			printf(
+				'%s%s->%s%1$s%s',
+				PHP_EOL,
+				__CLASS__,
+				__FUNCTION__,
+				mysqli_error( $this->_dbConnect() )
+			);
+			// $this->_log[] = mysqli_error( $this->_dbConnect() );
 
 	}
 
@@ -496,7 +540,14 @@ LIMIT {$atts['num']}";
 	public function clearCats(){
 		$sql = "TRUNCATE `XML_category`";
 		$query = mysqli_query( $this->_dbConnect(), $sql );
-		if( mysqli_query( $this->_dbConnect(), $sql ) === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
+		if( mysqli_query( $this->_dbConnect(), $sql ) === false )
+			printf(
+				'%s%s->%s%1$s%s',
+				PHP_EOL,
+				__CLASS__,
+				__FUNCTION__,
+				mysqli_error( $this->_dbConnect() )
+			);
 
 	}
 
@@ -559,5 +610,5 @@ GROUP BY cat.ID";
 
 		return $fetch;
 	}
-
+	
 }

@@ -1,5 +1,5 @@
 <?php
-set_time_limit( 900 );
+set_time_limit( 1800 );
 require_once __DIR__ . "/autoloader.php";
 require_once __DIR__ . "/../XML_setup.php";
 

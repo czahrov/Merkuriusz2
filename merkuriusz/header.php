@@ -1,5 +1,5 @@
 <?php
-	define( 'DEV', isset( $_COOKIE['sprytne'] ) );
+	define( 'DEV', $_SERVER['SERVER_NAME'] === 'localhost' or isset( $_COOKIE['sprytne'] ) );
 	$ver = time();
 	
 	// wp_enqueue_style( string $handle, string $src = '', array $deps = array(), string|bool|null $ver = false, string $media = 'all' )

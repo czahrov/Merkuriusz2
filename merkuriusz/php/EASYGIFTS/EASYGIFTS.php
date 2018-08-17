@@ -33,19 +33,19 @@ class EASYGIFTS extends XMLAbstract{
 			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'products' ] ) );
 			foreach( $XML->children() as $num => $item ){
 				$marking_a = array();
-				foreach( $item->markgroups->markgroup as $child ){
+				if( $item->markgroups->count() ) foreach( $item->markgroups->markgroup as $child ){
 					$marking_a[] = (string)$child->name;
 				}
 				$marking = implode( "<br>", $marking_a );
 				
 				$materials_a = array();
-				foreach( $item->materials->material as $material ){
+				if( $item->materials->count() ) foreach( $item->materials->material as $material ){
 					$materials_a[] = (string)$material->name;
 				}
 				$materials = implode( ", ", $materials_a );
 				
 				$photo_a = array();
-				foreach( $item->images->children() as $img ){
+				if( $item->images->count() ) foreach( $item->images->children() as $img ){
 					$photo_a[] = (string)$img;
 				}
 				$photos = json_encode( $photo_a );
@@ -96,7 +96,7 @@ class EASYGIFTS extends XMLAbstract{
 				$query = mysqli_query( $this->_dbConnect(), $sql );
 				if( $query === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
 				
-				foreach( $item->categories->category as $cat ){
+				if( $item->categories->count() ) foreach( $item->categories->category as $cat ){
 					$category = $this->_stdName( (string)$cat->name );
 					$subcategory = 'pozostałe';
 					
@@ -118,7 +118,7 @@ class EASYGIFTS extends XMLAbstract{
 						if( $this->_bindProduct( $product, $c, $category ) === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
 					}
 					
-					if( count( $cat->subcategories->subcategory ) > 0 ){
+					if( $cat->subcategories->count() ){
 						foreach( $cat->subcategories->subcategory as $subcat ){
 							$subcategory = $this->_stdName( $subcat->name );
 							$this->_addCategory( $category, $subcategory );

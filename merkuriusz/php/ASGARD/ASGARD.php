@@ -64,9 +64,9 @@ class ASGARD extends XMLAbstract{
 				);
 				
 				$cat = addslashes( (string)$item->kategoria );
-				$category = $this->_stdName( $cat );
+				$category = empty( $c = $this->_stdName( $cat ) )?( 'Pozostałe' ):( $c );
 				$subcat = addslashes( (string)$item->podkategoria );
-				$subcategory = $this->_stdName( $subcat );
+				$subcategory = empty( $s = $this->_stdName( $subcat ) )?( 'Pozostałe' ):( $s );
 				
 				if( ( $t = $this->_addItem( $product ) ) !== true ) $this->_log[] = $t;
 				

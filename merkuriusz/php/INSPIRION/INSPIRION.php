@@ -42,7 +42,7 @@ class INSPIRION extends XMLAbstract{
 					'description' => addslashes( (string)$item->body ),
 					'catalog' => '',
 					'brand' => '',
-					'marking' => (string)$item->Imprint-size,
+					'marking' => (string)$item->{'Imprint-size'},
 					'materials' => addslashes( (string)$item->material ),
 					'dimension' => addslashes( (string)$item->wymiary ),
 					'colors' => addslashes( (string)$item->kolor ),
