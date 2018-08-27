@@ -17,13 +17,14 @@ ON hash.CID = subcat.ID
 JOIN XML_category AS cat
 ON subcat.parent = cat.ID
 WHERE prod.code = '{$kod}'";
-
+	
 	$fetch = doSQL( $sql );
 	$item = $fetch[0];
 	if( DEV ){
-		echo "<!--";
+		echo "<!--\r\n";
+		echo $sql . PHP_EOL;
 		print_r( $item );
-		echo "-->";
+		echo "\r\n-->";
 	}
 		
 ?>
@@ -41,6 +42,13 @@ WHERE prod.code = '{$kod}'";
 				</div>
 			</div>
 			<div class="col-md-12 col-lg-9 content-block">
+				<?php
+					if( empty( $item ) ):
+				?>
+				<div style='margin: 20px 0;'>
+					Brak produktu z podanym kodem
+				</div>
+				<?php else: ?>
 				<div class="category-third-container">
 					<ul class="breadcrumb">
 						<?php
@@ -160,23 +168,33 @@ WHERE prod.code = '{$kod}'";
 					</p>
 				</div>
 				<div class="category-availability">
-					<a href="#">
-						<h3>
-							Dostępność w magazynie:
-								<span>
-								<?php
-									printf(
-										'%u szt.',
-										$item['instock']
-									);
-									
-								?>
-								</span>
-						</h3>
-					</a>
+					<?php if( $item['instock'] > 0 ): ?>
+					<h3>
+						Dostępność w magazynie:
+						<span>
+						<?php
+							printf(
+								'%u szt.',
+								$item['instock']
+							);
+							
+						?>
+						</span>
+					</h3>
+					<?php else: ?>
+					<div class="product-enquiry-details">
+						<button type="submit">
+							<a href="http://merkuriusz.scepter.pl/zapytaj/?kod=5875810">
+							<a href="<?php echo home_url("/zapytaj/?kod={$item['code']}"); ?>">
+								sprawdź dostępność magazynową
+							</a>
+						</button>
+					</div>
+					<?php endif; ?>
 				</div>
 				<?php
 					$sql = "SELECT * FROM XML_product WHERE code LIKE '{$item['short']}%' AND NOT code = '{$item['code']}'";
+					// echo $sql;
 					$siblings = doSQL( $sql );
 				?>
 				<div class="similar-products-title">
@@ -229,6 +247,7 @@ WHERE prod.code = '{$kod}'";
 					</div>
 				</div>
 				<!-- /.single item -->
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>

@@ -14,7 +14,6 @@ class PAR extends XMLAbstract{
 		$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources['stock'] ) );
 		foreach( $XML->produkt as $item ){
 			$stock_a[ (string)$item->kod ] = (int)$item->stan_magazynowy;
-
 		}
 
 		// wczytywanie pliku XML z produktami
@@ -44,9 +43,9 @@ class PAR extends XMLAbstract{
 				$marking_a = array();
 				foreach( $item->techniki_zdobienia->technika as $arg ){
 					$marking_a[] = sprintf(
-						'%s<br>
->%s
->>%s',
+						'<br>%s
+<br>>%s
+<br>>>%s',
 						(string)$arg->miejsce_zdobienia,
 						(string)$arg->technika_zdobienia,
 						(string)$arg->maksymalny_rozmiar_logo
@@ -76,7 +75,7 @@ class PAR extends XMLAbstract{
 					'brutto' => $brutto,
 					'price_alt' => '',
 					'price_before' => '',
-					'instock' => '',
+					'instock' => $stock_a[ (string)$item->kod ],
 					'new' => (string)$item->towar_nowosc === "false"?( 0 ):( 1 ),
 					'promotion' => (string)$item->promocja === "0"?( 0 ):( 1 ),
 					'sale' => (string)$item->wyprzedaz === "false"?( 0 ):( 1 ),

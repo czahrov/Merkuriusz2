@@ -79,6 +79,7 @@ array(
 /* ~260s */
 $SHOP['falkross'] = new FALKROSS( array(
 	'products' => 'http://download.falk-ross.eu/download/article/falkross-articles.xml',
+	'stock' => 'https://stockinfo_germany:RK89F3S77@ws.falk-ross.eu/webservice/R01_000/stockinfo/falkross_de.csv',
 ),
 array(
 	'shop' => 'FALKROSS',

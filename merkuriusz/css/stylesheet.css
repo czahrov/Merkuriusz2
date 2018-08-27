@@ -1300,11 +1300,14 @@ a.button-show-item{
 }
 .pagination-products a:hover:not(.active) 
 {
-    background-color: blue;
+    background-color: #0087ef;
+	color: #fff;
 }
 .pagination-products span
 {
     margin-right:1%;
+	padding-bottom: 4px;
+	align-self: flex-end;
 }
 
 .category-third-container

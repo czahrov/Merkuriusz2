@@ -90,21 +90,23 @@ class JAGUARGIFT extends XMLAbstract{
 					if( (string)$item->availability !== "Niedostępne" ) $marking_a[] = (string)$arg->name;
 
 				}
-				$price = (string)$item->price_eur;
-				$netto = (float)str_replace( ",", ".", $price ) / $this->_eur;
+				$price = (string)$item->price;
+				$netto = (float)str_replace( ",", ".", $price );
 				$brutto = $netto * ( 1 + $this->_vat );
 				
 				foreach( $item->available_colors->{'list-item'} as $variant ){
 					$photo_a = array();
 					$i = (string)$variant->main_image->image;
 					if( $i !== "" ) $photo_a[] = $i;
-					foreach( $item->images->{'list-item'} as $img ){
+					if( $item->images->count() ) foreach( $item->images->{'list-item'} as $img ){
 						$photo_a[] = (string)$img->image;
 					}
 					
+					preg_match( '/^(.+)(.{2})$/', (string)$variant->vendo_code, $short );
+					
 					$product = array(
-						'code' => (string)$variant->id,
-						'short' => (string)$variant->id,
+						'code' => (string)$variant->vendo_code,
+						'short' => $short[1],
 						'shop' => $this->_atts['shop'],
 						'title' => addslashes( (string)$variant->name ),
 						'description' => @(string)$item->features->{'list-item'}[0]->value,
@@ -129,36 +131,29 @@ class JAGUARGIFT extends XMLAbstract{
 						'data' => $dt,
 					);
 					
-					if( ( $t = $this->_addItem( $product ) ) !== true ) $this->_log[] = $t;
+					// if( $product['code'] === '60912404' ) var_dump( $product );
+					
+					if( ( $t = $this->_addItem( $product ) ) !== true ) echo "\r\nError: addItem {$product['code']}";
 					
 					// czyszczenie hash'u produktu przed wiązaniem
 					$sql = "DELETE FROM XML_hash
 					WHERE PID = '{$product['code']}'";
 					$query = mysqli_query( $this->_dbConnect(), $sql );
-					if( $query === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
+					if( $query === false ) echo "\r\nError: hashClear\r\n{$sql}";
 					
 					// $this->_categoryFilter( $category, $subcategory, $item );
 					
 					foreach( $item->category->{'list-item'} as $cat ){
 						$category = $this->_stdName( (string)$cat->name );
+						if( empty( $category ) ) $category = 'Inne';
 						$subcategory = 'pozostałe';
 						$this->_addCategory( $category, $subcategory );
-						if( $this->_bindProduct( $product, $category, $subcategory ) !== true ) $this->_log[] = mysqli_error( $this->_dbConnect() );
+						if( $this->_bindProduct( $product, $category, $subcategory ) !== true ) echo "\r\nError: bindProduct {$product['code']}";
 						
 					}
 					
 				}
 				
-				// echo "\r\n $sql \r\n";
-
-				if( mysqli_query( $this->_dbConnect(), $sql ) === false ){
-					$this->_log[] = $sql;
-					$this->_log[] = mysqli_error( $this->_dbConnect() );
-
-				}
-
-				// echo "\r\n{$category} | {$subcategory}";
-
 			}
 
 		}

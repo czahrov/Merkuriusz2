@@ -57,23 +57,38 @@ class ANDA extends XMLAbstract{
 		$mark_a = array();
 		$XML = simplexml_load_file( __DIR__ . "/DND/marking" );
 		foreach( $XML->labeling as $item ){
+			$id = (string)$item->itemNumber;
+			$pos_a = array();
 			foreach( $item->positions->position as $pos ){
-				foreach( $pos->technologies->technology[0] as $tech ){
-					$mark_a[ (string)$item->itemNumber ][] = sprintf(
-						'%s (%s) %s (kolory: %s)',
-						(string)$tech->Name,
-						(string)$tech->Code,
-						implode( 'x', array_filter( array( (int)$tech->maxWmm, (int)$tech->maxHmm, (int)$tech->maxDmm ), function( $arg ){
-							return !empty( $arg );
-						} ) ),
-						(int)$item->maxColor
-						
+				$pos_name = (string)$pos->posName;
+				$tech_a = array();
+				foreach( $pos->technologies->technology as $tech ){
+					$tech_code = (string)$tech->Code;
+					$tech_name = (string)$tech->Name;
+					$tech_colors = (string)$tech->maxColor;
+					$tech_maxW = (string)$tech->maxWmm;
+					$tech_maxH = (string)$tech->maxHmm;
+					$tech_maxD = (string)$tech->maxDmm;
+					$tech_a[] = sprintf(
+						'%s: %s (%s) kolory:%s, %s mm',
+						$pos_name,
+						$tech_name,
+						$tech_code,
+						$tech_colors,
+						implode(
+							'x', 
+							array_filter(
+								array( $tech_maxW, $tech_maxH, $tech_maxD ), 
+								function( $arg ){
+									return !empty( $arg );
+								}
+							)
+						)
 					);
-					
 				}
-				
+				$pos_a[] = implode( '<br>', $tech_a );
 			}
-			
+			$mark_a[ $id ] = implode( '<br>', $pos_a );
 		}
 		
 		/* wczytywanie produktów z XML */
@@ -93,7 +108,7 @@ class ANDA extends XMLAbstract{
 				
 				$catalog_a = array();
 				foreach( $item->collections->collections->collection as $col ){
-					$catalog_a[] = (string)$col->name;
+					$catalog_a[] = addslashes( (string)$col->name );
 				}
 				
 				$prop_a = array(
@@ -126,11 +141,11 @@ class ANDA extends XMLAbstract{
 					'code' => (string)$item->itemNumber,
 					'short' => $short[0],
 					'shop' => $this->_atts['shop'],
-					'title' => (string)$item->name,
-					'description' => (string)$item->descriptions,
+					'title' => addslashes( (string)$item->name ),
+					'description' => addslashes( (string)$item->descriptions ),
 					'catalog' => implode( ", ", $catalog_a ),
-					'brand' => (string)$item->designName,
-					'marking' => '',
+					'brand' => addslashes( (string)$item->designName ),
+					'marking' => $mark_a[ (string)$item->itemNumber ],
 					'materials' => implode( ' / ', $prop_a['materials'] ),
 					'dimension' => implode( ' / ', $prop_a['dim'] ),
 					'colors' => implode( ', ', array_filter( array( (string)$item->primaryColor, (string)$item->secondaryColor ), function( $arg ){ return !empty( $arg ); } ) ),
@@ -161,6 +176,14 @@ class ANDA extends XMLAbstract{
 				
 				$category = $this->_stdName( (string)$item->categories->category[0]->name );
 				$subcategory = $this->_stdName( (string)$item->categories->category[1]->name );
+				
+				if( count( array_filter( $catalog_a, function( $arg ){
+					return stripos( $arg, 'be creative' ) !== false;
+					
+				} ) ) ){
+					$subcategory = $category;
+					$category = 'Be Creative';
+				}
 				
 				if( empty( $category ) ) $category = 'Inne';
 				if( empty( $subcategory ) ) $subcategory = 'Pozostałe';

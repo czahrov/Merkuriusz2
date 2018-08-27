@@ -209,4 +209,17 @@ $(function(){
 		$( '#newsletter .status' ) 
 	);
 	
+	/* tabela rozmiarów falk&ross */
+	(function( colors ){
+		colors.click( function( e ){
+			$(this).next('.prop').show();
+			colors.not( $(this) ).next('.prop').hide();
+			
+		} );
+		
+	})
+	(
+		$('#frtable .color')
+	);
+	
 })

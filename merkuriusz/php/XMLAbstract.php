@@ -313,6 +313,7 @@ class XMLAbstract{
 				return true;
 			}
 			else{
+				echo "\r\n{$sql}\r\n";
 				return mysqli_error( $this->_dbConnect() );
 			}
 			

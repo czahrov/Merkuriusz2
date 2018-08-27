@@ -3,22 +3,28 @@
 	get_header();
 	
 	if( DEV ){
-		echo "<!--";
+		echo "<!--POST\r\n";
 		print_r( $_POST );
-		echo "-->";
+		echo "\r\n-->";
 	}
 	
 	$fetch = doSQL("SELECT * FROM XML_product WHERE code = '{$_GET['kod']}'");
 	$item = $fetch[0];
 	$imgs = json_decode( $item['photos'] );
 	
+	if( DEV ){
+		echo "<!--ITEM\r\n";
+		print_r( $item );
+		echo "\r\n-->";
+	}
+	
+	
 	if( !empty( $_POST ) ){
 		add_action( 'phpmailer_init', function( PHPMailer $mailer ){
 			$mailer->Encoding = 'Base64';
-			
 		} );
 		
-		$to = DEV?( "sprytne@scepter.pl" ):( $_POST['email'] );
+		$to = DEV?( "sprytne@scepter.pl" ):( 'biuro@merkuriusz.pl' );
 		$subject = sprintf(
 			'%s przesyła zapytanie o produkt %s',
 			$_POST['imię'],
@@ -34,7 +40,7 @@ Wiadomość:
 %s
 
 
-Wyrażam zgodę na RODO
+%s na otrzymywanie dalszych wiadomości handlowych.
 ---
 Wiadomość wygenerowana automatycznie na %s',
 			$_POST['imię'],
@@ -42,10 +48,16 @@ Wiadomość wygenerowana automatycznie na %s',
 			$_POST['telefon'],
 			$_POST['firma'],
 			$_POST['wiadomość'],
+			$_POST['RODO'] === 'on'?( 'Wyrażam zgodę' ):( 'Nie wyrażam zgody' ),
 			
 			home_url()
 			
 		);
+		
+		if( DEV ){
+			echo "<!-- WIADOMOŚĆ:\r\n{$message}\r\n-->";
+		}
+		
 		$headers = array();
 		$headers[] = "From: Formularz <noreply@{$_SERVER['HTTP_HOST']}>";
 		$headers[] = "Reply-To: {$_POST['imię']} <{$_POST['email']}>";
@@ -53,7 +65,7 @@ Wiadomość wygenerowana automatycznie na %s',
 		
 		if( DEV ){
 			$res_mail = false;
-			// $res_mail = wp_mail( $to, $subject, $message, $headers, $attachments );
+			$res_mail = wp_mail( $to, $subject, $message, $headers, $attachments );
 		}
 		else{
 			$res_mail = wp_mail( $to, $subject, $message, $headers, $attachments );
@@ -108,7 +120,15 @@ Wiadomość wygenerowana automatycznie na %s',
 								Cena netto
 							</div>
 							<div class='col'>
-								<?php printf( '%.2f %s', $item['netto'], $item['currency'] ); ?>
+								<?php
+									if( (float)$item['netto'] > 0 ){
+										printf( '%.2f %s', $item['netto'], $item['currency'] );
+									}
+									else{
+										echo "wycena indywidualna";
+									}
+									
+								?>
 							</div>
 						</div>
 						<div class='info d-flex'>
@@ -116,7 +136,14 @@ Wiadomość wygenerowana automatycznie na %s',
 								Stan magazynowy
 							</div>
 							<div class='col'>
-								<?php echo $item['instock'] . " szt"; ?>
+								<?php
+									if( (int)$item['instock'] > 0 ){
+										echo $item['instock'] . " szt";
+									}
+									else{
+										echo "produkt na zamówienie";
+									}
+								?>
 							</div>
 						</div>
 						<div class='info d-flex'>
@@ -188,9 +215,9 @@ Wiadomość wygenerowana automatycznie na %s',
 						<textarea class='col-12' name='wiadomość' placeholder='Wiadomość' required></textarea>
 					</div>
 					<div class='col-12'>
-						<input id='rodo' type='checkbox' name='RODO' required>
+						<input id='rodo' type='checkbox' name='RODO'>
 						<label for='rodo'>
-							Zgoda na RODO
+							Wyrażam zgodę na otrzymywanie dalszych wiadomości handlowych
 						</label>
 					</div>
 					<div class='col'>

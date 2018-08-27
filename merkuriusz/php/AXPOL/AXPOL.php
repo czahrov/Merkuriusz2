@@ -3,7 +3,18 @@ class AXPOL extends XMLAbstract{
 
 	// filtrowanie kategorii
 	protected function _categoryFilter( &$cat_name, &$subcat_name, $item ){
+		if( mb_stripos( $cat_name, 'wine club' ) !== false ){
+			$cat_name = 'Vine Club';
+		}
+		elseif( mb_stripos( $cat_name, 'voyager xd' ) !== false ){
+			$cat_name = 'Voyager XD';
+		}
+		elseif( mb_stripos( $cat_name, 'wyprzedaż' ) !== false ){
+			$cat_name = 'Inne';
+		}
 		
+		if( empty( $cat_name ) ) $cat_name = 'Inne';
+		if( empty( $subcat_name ) ) $subcat_name = 'Pozostałe';
 	}
 
 	// wczytywanie XML, parsowanie danych XML, zapis do bazy danych
@@ -114,9 +125,8 @@ class AXPOL extends XMLAbstract{
 				if( $query === false ) echo "\r\n" . mysqli_error( $this->_dbConnect() );
 				
 				$category = $this->_stdName( (string)$item->MainCategoryPL );
-				if( empty( $category ) ) $category = 'Inne';
 				$subcategory = $this->_stdName( (string)$item->SubCategoryPL );
-				if( empty( $subcategory ) ) $subcategory = 'Pozostałe';
+				$this->_categoryFilter( $category, $subcategory, $item );
 				
 				$this->_addCategory( $category, $subcategory );
 				if( $this->_bindProduct( $product, $category, $subcategory ) !== true ) 

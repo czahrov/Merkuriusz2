@@ -113,7 +113,7 @@ ORDER BY cat_name ASC";
 				?>
 				<div class='category'>
 					<a class='title col-12 d-flex justify-content-between align-items-center' href='<?php echo home_url("kategoria/?dostawca={$shop}&nazwa={$cat}"); ?>'>
-						<?php echo ucfirst( $cat ); ?>
+						<?php echo mb_convert_case( $cat, MB_CASE_TITLE ); ?>
 					</a>
 				</div>
 				<?php endforeach; ?>

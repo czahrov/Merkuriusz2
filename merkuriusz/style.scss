@@ -113,6 +113,122 @@ body{
 			
 		}
 		
+		#frtable
+		{
+			margin-top: 100px;
+			
+			tr{
+				
+				td{
+					min-width: 100px;
+					
+				}
+				
+			}
+			
+			& > thead{
+				border-bottom: solid 1px black;
+				
+				tr{
+					padding-bottom: 10px;
+					
+					td{
+						font-weight: bold;
+						text-transform: uppercase;
+						font-size: 14px;
+					}
+					
+				}
+				
+			}
+			
+			& > tbody{
+				
+				tr{
+					
+					td{
+						padding: 2px 10px;
+						
+					}
+					
+				}
+				
+				table{
+					width: calc( 100% + 20px );
+					margin: 0 -10px;
+					
+					tr{
+						
+						td{
+							padding: 4px 10px;	
+						}
+						
+					}
+					
+				}
+				
+				.line{
+					
+					.color{
+						padding: 10px;
+						font-weight: bold;
+						cursor: pointer;
+					}
+					
+					.prop{
+						
+						.single{
+							
+							&:nth-child(even){
+								background-color: #007bff;
+								color: #fff;
+							}
+							
+						}
+						
+					}
+					
+					&:nth-child(even){
+						background-color: #007bff;
+						color: #fff;
+						
+						.single{
+							
+							&:nth-child(even){
+								background-color: #fff;
+								color: #000;
+							}
+							
+						}
+						
+					}
+					
+					&:not(:first-child){
+						
+						.prop{
+							display: none;
+							
+						}
+						
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		.category-availability{
+			
+			.product-enquiry-details{
+				padding: 20px 0;
+				border: none;
+				background-color: transparent;
+				
+			}
+			
+		}
+		
 	}
 	
 	&.home-page{
@@ -255,6 +371,10 @@ body{
 					width: 100%;
 					border: solid 1px #007bff;
 					
+				}
+				
+				textarea{
+					height: 100px;
 				}
 				
 			}
@@ -1007,6 +1127,41 @@ body{
 			
 			&.fail > .icons > .icon.fail{
 				display: block;
+				
+			}
+			
+		}
+		
+	}
+	
+}
+
+#sortbutton
+{
+	
+	& + #sort-dropdown
+	{
+		
+		li{
+			padding: 12px 0px;
+			border-top: 1px solid #e8e8e8;
+			border-right: 1px solid #e8e8e8;
+			font-size: 15px !important;
+			color: #020202 !important;
+			font-weight: 500;
+			
+			a{
+				display: block;
+				padding: 10px 20px;
+			}
+			
+			&:hover{
+				background: #2a2d3a;
+				
+				a{
+					color: #fff;
+					text-decoration: none;
+				}
 				
 			}
 			

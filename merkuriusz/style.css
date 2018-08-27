@@ -140,6 +140,46 @@ body.product-page .category-single-product .product-social-contacts a {
   body.product-page .category-single-product .product-social-contacts a, body.product-page .category-single-product .product-social-contacts a * {
     cursor: pointer; }
 
+body.product-page #frtable {
+  margin-top: 100px; }
+  body.product-page #frtable tr td {
+    min-width: 100px; }
+  body.product-page #frtable > thead {
+    border-bottom: solid 1px black; }
+    body.product-page #frtable > thead tr {
+      padding-bottom: 10px; }
+      body.product-page #frtable > thead tr td {
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 14px; }
+  body.product-page #frtable > tbody tr td {
+    padding: 2px 10px; }
+  body.product-page #frtable > tbody table {
+    width: calc( 100% + 20px);
+    margin: 0 -10px; }
+    body.product-page #frtable > tbody table tr td {
+      padding: 4px 10px; }
+  body.product-page #frtable > tbody .line .color {
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer; }
+  body.product-page #frtable > tbody .line .prop .single:nth-child(even) {
+    background-color: #007bff;
+    color: #fff; }
+  body.product-page #frtable > tbody .line:nth-child(even) {
+    background-color: #007bff;
+    color: #fff; }
+    body.product-page #frtable > tbody .line:nth-child(even) .single:nth-child(even) {
+      background-color: #fff;
+      color: #000; }
+  body.product-page #frtable > tbody .line:not(:first-child) .prop {
+    display: none; }
+
+body.product-page .category-availability .product-enquiry-details {
+  padding: 20px 0;
+  border: none;
+  background-color: transparent; }
+
 body.home-page #banners-block .zoom-banner {
   position: relative; }
   body.home-page #banners-block .zoom-banner a {
@@ -192,6 +232,8 @@ body.ask-page #ask-form .cell {
     padding: 5px 10px;
     width: 100%;
     border: solid 1px #007bff; }
+  body.ask-page #ask-form .cell textarea {
+    height: 100px; }
 
 body.ask-page #ask-form input.send {
   padding: 5px 20px;
@@ -557,5 +599,21 @@ body.shop-page #kafelki {
       display: block; }
     #newsletter .subscribe-section .status.fail > .icons > .icon.fail {
       display: block; }
+
+#sortbutton + #sort-dropdown li {
+  padding: 12px 0px;
+  border-top: 1px solid #e8e8e8;
+  border-right: 1px solid #e8e8e8;
+  font-size: 15px !important;
+  color: #020202 !important;
+  font-weight: 500; }
+  #sortbutton + #sort-dropdown li a {
+    display: block;
+    padding: 10px 20px; }
+  #sortbutton + #sort-dropdown li:hover {
+    background: #2a2d3a; }
+    #sortbutton + #sort-dropdown li:hover a {
+      color: #fff;
+      text-decoration: none; }
 
 /*# sourceMappingURL=style.css.map */

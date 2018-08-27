@@ -10,7 +10,22 @@ class FALKROSS extends XMLAbstract{
 	// wczytywanie XML, parsowanie danych XML, zapis do bazy danych
 	// rehash - określa czy wykonać jedynie przypisanie kategorii dla produktów
 	protected function _import( $rehash = false ){
-		// echo PHP_EOL . "> ładowanie XML";
+		
+		// generowanie tablicy stanów magazynowych dla wariantów
+		$variant_stock_a = array();
+		if( ( $file = fopen( __DIR__ . "/DND/" . basename( $this->_sources[ 'stock' ] ), 'r' ) ) !== false ){
+			$counter = 0;
+			while( ( $line = fgetcsv( $file, 0, ';' ) ) !== false ){
+				if( $counter == 0 ){
+					$counter++;
+					continue;
+				}
+				$variant_stock_a[ "v" . $line[0] ] = $line[1];
+				
+			}
+			
+		}
+		// print_r( $variant_stock_a );
 		
 		// wczytywanie pliku XML z produktami
 		$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'products' ] ) );
@@ -24,10 +39,8 @@ class FALKROSS extends XMLAbstract{
 
 		}
 		else{
-			
 			// parsowanie danych z XML
 			foreach( $XML->style as $item ){
-				
 				$name = (string)$item->style_name->language->pl;
 				
 				$photo_a = array();
@@ -41,6 +54,7 @@ class FALKROSS extends XMLAbstract{
 				
 				$color_a = array();
 				$size_a = array();
+				$stock_a = array();
 				
 				if( $item->sku_list->count() ) foreach( $item->sku_list->sku as $variant ){
 					$c = (string)$variant->sku_color_name;
@@ -53,7 +67,20 @@ class FALKROSS extends XMLAbstract{
 					if( array_search( $s, $size_a ) === false ){
 						$size_a[] = $s;
 					}
+					
+					$stock_a[ $c ][ $s ] = $variant_stock_a[ "v" . (string)$variant->sku_artnum ];
 				}
+				
+				// print_r( $stock_a );
+				$stock_txt = "<table id='frtable'><thead><tr><td>Kolor</td><td><table><tr><td>Rozmiary</td><td>Stan magazynowy</td></tr></table></td></tr></thead><tbody>";
+				foreach( $stock_a as $color => $sizes ){
+					$stock_txt .= "<tr class='line'><td class='color'>{$color}</td><td class='prop'><table>";
+					foreach( $sizes as $size => $qt ){
+						$stock_txt .= "<tr class='single'><td class='size'>{$size}</td><td class='quantity'>{$qt}</td></tr>";
+					}
+					$stock_txt .= "</table></td></tr>";
+				}
+				$stock_txt .= "</tbody></table>";
 				
 				preg_match( '/^(.+)(.{2})$/', (string)$item->style_nr, $match );
 				
@@ -61,8 +88,8 @@ class FALKROSS extends XMLAbstract{
 					'code' => "{$match[1]}.{$match[2]}",
 					'short' => "{$match[1]}.{$match[2]}",
 					'shop' => $this->_atts['shop'],
-					'title' => $name,
-					'description' => addslashes( (string)$item->style_description->language->pl ),
+					'title' => addslashes( $name ),
+					'description' => addslashes( (string)$item->style_description->language->pl . $stock_txt ),
 					'catalog' => '',
 					'brand' => '',
 					'marking' => '',
@@ -85,6 +112,7 @@ class FALKROSS extends XMLAbstract{
 				);
 				
 				if( ( $t = $this->_addItem( $product ) ) !== true ){
+					var_dump( (string)$t );
 					echo "\r\naddItem ERROR:" . $product['code'] . "\r\n";
 				}
 				
