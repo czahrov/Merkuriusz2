@@ -298,6 +298,7 @@ body{
 		
 		#Nav-container
 		{
+			
 			@media( min-width: 992px ){
 				position: absolute;
 				
@@ -402,8 +403,8 @@ body{
 		.banner{
 			min-height: 300px;
 			background:{
-				position: left center;
-				size: cover;
+				position: center top;
+				size: 100% auto;
 				repeat: no-repeat;
 				color: #f8f8f8;
 			};
@@ -709,6 +710,210 @@ body{
 		#kafelki
 		{
 			margin-bottom: 120px;
+			
+		}
+		
+	}
+	
+	#Nav-container
+	{
+		
+		.dropdown-menu{
+			
+			li[role=presentation]{
+				
+				a{
+					background-color: transparent;
+					
+				}
+				
+				&.shop_axp{
+					background-color: #ae2225;
+				}
+				
+				&.shop_jg{
+					
+					a{
+						
+						&::after{
+							content: '- skóra';
+							padding-left: 0.5em;
+						}
+						
+					}
+					
+				}
+				
+				&:hover{
+					background-color: #2a2d3a;
+					
+					a{
+						background-color: transparent;
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		.title{
+			text-transform: uppercase;
+			font-size: 20px;
+			
+			@media( min-width: 992px ){
+				font-size: 10px;
+			}
+			
+			@media( min-width: 1200px ){
+				font-size: 13px;
+			}
+			
+			@media( min-width: 1400px ){
+				font-size: 16px;
+			}
+			
+		}
+		
+	}
+	
+	#fourth-container-content
+	{
+		
+		.category{
+			
+			&.victorinox{
+				background-color: #e40b0e;
+				color: #fff;
+				
+			}
+			
+			&.wenger{
+				background-color: #000;
+				color: #fff;
+			}
+			
+			&.markowa, 
+			&.bank,
+			&.pendrive,
+			&.silicon,
+			&.smartwatch{
+				background-color: #260d42;
+				color: #fff;
+			}
+			
+			&.vip{
+				background-color: #e7b82d;
+				
+				a{
+					
+					&::after{
+						content: 'marka, prestiż';
+						padding-left: 0.5em;
+					}
+					
+				}
+				
+			}
+			
+			&.aladdin{
+				
+				a{
+					
+					&::after{
+						content: '- termosy, kubki markowe';
+						padding-left: 0.5em;
+					}
+					
+				}
+				
+			}
+			
+			&.cofee{
+				background-color: hsla(20, 70%, 35%, 1);
+				
+				a{
+					
+					&::after{
+						content: '- czapki markowe cofee';
+						padding-left: 0.5em;
+					}
+					
+				}
+				
+			}
+			
+			&.tucano{
+				
+				a{
+					
+					&::after{
+						content: '- tucano torby i plecaki';
+						padding-left: 0.5em;
+					}
+					
+				}
+				
+			}
+			
+			&.schwarzwolf{
+				
+				a{
+					
+					&::after{
+						content: '- mistrz modnego designu';
+						padding-left: 0.5em;
+					}
+					
+				}
+				
+			}
+			
+			&.moleskine{
+				
+				a{
+					
+					&::after{
+						content: '- notesy prestiżowe';
+						padding-left: 0.5em;
+					}
+					
+				}
+				
+			}
+			
+			&.fofcio{
+				
+				a{
+					
+					&::after{
+						content: '- misie';
+						padding-left: 0.5em;
+					}
+					
+				}
+				
+			}
+			
+			&.vine{
+				background-color: #ae2225;
+				a{
+					
+				}
+				
+			}
+			
+		}
+		
+	}
+	
+	.main-content-section{
+		
+		.dropdown{
+			
+			@media( min-width: 992px ){
+				max-width: 330px;
+			}
 			
 		}
 		
@@ -1171,3 +1376,11 @@ body{
 	
 }
 
+.footer-details{
+	
+	.footer-elements{
+		line-height: 30px;
+		
+	}
+	
+}

@@ -3,6 +3,12 @@ class MACMA extends XMLAbstract{
 
 	// filtrowanie kategorii
 	protected function _categoryFilter( &$cat_name, &$subcat_name, $item ){
+		if( $cat_name == 'polaroid' ){
+			$subcat_name = $cat_name;
+			$cat_name = 'elektronika markowa';
+		}
+		
+		if( $subcat_name == null ) $subcat_name = 'pozostałe';
 		
 	}
 
@@ -28,7 +34,6 @@ class MACMA extends XMLAbstract{
 		// wczytywanie pliku XML z produktami
 		$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'products' ] ) );
 		$dt = date( 'Y-m-d H:i:s' );
-		
 		if( $rehash === true ){
 			// parsowanie danych z XML
 			foreach( $XML->children() as $item ){
@@ -109,27 +114,35 @@ class MACMA extends XMLAbstract{
 				$query = mysqli_query( $this->_dbConnect(), $sql );
 				if( $query === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
 				
+				if( $product['new'] ){
+					$this->_addCategory( 'nowość', 'pozostałe' );
+					$this->_bindProduct( $product, 'nowość', 'pozostałe' );
+				}
+				
 				if( $item->categories->count() ) foreach( $item->categories->category as $cat ){
 					$category = $this->_stdName( (string)$cat->name );
 					$subcategory = null;
 					
 					if( $cat->subcategories->count() ) foreach( $cat->subcategories->subcategory as $sub ){
 						$subcategory = $this->_stdName( (string)$sub->name );
+						$this->_categoryFilter( $category, $subcategory, $item );
 						$this->_addCategory( $category, $subcategory );
-						
+						if( $category == ( $s  = 'schwarzwolf' ) ){
+							$this->_addCategory( $c = 'kolekcja vip', $s );
+							if( $this->_bindProduct( $product, $c, $s ) !== true ) $this->_log[] = mysqli_error( $this->_dbConnect() );
+						}
 						if( $this->_bindProduct( $product, $category, $subcategory ) !== true ) $this->_log[] = mysqli_error( $this->_dbConnect() );
 						
 					}
 					
 					if( $subcategory === null ){
-						$this->_addCategory( $category, $c = 'pozostałe' );
-						if( $this->_bindProduct( $product, $category, $c ) !== true ) $this->_log[] = mysqli_error( $this->_dbConnect() );
+						$this->_categoryFilter( $category, $subcategory, $item );
+						$this->_addCategory( $category, $subcategory );
+						if( $this->_bindProduct( $product, $category, $subcategory ) !== true ) $this->_log[] = mysqli_error( $this->_dbConnect() );
 						
 					}
 					
 				}
-				
-				// echo "\r\n [{$num}] {$product['code']}";
 				
 			}
 

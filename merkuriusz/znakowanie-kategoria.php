@@ -13,14 +13,7 @@
 		<?php get_template_part('segment/top'); ?>
 		<div class="container flex-wrap main-content-section mt-4 mt-lg-0">
 			<div class="row">
-				<div class="col-md-12 col-lg-3" id="Nav-container">
-					<div class="dropdown open show">
-						<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-						<img src="<?php echo get_template_directory_uri(); ?>/media/menubar.png"> &nbsp <span>NASZE PRODUKTY </span>
-						</button>
-						<?php genMenu(); ?>
-					</div>
-				</div>
+				<?php get_template_part('segment/shop-menu'); ?>
 			</div>
 		</div>
 		<!-- end of the menu-section--> 

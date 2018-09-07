@@ -108,14 +108,22 @@ class EASYGIFTS extends XMLAbstract{
 						$this->_addCategory( $c = 'Power of brands - oferta specjalna 24h', $category );
 						if( $this->_bindProduct( $product, $c, $category ) === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
 						
-						$this->_addCategory( $s = 'Kolekcja VIP', $c );
+						$this->_addCategory( $s = 'kolekcja vip', $c );
 						if( $this->_bindProduct( $product, $s, $c ) === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
 					}
 					
 					if( in_array( $category, array( 'elektronika markowa', 'cerruti 1881', 'power of brands', 'cacharel', 'ungaro', 'nina ricci', 'jean-louis scherrer', 'christian lacroix', 'wenger - bagaże biznesowe i akcesoria podróżne', 'wenger - bestsellery', 'victorinox', 'victorinox delemont collection', 'victorinox lifestyle - akcesoria podróżne', 'victorinox altmont - plecaki i torby' ) )
 					){
-						$this->_addCategory( $c = 'Kolekcja VIP', $category );
+						$this->_addCategory( $c = 'kolekcja vip', $category );
 						if( $this->_bindProduct( $product, $c, $category ) === false ) $this->_log[] = mysqli_error( $this->_dbConnect() );
+					}
+					
+					if( stripos( $category, $c = 'wenger' ) !== false ){
+						if( stripos( $category, 'bestseller' ) !== false ){
+							$subcategory = 'bestsellery';
+						}
+						
+						$category = $c;
 					}
 					
 					if( $cat->subcategories->count() ){

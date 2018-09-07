@@ -123,6 +123,8 @@ body
 
 .main-content-section .dropdown button{
     padding: 22px 0 21px 20px;
+	max-width: 100%;
+	height: 60px;
 
 }
 .main-content-section .dropdown button:after{
@@ -151,7 +153,7 @@ body
 }
 .main-content-section .dropdown-menu li:hover,
 .main-content-section .dropdown-menu li:hover a{
-    background:#2a2d3a;
+    background-color:#2a2d3a;
     color:#d5d6d7;
 }
 .main-content-section .dropdown-menu li:last-child{
@@ -175,6 +177,7 @@ body
 }
 #navbarResponsive li{
     padding:14px 0;
+	height: 60px;
 }
 #menuglowne
 {
@@ -1738,11 +1741,7 @@ ul.breadcrumb li a:hover a:active {
 }
 @media (min-width:992px) and (max-width:1199px)
 {  
-   .dropdown-toggle#menu1
-   {
-       font-size: 14px;
-   }
-
+   
    .navbar-dark .navbar-nav .nav-link{
        font-size: 12px;
        padding: 10px 8px;

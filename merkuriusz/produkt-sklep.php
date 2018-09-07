@@ -24,14 +24,7 @@ ORDER BY cat_name ASC";
 		<?php get_template_part('segment/top'); ?>
 		<div class="container flex-wrap main-content-section mt-4 mt-lg-0">
 			<div class="row">
-				<div class="col-md-12 col-lg-3" id="Nav-container">
-					<div class="dropdown open show">
-						<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-						<img src="<?php echo get_template_directory_uri(); ?>/media/menubar.png"> &nbsp <span>NASZE PRODUKTY </span>
-						</button>
-						<?php genMenu(); ?>
-					</div>
-				</div>
+				<?php get_template_part('segment/shop-menu'); ?>
 			</div>
 		</div>
 		<!-- end of the menu-section--> 
@@ -110,9 +103,21 @@ ORDER BY cat_name ASC";
 					}
 					
 					foreach( $grid as $cat => $subcats ):
+					/* ukrywane kategorie */
+					if( in_array( $cat, array( 'cacharel', 'cerruti 1881', 'christian lacroix', 'jean-louis scherrer', 'nina ricci', 'ungaro', 'Power of brands - oferta specjalna 24h', 'power of brands – oferta specjalna 24h', 'wenger - bagaże biznesowe i akcesoria podróżne', 'wenger - bestsellery' ) ) ) continue;
+					/* dodawanie klas do kategorii */
+					$class = "";
+					$keys = array( 'victorinox', 'wenger', 'markowa', 'vip', 'bank', 'pendrive', 'smartwatch', 'silicon', 'aladdin', 'cofee', 'tucano', 'schwarzwolf', 'vine', 'moleskine', 'fofcio' );
+					foreach( $keys as $key ){
+						if( stripos( $cat, $key ) !== false ){
+							$class = $key;
+							break;
+						}
+					}
+					
 				?>
-				<div class='category'>
-					<a class='title col-12 d-flex justify-content-between align-items-center' href='<?php echo home_url("kategoria/?dostawca={$shop}&nazwa={$cat}"); ?>'>
+				<div class='category <?php echo $class; ?>'>
+					<a class='title col-12 d-flex align-items-center' href='<?php echo home_url("kategoria/?dostawca={$shop}&nazwa={$cat}"); ?>'>
 						<?php echo mb_convert_case( $cat, MB_CASE_TITLE ); ?>
 					</a>
 				</div>

@@ -12,6 +12,13 @@ class AXPOL extends XMLAbstract{
 		elseif( mb_stripos( $cat_name, 'wyprzedaż' ) !== false ){
 			$cat_name = 'Inne';
 		}
+		elseif( $cat_name == 'moleskine' and $subcat_name == 'notatniki' ){
+			$subcat_name = 'notesty prestiżowe';	
+		}
+		elseif( stripos( (string)$item->TitlePL, 'mauro conti' ) !== false ){
+			$cat_name = 'kolekcja vip';
+			$subcat_name = 'mauro conti';
+		}
 		
 		if( empty( $cat_name ) ) $cat_name = 'Inne';
 		if( empty( $subcat_name ) ) $subcat_name = 'Pozostałe';
@@ -67,7 +74,6 @@ class AXPOL extends XMLAbstract{
 			
 			// parsowanie danych z XML
 			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'products' ] ) );
-			
 			foreach( $XML->Row as $item ){
 				preg_match( '/^[^\-]+/', (string)$item->CodeERP, $short );
 				
@@ -123,6 +129,11 @@ class AXPOL extends XMLAbstract{
 				// echo "\r\n{$sql}\r\n";
 				$query = mysqli_query( $this->_dbConnect(), $sql );
 				if( $query === false ) echo "\r\n" . mysqli_error( $this->_dbConnect() );
+				
+				if( $product['new'] ){
+					$this->_addCategory( 'nowość', 'pozostałe' );
+					$this->_bindProduct( $product, 'nowość', 'pozostałe' );
+				}
 				
 				$category = $this->_stdName( (string)$item->MainCategoryPL );
 				$subcategory = $this->_stdName( (string)$item->SubCategoryPL );

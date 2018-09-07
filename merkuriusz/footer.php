@@ -86,7 +86,7 @@
 								$menu = wp_get_nav_menu_items('na-skroty');
 								foreach( $menu as $item ){
 									printf(
-										'<div id="footer-elements">
+										'<div class="footer-elements">
 											<a href="%s">
 												%s
 											</a>
@@ -108,7 +108,7 @@
 								$menu = wp_get_nav_menu_items('informacje');
 								foreach( $menu as $item ){
 									printf(
-										'<div id="footer-elements">
+										'<div class="footer-elements">
 											<a href="%s">
 												%s
 											</a>

@@ -1,4 +1,9 @@
 <?php
+	// if( !isset( $_COOKIE['sprytne'] ) ){
+		// include 'wbudowie.php';
+		// exit;
+	// }
+	
 	define( 'DEV', $_SERVER['SERVER_NAME'] === 'localhost' or isset( $_COOKIE['sprytne'] ) );
 	$ver = time();
 	

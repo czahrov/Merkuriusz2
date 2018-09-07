@@ -9,7 +9,7 @@
 				<div class="col-md-12 col-lg-3" id="Nav-container">
 					<div class="dropdown open show">
 						<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-						<img src="<?php echo get_template_directory_uri(); ?>/media/menubar.png"> &nbsp <span>NASZE PRODUKTY </span>
+						<img src="<?php echo get_template_directory_uri(); ?>/media/menubar.png"> &nbsp <span>Gadżety reklamowe</span>
 						</button>
 						<?php genMenu(); ?>
 					</div>
@@ -22,10 +22,15 @@
 		</div>
 		<div class= "container fourth-container">
 			<div class="row" id="fourth-container-content">
-				<div class='banner col-12 d-flex align-items-center justify-content-center' style='background-image:url(<?php echo get_the_post_thumbnail_url( $post->ID ); ?>);'>
+				<?php
+					$img = get_the_post_thumbnail_url( $post->ID );
+				?>
+				<div class='banner col-12 d-flex align-items-center justify-content-center' style='background-image:url(<?php echo $img; ?>);'>
+					<?php if( $img == false ): ?>
 					<div class='title'>
 						<?php echo mb_strtoupper( $post->post_title ); ?>
 					</div>
+					<?php endif; ?>
 				</div>
 				<div class='content col-12'>
 					<?php echo apply_filters( 'the_content', $post->post_content ); ?>

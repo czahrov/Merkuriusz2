@@ -57,6 +57,7 @@ JOIN XML_category AS cat
 ON subcat.parent = cat.ID
 WHERE ";
 	$sql .= implode( ' AND ', $where );
+	$sql .= " GROUP BY prod.code ";
 	$sql .= "ORDER BY {$orderby} {$order}";
 	
 	$fetch = doSQL( $sql );
@@ -83,14 +84,7 @@ WHERE ";
 		<?php get_template_part('segment/top'); ?>
 		<div class="container flex-wrap main-content-section mt-4 mt-lg-0">
 			<div class="row">
-				<div class="col-md-12 col-lg-3" id="Nav-container">
-					<div class="dropdown open show">
-						<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-						<img src="<?php echo get_template_directory_uri(); ?>/media/menubar.png"> &nbsp <span>NASZE PRODUKTY </span>
-						</button>
-						<?php genMenu(); ?>
-					</div>
-				</div>
+				<?php get_template_part('segment/shop-menu'); ?>
 			</div>
 		</div>
 		<!-- end of the menu-section--> 
@@ -170,7 +164,7 @@ WHERE ";
 				echo "-->";
 				foreach( $fetch as $sub ):
 				/* generowanie odnośników dla kolekcji vip */
-				if( in_array( mb_strtolower( $sub['subcat_name'] ), array( 'elektronika markowa', 'cacharel', 'cerruti 1881', 'christian lacroix', 'jean-louis scherrer', 'nina ricci', 'power of brands - oferta specjalna 24h', 'ungaro', 'victorinox', 'victorinox altmont - plecaki i torby', 'victorinox delemont collection', 'victorinox lifestyle - akcesoria podróżne', 'wenger - bagaże biznesowe i akcesoria podróżne', 'wenger - bestsellery' ) ) ):
+				if( in_array( mb_strtolower( $sub['subcat_name'] ), array( 'elektronika markowa', 'cacharel', 'cerruti 1881', 'christian lacroix', 'jean-louis scherrer', 'nina ricci', 'power of brands - oferta specjalna 24h', 'ungaro', 'victorinox', 'victorinox altmont - plecaki i torby', 'victorinox delemont collection', 'victorinox lifestyle - akcesoria podróżne', 'wenger', 'schwarzwolf' ) ) ):
 			?>
 			<a id="electronicstext" class='<?php echo mb_strtolower( $sub['subcat_name'] ) == mb_strtolower( $subcat )?(' active '):(''); ?>' href='<?php echo home_url("kategoria/?dostawca={$shop}&nazwa={$sub['subcat_name']}"); ?>'>
 				<?php echo ucfirst( $sub['subcat_name'] ); ?>

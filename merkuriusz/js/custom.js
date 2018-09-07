@@ -89,12 +89,19 @@ $(function(){
 	});
 	
 	/* szerokość slidera głównego na home-page */
-	(function( menu, slider ){
+	(function( menu, slider, topbrands ){
 		$(window).resize( function( e ){
 			if( window.innerWidth >= 992 ){
 				slider
 				.css({
 					marginLeft: menu.outerWidth( true ),
+				});
+				
+				topbrands
+				.css({
+					marginTop: function(){
+						return Math.max( 0, ( menu.outerHeight( true ) - slider.outerHeight( true ) ) );
+					},
 				});
 				
 			}
@@ -103,14 +110,23 @@ $(function(){
 				.css({
 					marginLeft: 0,
 				});
+				
+				topbrands
+				.css({
+					marginTop: 0,
+				})
+				
+				
 			}
 			
 		} )
 		.resize();
 		
-	})(
+	})
+	(
 		$('body.home-page #Nav-container'),
-		$('body.home-page #demo')
+		$('body.home-page #demo'),
+		$('body.home-page #top-brands-block')
 	);
 	
 	/* newsletter */

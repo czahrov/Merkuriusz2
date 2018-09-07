@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*
 Theme Name: merkuriusz
 Author: SCEPTER Agencja Interaktywna
@@ -245,8 +246,8 @@ body.ask-page #ask-form input.send {
 
 body.single-page .banner {
   min-height: 300px;
-  background-position: left center;
-  background-size: cover;
+  background-position: center top;
+  background-size: 100% auto;
   background-repeat: no-repeat;
   background-color: #f8f8f8;
   margin-bottom: 50px; }
@@ -402,6 +403,85 @@ body.shop-page #fourth-container-content {
 
 body.shop-page #kafelki {
   margin-bottom: 120px; }
+
+body #Nav-container .dropdown-menu li[role=presentation] a {
+  background-color: transparent; }
+
+body #Nav-container .dropdown-menu li[role=presentation].shop_axp {
+  background-color: #ae2225; }
+
+body #Nav-container .dropdown-menu li[role=presentation].shop_jg a::after {
+  content: '- skóra';
+  padding-left: 0.5em; }
+
+body #Nav-container .dropdown-menu li[role=presentation]:hover {
+  background-color: #2a2d3a; }
+  body #Nav-container .dropdown-menu li[role=presentation]:hover a {
+    background-color: transparent; }
+
+body #Nav-container .title {
+  text-transform: uppercase;
+  font-size: 20px; }
+  @media (min-width: 992px) {
+    body #Nav-container .title {
+      font-size: 10px; } }
+  @media (min-width: 1200px) {
+    body #Nav-container .title {
+      font-size: 13px; } }
+  @media (min-width: 1400px) {
+    body #Nav-container .title {
+      font-size: 16px; } }
+
+body #fourth-container-content .category.victorinox {
+  background-color: #e40b0e;
+  color: #fff; }
+
+body #fourth-container-content .category.wenger {
+  background-color: #000;
+  color: #fff; }
+
+body #fourth-container-content .category.markowa, body #fourth-container-content .category.bank, body #fourth-container-content .category.pendrive, body #fourth-container-content .category.silicon, body #fourth-container-content .category.smartwatch {
+  background-color: #260d42;
+  color: #fff; }
+
+body #fourth-container-content .category.vip {
+  background-color: #e7b82d; }
+  body #fourth-container-content .category.vip a::after {
+    content: 'marka, prestiż';
+    padding-left: 0.5em; }
+
+body #fourth-container-content .category.aladdin a::after {
+  content: '- termosy, kubki markowe';
+  padding-left: 0.5em; }
+
+body #fourth-container-content .category.cofee {
+  background-color: #98441b; }
+  body #fourth-container-content .category.cofee a::after {
+    content: '- czapki markowe cofee';
+    padding-left: 0.5em; }
+
+body #fourth-container-content .category.tucano a::after {
+  content: '- tucano torby i plecaki';
+  padding-left: 0.5em; }
+
+body #fourth-container-content .category.schwarzwolf a::after {
+  content: '- mistrz modnego designu';
+  padding-left: 0.5em; }
+
+body #fourth-container-content .category.moleskine a::after {
+  content: '- notesy prestiżowe';
+  padding-left: 0.5em; }
+
+body #fourth-container-content .category.fofcio a::after {
+  content: '- misie';
+  padding-left: 0.5em; }
+
+body #fourth-container-content .category.vine {
+  background-color: #ae2225; }
+
+@media (min-width: 992px) {
+  body .main-content-section .dropdown {
+    max-width: 330px; } }
 
 #owl-demo .owl-item img {
   max-width: 100%; }
@@ -615,5 +695,8 @@ body.shop-page #kafelki {
     #sortbutton + #sort-dropdown li:hover a {
       color: #fff;
       text-decoration: none; }
+
+.footer-details .footer-elements {
+  line-height: 30px; }
 
 /*# sourceMappingURL=style.css.map */

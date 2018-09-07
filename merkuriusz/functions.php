@@ -93,40 +93,54 @@ function getProduct( $code = null ){
 
 function genMenu(){
 	$menu = array(
-		/* 'Biuro i biznes',
-		'Czas i pogoda',
-		'Do picia',
-		'Dom i ogród',
-		'Smycze',
-		'Dzieci, zabawa, szkoła',
-		'Pluszaki',
-		'Elektronika',
-		'Materiały piśmiennicze',
-		'Narzędzia, latarki, breloki, antystresy',
-		'Odblaski',
-		'Parasole i peleryny',
-		'Torby i plecaki',
-		'VIP Collection',
-		'Wakacje, sport i rekreacja',
-		'Zdrowie i uroda',
-		'Święta i okazje specjalne',
-		'Tekstylia i odzież',
-		'Nagrody i trofea',
-		'Opakowania',
-		'Etui i portfele',
-		'Pinsy, plakietki, odznaki',
-		'Sublimacja - drukuj na kolorowo',
-		'VIP Skóra',
-		'Sety', */
-		'Easy Gifts' => 'easygifts',
-		'Jaguar Gift' => 'jaguargift',
-		'Falk&Ross' => 'falkross',
-		'Asgard' => 'asgard',
-		'Inspirion' => 'inspirion',
-		'PAR' => 'par',
-		'Macma' => 'macma',
-		'Axpol' => 'axpol',
-		'Anda' => 'anda',
+		'Easy Gifts' => array(
+			'url' => home_url("sklep/?nazwa=easygifts"),
+			'class' => 'shop_eg',
+		),
+		'Jaguar Gift' => array(
+			'url' => home_url("sklep/?nazwa=jaguargift"),
+			'class' => 'shop_jg',
+		),
+		'Falk&Ross' => array(
+			'url' => home_url("sklep/?nazwa=falkross"),
+			'class' => 'shop_fr',
+		),
+		'Asgard' => array(
+			'url' => home_url("sklep/?nazwa=asgard"),
+			'class' => 'shop_asg',
+		),
+		'Inspirion' => array(
+			'url' => home_url("sklep/?nazwa=inspirion"),
+			'class' => 'shop_ins',
+		),
+		'PAR' => array(
+			'url' => home_url("sklep/?nazwa=par"),
+			'class' => 'shop_par',
+		),
+		'Macma' => array(
+			'url' => home_url("sklep/?nazwa=macma"),
+			'class' => 'shop_mcm',
+		),
+		'Axpol' => array(
+			'url' => home_url("sklep/?nazwa=axpol"),
+			'class' => 'shop_axp',
+		),
+		'Anda' => array(
+			'url' => home_url("sklep/?nazwa=anda"),
+			'class' => 'shop_and',
+		),
+		'Axpol Fofcio Promo Toys' => array(
+			'url' => home_url("kategoria/?dostawca=axpol&nazwa=fofcio promo toys"),
+			'class' => 'shop_axp',
+		),
+		'Axpol XD Prestiż' => array(
+			'url' => home_url("kategoria/?dostawca=axpol&nazwa=voyager xd"),
+			'class' => 'shop_axp',
+		),
+		'Axpol Vine Club' => array(
+			'url' => home_url("kategoria/?dostawca=axpol&nazwa=vine club"),
+			'class' => 'shop_axp',
+		),
 	);
 	
 	ksort( $menu );
@@ -136,12 +150,13 @@ function genMenu(){
 	echo '<ul class="dropdown-menu list-unstyled">';
 	foreach( $menu as $name => $item ){
 		printf(
-			'<li role="presentation">
+			'<li class="%s" role="presentation">
 				<a href="%s" role="menuitem" tabindex="-1" class="list-group-item">
 					%s
 				</a>
 			</li>',
-			home_url("sklep/?nazwa={$item}"),
+			$item['class'],
+			$item['url'],
 			$name
 			
 		);
