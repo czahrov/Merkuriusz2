@@ -8,9 +8,10 @@
 	);
 	
 	/* standardowa strona */
-	$temp = array();
 	$current = get_post();
-	do{
+	$temp = array();
+	
+	/* do{
 		$temp[] = array(
 			'name' => $current->post_title,
 			'url' => get_the_permalink( $current->ID ),
@@ -18,9 +19,23 @@
 		
 		$current = get_post( $current->post_parent );
 	}
-	while( $current->post_parent > 0 );
+	while( $current->post_parent > 0 ); */
 	
-	array_reverse( $temp );
+	while( $current->post_parent > 0 ){
+		array_unshift( $temp, array(
+			'name' => $current->post_title,
+			'url' => get_the_permalink( $current->ID ),
+		) );
+		
+		$current = get_post( $current->post_parent );
+	}
+	
+	array_unshift( $temp, array(
+		'name' => $current->post_title,
+		'url' => get_the_permalink( $current->ID ),
+	) );
+	
+	// array_reverse( $temp );
 	
 	foreach( $temp as $t ){
 		$path[] = $t;
