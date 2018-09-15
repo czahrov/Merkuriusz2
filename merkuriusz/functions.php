@@ -223,7 +223,8 @@ function genOfertyData(){
 function register_my_menus() {
   register_nav_menus(
     array(
-      'menu-znakowanie' => __( 'menu-znakowanie' )
+      'menu-znakowanie' => __( 'menu-znakowanie' ),
+      'menu-kalendarze' => __( 'menu-kalendarze' ),
     )
   );
 }

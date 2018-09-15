@@ -479,10 +479,6 @@ body #fourth-container-content .category.fofcio a::after {
 body #fourth-container-content .category.vine {
   background-color: #ae2225; }
 
-@media (min-width: 992px) {
-  body .main-content-section .dropdown {
-    max-width: 330px; } }
-
 #owl-demo .owl-item img {
   max-width: 100%; }
 
