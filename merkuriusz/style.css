@@ -695,4 +695,12 @@ body #fourth-container-content .category.vine {
 .footer-details .footer-elements {
   line-height: 30px; }
 
+@media (min-width: 992px) {
+  #Nav-container {
+    max-width: 270px; } }
+
+@media (min-width: 1200px) {
+  #Nav-container {
+    max-width: 330px; } }
+
 /*# sourceMappingURL=style.css.map */
