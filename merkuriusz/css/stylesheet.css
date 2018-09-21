@@ -1,7 +1,42 @@
+@font-face{
+	font-family: 'fontBold';
+	src: url(../fonts/TitilliumWeb-Bold.ttf);
+}
+
+@font-face{
+	font-family: 'fontBoldItalic';
+	src: url(../fonts/TitilliumWeb-BoldItalic.ttf);
+}
+
+@font-face{
+	font-family: 'fontExtraLight';
+	src: url(../fonts/TitilliumWeb-ExtraLight.ttf);
+}
+
+@font-face{
+	font-family: 'fontItalic';
+	src: url(../fonts/TitilliumWeb-Italic.ttf);
+}
+
+@font-face{
+	font-family: 'fontLight';
+	src: url(../fonts/TitilliumWeb-Light.ttf);
+}
+
+@font-face{
+	font-family: 'fontLightItalic';
+	src: url(../fonts/TitilliumWeb-LightItalic.ttf);
+}
+
+@font-face{
+	font-family: 'fontRegular';
+	src: url(../fonts/TitilliumWeb-Regular.ttf);
+}
+
 body
 {
     margin:0px;
-    font-family:'metropolis','Times New Roman', serif;;
+    font-family: 'fontRegular', 'metropolis','Times New Roman', serif;
 }
 
 .topHeader

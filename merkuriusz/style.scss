@@ -50,12 +50,10 @@ $generator:(
 @each $name, $value in $generator{
 	.font-#{$name}{
 		color: $value;
-		
 	}
 	
 	.bg-#{$name}{
 		background-color: $value;
-		
 	}
 	
 }
@@ -672,12 +670,13 @@ body{
 				margin-bottom: -1px;
 				
 				.title{
-					padding: 16px 20px;
-					font-size: 18px;
-					line-height: 30px;
-					border: solid 1px #e8e8e8;
+					padding: 16px 20px 16px 60px;
 					transition-property: color, background;
 					transition: .3s linear;
+					font-size: 18px;
+					font-family: fontBold;
+					line-height: 30px;
+					border: solid 1px #e8e8e8;
 					
 					&:hover{
 						text-decoration: none;
@@ -727,8 +726,50 @@ body{
 					
 				}
 				
+				&.img{
+					background-size: contain;
+					background-repeat: no-repeat;
+					background-position: center;
+					
+					a{
+						opacity: 0;
+					}
+					
+				}
+				
+				&.shop_anda{
+					// background-image: url('media/ikony/cool anda.png'), linear-gradient( 0deg, #115dc5, #dadfe6 );
+					
+				}
+				
+				&.shop_asg{
+					// background-image: url('media/ikony/blue collection.png'), linear-gradient( 0deg, #115dc5, #dadfe6 );
+					
+				}
+				
 				&.shop_axp{
-					background-color: #ae2225;
+					// background-image: url('media/ikony/voyager_white.png'), linear-gradient( 0deg, #115dc5, #dadfe6 );
+					
+				}
+				
+				&.shop_axp_fofcio{
+					// background-image: url('media/ikony/fofcio.png'), linear-gradient( 0deg, #115dc5, #dadfe6 );
+					
+				}
+				
+				&.shop_axp_vine{
+					// background-image: url('media/ikony/voyager vine club_white.png'), linear-gradient( 0deg, #115dc5, #dadfe6 );
+					
+				}
+				
+				&.shop_axp_xd{
+					// background-image: url('media/ikony/voyager xd_white.png'), linear-gradient( 0deg, #115dc5, #dadfe6 );
+					
+				}
+				
+				&.shop_eg{
+					// background-image: url('media/ikony/easy gifts.png'), linear-gradient( 0deg, #115dc5, #dadfe6 );
+					
 				}
 				
 				&.shop_jg{
@@ -782,28 +823,35 @@ body{
 		
 		.category{
 			
-			&.victorinox{
-				background-color: #e40b0e;
-				color: #fff;
+			a{
+				position: relative;
+				background:{
+					size: auto 80%;
+					position: 10px 50%;
+					position: contain;
+					repeat: no-repeat;
+				};
+				
+				&::before{
+					content: '';
+					position: absolute;
+					padding: 5px;
+					top: 0;
+					left: 0;
+					bottom: 0;
+					width: 60px;
+					background:{
+						size: contain;
+						position: center;
+						repeat: no-repeat;
+						clip: content-box;
+						origin: content-box;
+					};
+				}
 				
 			}
 			
-			&.wenger{
-				background-color: #000;
-				color: #fff;
-			}
-			
-			&.markowa, 
-			&.bank,
-			&.pendrive,
-			&.silicon,
-			&.smartwatch{
-				background-color: #260d42;
-				color: #fff;
-			}
-			
 			&.vip{
-				background-color: #e7b82d;
 				
 				a{
 					
@@ -830,7 +878,6 @@ body{
 			}
 			
 			&.cofee{
-				background-color: hsla(20, 70%, 35%, 1);
 				
 				a{
 					
@@ -898,6 +945,273 @@ body{
 			&.vine{
 				background-color: #ae2225;
 				a{
+					
+				}
+				
+			}
+			
+		}
+		
+		&.easygifts{
+			
+			$full:(
+				aladdin__stanley: aladdin,
+				czapki_cofee: cofee,
+				elektronika_markowa: markowe,
+				icewatch: 'ice watch',
+				tucano: 'tucano',
+				schwarzwolf: schwarzwolf,
+				silicon_power: 'silicon power',
+				victorinox: victorinox,
+				wenger: wenger,
+			);
+			
+			$icons:(
+				biuro_i_akcesoria_biurowe: spinacz,
+				breloki_akrylowe: brelok,
+				czas_i_elektronika: 'czas i elektronika',
+				długopisy_z_grawerem_za_10_groszy: pióro,
+				dodatki: dymek,
+				dom: pokój,
+				dyski: dysk,
+				easy_siesta__impacto: drink,
+				gadżety_świąteczne: bombki,
+				import: statek,
+				kolekcja_vip: vip,
+				materiały_piśmiennicze: długopis,
+				mobile: mobile,
+				narzędzia: narzędzia,
+				new_season_new_gifts: 'nowy sezon',
+				odpoczynek: sport,
+				opakowania: pudło,
+				pendrivey: pendrive,
+				pinsy: agrafka,
+				podróże: glob,
+				power_banki: 'power bank',
+				różne: dymek,
+				selfie_sticki: 'selfie stick',
+				sety: plus,
+				smart_cube: 'smart cube',
+				smartwatche: smartwatch,
+				torby: torby,
+				torby_by_jassz: torby,
+				uroda: lusterko,
+				victorinox_altmont_-_plecaki_i_torby: victorinox,
+				victorinox_delemont_collection: victorinox,
+				victorinox_lifestyle_-_akcesoria_podróżne: victorinox,
+				wyprzedaż: wyprzedaż,
+				
+			);
+			
+			@each $class, $img in $full{
+				.#{$class} a{
+					background-image: url('media/ikony/#{$img}.png');
+					font-size: 0 !important;
+					
+				}
+				
+			}
+			
+			@each $class, $img in $icons{
+				.#{$class} a::before{
+					background-image: url('media/ikony/#{$img}.png');
+					
+				}
+				
+			}
+			
+		}
+		
+		&.asgard{
+			
+			$full:(
+				
+			);
+			
+			$icons:(
+				biuro_i_praca: agrafka,
+				breloki_i_smycze: brelok,
+				do_pisania: długopis,
+				elektronika: usb,
+				jedzenie_i_picie: talerz,
+				narzędzia_i_odblaski: narzędzia,
+				oferta_świąteczna: bombki,
+				sport_i_wypoczynek: sport,
+				torby_i_parasole: torby,
+				
+			);
+			
+			@each $class, $img in $full{
+				.#{$class} a{
+					background-image: url('media/ikony/#{$img}.png');
+					font-size: 0 !important;
+					
+				}
+				
+			}
+			
+			@each $class, $img in $icons{
+				.#{$class} a::before{
+					background-image: url('media/ikony/#{$img}.png');
+					
+				}
+				
+			}
+			
+		}
+		
+		&.axpol{
+			
+			$full:(
+				moleskine: moleskine,
+				Vine_Club: 'voyager vine club',
+				voyager_plus: 'voyager plus',
+				Voyager_XD: 'voyager xd',
+				
+			);
+			
+			$icons:(
+				świąteczne: bombki,
+				biuro: spinacz,
+				breloki: brelok,
+				budowlane: ściana,
+				do_picia: kubki,
+				do_pisania: długopis,
+				dom: pokój,
+				elektronika: usb,
+				fofcio_promo_toys: miś,
+				Inne: dymek,
+				kolekcja_vip: vip,
+				narzędzia: narzędzia,
+				nowość: nowość,
+				parasole_i_peleryny: parasol,
+				podróż: glob,
+				rozrywka_i_szkoła: samolocik,
+				sport: 'sport i rekreacja',
+				tekstylia: ubranie,
+				torby_i_plecaki: torby,
+				wielkanoc: pisanka,
+				wypoczynek: sport,
+				
+			);
+			
+			@each $class, $img in $full{
+				.#{$class} a{
+					background-image: url('media/ikony/#{$img}.png');
+					font-size: 0 !important;
+					
+				}
+				
+			}
+			
+			@each $class, $img in $icons{
+				.#{$class} a::before{
+					background-image: url('media/ikony/#{$img}.png');
+					
+				}
+				
+			}
+			
+		}
+		
+		&.inspirion{
+			
+			$full:(
+				
+			);
+			
+			$icons:(
+				breloki: brelok,
+				czapki: czapka,
+				czas_i_pogoda: zegar,
+				dla_dzieci: dzieci,
+				do_domu_i_kuchni: pokój,
+				drobiazgi: dymek,
+				elektronika: usb,
+				galanteria_podróżna: glob,
+				gry: sport,
+				kosmetyka: lusterko,
+				narzędzia_i_hobby: narzędzia,
+				parasole: parasol,
+				rekreacja_i_piknik: kosz,
+				torby_i_plecaki: torby,
+				ubrania: ubranie,
+				wszystko_do_biura: spinacz,
+				
+			);
+			
+			@each $class, $img in $full{
+				.#{$class} a{
+					background-image: url('media/ikony/#{$img}.png');
+					font-size: 0 !important;
+					
+				}
+				
+			}
+			
+			@each $class, $img in $icons{
+				.#{$class} a::before{
+					background-image: url('media/ikony/#{$img}.png');
+					
+				}
+				
+			}
+			
+		}
+		
+		&.macma{
+			
+			$full:(
+				cofee: cofee,
+				crisma: crisma,
+				ferraghini: ferraghini,
+				mark_twain: 'mark twain',
+				schwarzwolf: schwarzwolf,
+				
+			);
+			
+			$icons:(
+				and_more: dymek,
+				artykuły_biurowe: spinacz,
+				bestsellery: wstążka,
+				boże_narodzenie: bombki,
+				breloki_i_odznaki: brelok,
+				długopisy_i_zestawy_piśmienne: długopis,
+				długopisy_z_grawerem_za_10_gr: pióro,
+				dom_i_wyposażenie_wnętrz: pokój,
+				elektronika_i_zegary: 'czas i elektronika',
+				elektronika_markowa: markowe_black,
+				katalog_świąteczny: katalog,
+				kolekcja_vip: vip,
+				kosmetyki_i_pielęgnacja: lusterko,
+				kubki_reklamowe: kubki,
+				latarki_i_narzędzia: narzędzia,
+				lubiana_i_karolina: 'lubiana i karolina',
+				nowość: nowość,
+				odzież_reklamowa: ubranie,
+				pamięci_usb: pendrive,
+				parasole_i_płaszcze: parasol,
+				podróże_i_turystyka: glob,
+				power_banki: 'power bank',
+				skrzynki_i_akcesoria_barowe: bar,
+				smile_hand: ręka,
+				sport_i_rekreacja: sport,
+				torby_worki_plecaki: torby,
+				
+			);
+			
+			@each $class, $img in $full{
+				.#{$class} a{
+					background-image: url('media/ikony/#{$img}.png');
+					font-size: 0 !important;
+					
+				}
+				
+			}
+			
+			@each $class, $img in $icons{
+				.#{$class} a::before{
+					background-image: url('media/ikony/#{$img}.png');
 					
 				}
 				

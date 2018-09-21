@@ -6,7 +6,7 @@ class AXPOL extends XMLAbstract{
 		if( mb_stripos( $cat_name, 'wine club' ) !== false ){
 			$cat_name = 'Vine Club';
 		}
-		elseif( mb_stripos( $cat_name, 'voyager xd' ) !== false ){
+		elseif( stripos( (string)$item->CodeERP, 'P' ) === 0 ){
 			$cat_name = 'Voyager XD';
 		}
 		elseif( mb_stripos( $cat_name, 'wyprzedaż' ) !== false ){

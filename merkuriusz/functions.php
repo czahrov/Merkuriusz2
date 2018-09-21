@@ -93,57 +93,58 @@ function getProduct( $code = null ){
 
 function genMenu(){
 	$menu = array(
-		'Easy Gifts' => array(
-			'url' => home_url("sklep/?nazwa=easygifts"),
-			'class' => 'shop_eg',
-		),
-		'Jaguar Gift' => array(
-			'url' => home_url("sklep/?nazwa=jaguargift"),
-			'class' => 'shop_jg',
-		),
-		'Falk&Ross' => array(
-			'url' => home_url("sklep/?nazwa=falkross"),
-			'class' => 'shop_fr',
+		'Anda' => array(
+			'url' => home_url("sklep/?nazwa=anda"),
+			'class' => 'shop_and',
 		),
 		'Asgard' => array(
 			'url' => home_url("sklep/?nazwa=asgard"),
 			'class' => 'shop_asg',
 		),
+		'Axpol' => array(
+			'url' => home_url("sklep/?nazwa=axpol"),
+			'class' => 'shop_axp',
+		),
+		'Axpol Fofcio Promo Toys' => array(
+			'url' => home_url("kategoria/?dostawca=axpol&nazwa=fofcio promo toys"),
+			'class' => 'shop_axp_fofcio',
+		),
+		'Axpol Vine Club' => array(
+			'url' => home_url("kategoria/?dostawca=axpol&nazwa=vine club"),
+			'class' => 'shop_axp_vine',
+		),
+		'Axpol XD Prestiż' => array(
+			'url' => home_url("kategoria/?dostawca=axpol&nazwa=voyager xd"),
+			'class' => 'shop_axp_xd',
+		),
+		'Easy Gifts' => array(
+			'url' => home_url("sklep/?nazwa=easygifts"),
+			'class' => 'shop_eg',
+		),
+		'Falk&Ross' => array(
+			'url' => home_url("sklep/?nazwa=falkross"),
+			'class' => 'shop_fr',
+		),
 		'Inspirion' => array(
 			'url' => home_url("sklep/?nazwa=inspirion"),
 			'class' => 'shop_ins',
 		),
-		'PAR' => array(
-			'url' => home_url("sklep/?nazwa=par"),
-			'class' => 'shop_par',
+		'Jaguar Gift' => array(
+			'url' => home_url("sklep/?nazwa=jaguargift"),
+			'class' => 'shop_jg',
 		),
 		'Macma' => array(
 			'url' => home_url("sklep/?nazwa=macma"),
 			'class' => 'shop_mcm',
 		),
-		'Axpol' => array(
-			'url' => home_url("sklep/?nazwa=axpol"),
-			'class' => 'shop_axp',
+		'PAR' => array(
+			'url' => home_url("sklep/?nazwa=par"),
+			'class' => 'shop_par',
 		),
-		'Anda' => array(
-			'url' => home_url("sklep/?nazwa=anda"),
-			'class' => 'shop_and',
-		),
-		'Axpol Fofcio Promo Toys' => array(
-			'url' => home_url("kategoria/?dostawca=axpol&nazwa=fofcio promo toys"),
-			'class' => 'shop_axp',
-		),
-		'Axpol XD Prestiż' => array(
-			'url' => home_url("kategoria/?dostawca=axpol&nazwa=voyager xd"),
-			'class' => 'shop_axp',
-		),
-		'Axpol Vine Club' => array(
-			'url' => home_url("kategoria/?dostawca=axpol&nazwa=vine club"),
-			'class' => 'shop_axp',
-		),
+		
 	);
 	
-	ksort( $menu );
+	// ksort( $menu );
 	
 	// $menu[] = 'Inne produkty';
 	
@@ -638,5 +639,11 @@ function newsletter(){
 	}
 	
 	return $news;
+}
+
+function slug( $name ){
+	$find = array( '/\s/', '/&|!|\/|\+|\.|,/' );
+	$replace = array( '_', '' );
+	return preg_replace( $find, $replace, $name );
 }
 

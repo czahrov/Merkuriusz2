@@ -1,5 +1,11 @@
 <?php
 class EASYGIFTS extends XMLAbstract{
+	private function _priceMod( $price ){
+		$marża = 0.40;
+		// return ( (float)$price * -1 ) / ( $marża - 1 );
+		return $price;
+		
+	}
 	
 	// filtrowanie kategorii
 	protected function _categoryFilter( &$cat_name, &$subcat_name, $item ){
@@ -30,8 +36,10 @@ class EASYGIFTS extends XMLAbstract{
 			}
 			
 			// parsowanie danych z XML
-			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'products' ] ) );
-			foreach( $XML->children() as $num => $item ){
+			$xml_read = file_get_contents( __DIR__ . "/DND/" . basename( $this->_sources[ 'products' ] ) );
+			$xml_read = str_replace( '&', '&amp;', $xml_read );
+			$XML = simplexml_load_string( $xml_read );
+			foreach( $XML->product as $num => $item ){
 				$marking_a = array();
 				if( $item->markgroups->count() ) foreach( $item->markgroups->markgroup as $child ){
 					$marking_a[] = (string)$child->name;
@@ -53,12 +61,8 @@ class EASYGIFTS extends XMLAbstract{
 				$price = $item->baseinfo->price;
 				$price_promo = $item->baseinfo->price_promotion;
 				$price_sellout = $item->baseinfo->price_sellout;
-				if( (int)$item->additional_offer === 1 ){
-					$netto = 0;
-				}
-				else{
-					$netto = (float)str_replace( ",", ".", empty( $s = $price_sellout )?( empty( $p = $price_promo )?( $price ):( $p ) ):( $s ) );
-				}
+				$netto = (float)str_replace( ",", ".", empty( $s = $price_sellout )?( empty( $p = $price_promo )?( $price ):( $p ) ):( $s ) );
+				// if( (int)$item->additional_offer === 1 ) $netto = $this->_priceMod( $netto );
 				$brutto = $netto * ( 1 + $this->_vat );
 				
 				$product = array(
@@ -87,6 +91,9 @@ class EASYGIFTS extends XMLAbstract{
 					'sale' => (float)$item->baseinfo->price_sellout > 0?( 1 ):( 0 ),
 					'data' => $dt,
 				);
+				
+				// print_r( $product );
+				// return;
 				
 				if( ( $t = $this->_addItem( $product ) ) !== true ) $this->_log[] = $t;
 				

@@ -93,7 +93,7 @@ ORDER BY cat_name ASC";
 					kategorie
 				</span>
 			</h1>
-			<div id="fourth-container-content" class="row">
+			<div id="fourth-container-content" class="row <?php echo slug( $shop ); ?>">
 				<?php
 					$grid = array();
 					
@@ -105,20 +105,24 @@ ORDER BY cat_name ASC";
 					foreach( $grid as $cat => $subcats ):
 					/* ukrywane kategorie */
 					if( in_array( $cat, array( 'cacharel', 'cerruti 1881', 'christian lacroix', 'jean-louis scherrer', 'nina ricci', 'ungaro', 'Power of brands - oferta specjalna 24h', 'power of brands – oferta specjalna 24h', 'wenger - bagaże biznesowe i akcesoria podróżne', 'wenger - bestsellery' ) ) ) continue;
+					
 					/* dodawanie klas do kategorii */
-					$class = "";
+					/* $class = "";
 					$keys = array( 'victorinox', 'wenger', 'markowa', 'vip', 'bank', 'pendrive', 'smartwatch', 'silicon', 'aladdin', 'cofee', 'tucano', 'schwarzwolf', 'vine', 'moleskine', 'fofcio' );
 					foreach( $keys as $key ){
 						if( stripos( $cat, $key ) !== false ){
 							$class = $key;
 							break;
 						}
-					}
+					} */
 					
+					$cat = preg_replace( '/([^&])amp;/', '$1&', $cat );
 				?>
-				<div class='category <?php echo $class; ?>'>
+				<div class='category <?php echo slug( $cat ); ?>'>
 					<a class='title col-12 d-flex align-items-center' href='<?php echo home_url("kategoria/?dostawca={$shop}&nazwa={$cat}"); ?>'>
-						<?php echo mb_convert_case( $cat, MB_CASE_TITLE ); ?>
+						<?php
+							echo mb_convert_case( $cat, MB_CASE_TITLE );
+						?>
 					</a>
 				</div>
 				<?php endforeach; ?>

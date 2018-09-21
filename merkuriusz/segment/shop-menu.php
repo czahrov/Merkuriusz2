@@ -3,7 +3,7 @@
 		<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
 		<img src="<?php echo get_template_directory_uri(); ?>/media/menubar.png"> &nbsp 
 		<span class='title'>
-			Sklep gadżety reklamowe
+			<small>Sklep</small> gadżety reklamowe
 		</span>
 		</button>
 		<?php genMenu(); ?>
