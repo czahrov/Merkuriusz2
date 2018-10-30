@@ -95,7 +95,7 @@ function genMenu(){
 	$menu = array(
 		'Anda' => array(
 			'url' => home_url("sklep/?nazwa=anda"),
-			'class' => 'shop_and',
+			'class' => 'shop_anda',
 		),
 		'Asgard' => array(
 			'url' => home_url("sklep/?nazwa=asgard"),
@@ -116,6 +116,10 @@ function genMenu(){
 		'Axpol XD Prestiż' => array(
 			'url' => home_url("kategoria/?dostawca=axpol&nazwa=voyager xd"),
 			'class' => 'shop_axp_xd',
+		),
+		'Axpol plus' => array(
+			'url' => home_url("kategoria/?dostawca=axpol&nazwa=voyager plus"),
+			'class' => 'shop_axp_plus',
 		),
 		'Easy Gifts' => array(
 			'url' => home_url("sklep/?nazwa=easygifts"),

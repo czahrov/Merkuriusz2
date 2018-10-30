@@ -720,6 +720,12 @@ body{
 		.dropdown-menu{
 			
 			li[role=presentation]{
+				background:{
+					position: center left;
+					size: contain;
+					repeat: no-repeat;
+				};
+				min-height: 60px;
 				
 				a{
 					background-color: transparent;
@@ -737,38 +743,55 @@ body{
 					
 				}
 				
-				&.shop_anda{
-					// background-image: url('media/ikony/cool anda.png'), linear-gradient( 0deg, #115dc5, #dadfe6 );
+				$full:(
+					shop_anda: logo_anda,
+					shop_asg: logo_bluecollection,
+					shop_axp: logo_voyager,
+					shop_axp_fofcio: logo_fofcio,
+					shop_axp_vine: logo_vineclub,
+					shop_axp_xd: logo_voyagerxd,
+					shop_axp_plus: logo_voyager_plus,
+					shop_eg: logo_easygifts,
+					shop_fr: logo_falkross,
+					shop_ins: logo_tops,
+					shop_jg: logo_jaguargift,
+					shop_mcm: logo_macma,
+					shop_par: logo_royaldesign,
+					
+				);
+				
+				$icons:(
+					
+				);
+				
+				@each $class, $img in $full{
+					&.#{$class}{
+						position: relative;
+						padding: 16px 20px;
+						background:{
+							image: url('media/logo/#{$img}.png');
+							origin: content-box;
+						};
+						
+						a{
+							position: absolute;
+							top: 0;
+							left: 0;
+							right: 0;
+							bottom: 0;
+							font-size: 0 !important;
+							
+						}
+						
+					}
 					
 				}
 				
-				&.shop_asg{
-					// background-image: url('media/ikony/blue collection.png'), linear-gradient( 0deg, #115dc5, #dadfe6 );
-					
-				}
-				
-				&.shop_axp{
-					// background-image: url('media/ikony/voyager_white.png'), linear-gradient( 0deg, #115dc5, #dadfe6 );
-					
-				}
-				
-				&.shop_axp_fofcio{
-					// background-image: url('media/ikony/fofcio.png'), linear-gradient( 0deg, #115dc5, #dadfe6 );
-					
-				}
-				
-				&.shop_axp_vine{
-					// background-image: url('media/ikony/voyager vine club_white.png'), linear-gradient( 0deg, #115dc5, #dadfe6 );
-					
-				}
-				
-				&.shop_axp_xd{
-					// background-image: url('media/ikony/voyager xd_white.png'), linear-gradient( 0deg, #115dc5, #dadfe6 );
-					
-				}
-				
-				&.shop_eg{
-					// background-image: url('media/ikony/easy gifts.png'), linear-gradient( 0deg, #115dc5, #dadfe6 );
+				@each $class, $img in $icons{
+					.#{$class} a::before{
+						background-image: url('media/ikony/#{$img}.png');
+						
+					}
 					
 				}
 				
@@ -785,14 +808,14 @@ body{
 					
 				}
 				
-				&:hover{
+				/* &:hover{
 					background-color: #2a2d3a;
 					
 					a{
 						background-color: transparent;
 					}
 					
-				}
+				} */
 				
 			}
 			
@@ -828,7 +851,7 @@ body{
 				background:{
 					size: auto 80%;
 					position: 10px 50%;
-					position: contain;
+					size: contain;
 					repeat: no-repeat;
 				};
 				
@@ -1167,6 +1190,8 @@ body{
 				ferraghini: ferraghini,
 				mark_twain: 'mark twain',
 				schwarzwolf: schwarzwolf,
+				devia: devia,
+				tescoma: tescoma,
 				
 			);
 			
@@ -1198,6 +1223,390 @@ body{
 				sport_i_rekreacja: sport,
 				torby_worki_plecaki: torby,
 				
+			);
+			
+			@each $class, $img in $full{
+				.#{$class} a{
+					background-image: url('media/ikony/#{$img}.png');
+					font-size: 0 !important;
+					
+				}
+				
+			}
+			
+			@each $class, $img in $icons{
+				.#{$class} a::before{
+					background-image: url('media/ikony/#{$img}.png');
+					
+				}
+				
+			}
+			
+		}
+		
+		&.anda{
+			
+			$full:(
+				// cofee: cofee,
+			);
+			
+			$icons:(
+				ładowarki_usb: ladowarka_usb,
+				ładowarki_usb_samochodowe: ladowarka_samochodowa,
+				ściereczki: sciereczka,
+				świece_i_kadzidełka: swieca,
+				akcesoria_łazienkowe: wanna,
+				akcesoria_bbq: grill,
+				akcesoria_coffe__tea: kawa,
+				akcesoria_dla_biegaczy: biegacz,
+				akcesoria_do_telefonów_i_tabletów: mobile,
+				akcesoria_events__sport: golf,
+				akcesoria_koktajlowe: bar,
+				akcesoria_komputerowe: pc,
+				akcesoria_kuchenne: czapka_kucharska,
+				akcesoria_piłkarskie: piłka,
+				akcesoria_plażowe: leżak_plażowy,
+				akcesoria_podróżne: glob,
+				akcesoria_rowerowe: rower,
+				akcesoria_samochodowe: samochód,
+				aluminiowe_sportowe_butelki: bidony,
+				antystresy: antystres,
+				Be_Creative: magia,
+				bezrękawniki: bezrękawnik,
+				biżuteria_i_bransoletki: biżuteria,
+				bluzy: bluza,
+				butelki_i_kubki_termiczne: termosy,
+				chusty_i_krawaty: krawat,
+				czapki_baseballowe: czapka,
+				czapki_zimowe: czapka_zimowa,
+				długopisy_drewniane_i_bambusowe: długopisy_drewniane,
+				długopisy_ekologiczne: długopisy_ekologiczne,
+				długopisy_i_ołówki_dla_dzieci: długopisy_dla_dzieci,
+				długopisy_metalowe: długopisy,
+				długopisy_plastikowe: długopisy,
+				długopisy_wielokolorowe: długopisy,
+				dekoracje: dekoracja,
+				deski_do_krojenia: deska_do_krojenia,
+				drewniane_breloki: brelok,
+				etui_i_uchwyty_do_telefonów: mobile,
+				fartuchy: fartuch,
+				foldery_na_tablety: mobile,
+				futerały: pudło,
+				głośniki: głośnik,
+				gumki_i_ostrzynki: gumki_i_ostrzynki,
+				kable_usb: usb,
+				kalkulatory: kalkulator,
+				kapelusze: kapelusz,
+				klapki: japonki,
+				koce_polarowe: koc,
+				kosmetyczki: kosmetyczka,
+				koszule_i_koszulki_polo: polo,
+				kredki: kredki,
+				kubki: kubki,
+				kubki_termiczne: termosy,
+				kubki_filiżanki_i_szklanki: kubek_i_filiżanka,
+				kurtki: kurtka,
+				latarki: latarka,
+				linijki_i_zakładki: linijka,
+				lornetki_i_kompasy: lornetka,
+				lusterka_i_grzebienie: lusterko,
+				młynki: młynek,
+				magnesy_na_lodówkę: magnes,
+				metalowe_breloki: brelok,
+				miary: miarka,
+				minutniki: klepsydra,
+				monety_do_wózków_zakupowych: brelok_zakupowy,
+				myszki_i_podkładki: podkładka_pod_mysz,
+				nadmuchiwane: powietrze,
+				noże_i_narzędzia: narzędzia,
+				notatniki_i_kartki_samoprzylepne: karteczki,
+				notesy: zeszyt,
+				ołówki: ołówek,
+				ołówki_automatyczne: ołówek_automatyczny,
+				ołówki_grafitowe: ołówek,
+				odświeżacze_samochodowe: zawieszka,
+				odzież_sportowa: koszulka_piłkarska,
+				ogrzewacze: kaloryfer,
+				okulary_przeciwsłoneczne: okulary_przeciwsłoneczne,
+				okulary_vr_i_zestawy_słuchawkowe: vr,
+				opaski_na_oczy_i_zatyczki_do_uszu: zatyczki,
+				osłony_przeciwsłoneczne: osłony_przeciwsłoneczne,
+				otwieracze_do_butelek: otwieracz,
+				outdoor_i_piesze_wycieczki: outdoor,
+				płaszcze_przeciwdeszczowe: płaszcz_przeciwdeszczowy,
+				papierowe_torby_na_zakupy: torba_papierowa,
+				parasole_pełnowymiarowe: parasol,
+				parasole_składane: parasol,
+				paski: pasek,
+				piłki_plażowe: piłka_plażowa,
+				plastikowe_breloki: brelok,
+				plastikowe_sportowe_butelki: bidony,
+				plecaki: plecak,
+				pluszaki: pluszak,
+				podkładki: spinacz2,
+				podstawki: talerzyki,
+				poduszki_i_materace: poduszki_dmuchane,
+				poncza: płaszcz_przeciwdeszczowy,
+				portfele_i_portmonetki: portfel,
+				power_banki: 'power bank',
+				power_banki_i_ładowarki_usb: 'power bank',
+				produkty_dla_zwierząt: łapa,
+				produkty_do_dopingu: kibice,
+				produkty_fluoroscencyjne: kamizelka_odblaskowa,
+				produkty_medyczne: stetoskop,
+				przybory_stołowe: stołowe,
+				przywieszki_i_paski_bagażowe: bagaż,
+				pudełka_śniadaniowe_i_pojemniki: launchbox,
+				pudełka_na_tabletki: pudełko_na_tabletki,
+				puzzle: puzzle,
+				ramki: ramka,
+				ręczniki_frotté: ręcznik,
+				ręczniki_z_mikrofibry: ręcznik,
+				rękawice_kuchenne: rękawica_kuchenna,
+				rękawiczki_i_rysiki_do_ekranów_dotykowych: touchpen,
+				rośliny: roślina,
+				rozgałęźnik_uniwersalny: adapter,
+				rysowania_i_kolorowanie: kredki,
+				słuchawki: słuchawki,
+				słuchawki_douszne: słuchawki_douszne,
+				selfie_sticki_i_mobilna_fotografia: 'selfie stick',
+				składane_torby_na_zakupy: torby,
+				skarbonki: skarbonka,
+				skrobaczki_do_szyb: skrobaczka,
+				smartwatche: smartwatch,
+				smycze_i_uchwyty: identyfikator,
+				stacje_pogodowe: termometr,
+				stojaki_na_długopisy: stojak_na_długopisy,
+				szaliki_i_rękawiczki: szalik_i_rękawiczki,
+				szczoteczki_do_zębów: szczoteczka_do_zębów,
+				szklane_trofea: trofeum,
+				szklanki: szklanka,
+				t-shirty_z_długim_rękawem: długi_rękaw,
+				t-shirty_z_krótkim_rękawem: t-shirt,
+				teczki_na_dokumenty: teczka,
+				torby_na_kółkach: walizki,
+				torby_na_laptopa_i_dokumenty: aktówka,
+				torby_na_plażę: torba_plażowa,
+				torby_na_ramię: torba,
+				torby_na_zakupy: torby,
+				torby_podróżne: torbopas,
+				torby_sportowe: torba_sportowa,
+				torby_termiczne: torby_termiczne,
+				torby_ze_sznurkiem: worek,
+				uchwyty_na_karty_kredytowe: karty_kredytowe,
+				uchywyty_samochodowe: uchwyt_samochodowy,
+				usb_hub: usb_hub,
+				usb_pendrive: pendrive,
+				wagi_bagażowe: waga_bagażowa,
+				wiatraki: wentylator,
+				wizytowniki: karty_kredytowe,
+				wodoodporne_pokrowce_na_telefony: wodoodporne,
+				zabawki: zabawki,
+				zabawki_do_kolorowania: zabawki_do_kolorowania,
+				zabawki_plażowe: drink,
+				zaciski_na_banknoty: banknoty,
+				zakreślacze: zakreślacz,
+				zapalniczki: zapalniczka,
+				zegarki: zegarek,
+				zegary: zegar,
+				zegary_ścienne: zegar,
+				zestawy_do_manicure__makeup: kosmetyki,
+				zestawy_do_wina_i_akcesoria: wino,
+				zestawy_piśmiennicze: długopis,
+			);
+			
+			@each $class, $img in $full{
+				.#{$class} a{
+					background-image: url('media/ikony/#{$img}.png');
+					font-size: 0 !important;
+					
+				}
+				
+			}
+			
+			@each $class, $img in $icons{
+				.#{$class} a::before{
+					background-image: url('media/ikony/#{$img}.png');
+					
+				}
+				
+			}
+			
+		}
+		
+		&.par{
+			
+			$full:(
+				// cofee: cofee,
+			);
+			
+			$icons:(
+				akcesoria_komputerowe_i_smartfonowe: mobile,
+				akcesoria_samochodowe: samochód,
+				artykuły_świąteczne: bombki,
+				bidony: bidony,
+				breloki_antystresowe: brelok_antystres,
+				czapki: czapka,
+				długopisy_aluminiowe: długopisy,
+				długopisy_eco: długopisy_ekologiczne,
+				długopisy_metalowe: długopisy,
+				długopisy_plastikowe: długopisy,
+				dla_fanów: kibice,
+				do_łazienki: wanna,
+				do_kuchni: czapka_kucharska,
+				etui: pudło,
+				etui_na_laptopa_i_smartfon: pudło,
+				gry: zabawki,
+				izotermiczne: termosy,
+				kosze: koszyk_sklepowy,
+				kubki: kubki,
+				latarki: latarka,
+				leak_proof: nieprzemakalne,
+				metalowe_aluminiowe: brelok,
+				miarki_ołówki_stolarskie: miarka,
+				na_biurko: spinacz,
+				niezbędne_w_podróży: glob,
+				notesy_notatniki: notesy,
+				ołówki: ołówek,
+				odblaski: kamizelka_odblaskowa,
+				opaski_do_r08394: kubek,
+				ozdoby_domowe: swieca,
+				parasole: parasol,
+				piłki_antystresowe: antystres,
+				pióra_wieczne_i_kulkowe: pióro2,
+				plecaki: plecak,
+				pluszaki_i_maskotki: pluszak,
+				Pozostałe: antystres,
+				rowerowe: rower,
+				szkoła_i_dom: samolocik,
+				teczki_i_torby_na_dokumenty: teczka2,
+				teczki_konferencyjne: teczka,
+				termosy: termosy,
+				torby_i_plecaki_na_laptopa: aktówka,
+				torby_na_prezenty: torba_papierowa,
+				torby_na_zakupy: torby,
+				torby_podróżne: torba2,
+				wizytowniki: karty_kredytowe,
+				worki_na_prezenty: worek2,
+				z_żetonem_z_otwieraczem: brelok,
+				z_miarką_latarką_diodą: brelok,
+				zegary_i_kalkulatory: zegar_i_kalkulator,
+				zestawy_do_wina: wino,
+				zestawy_narzędzi_scyzoryki: narzędzia,
+				zestawy_piśmiennicze: długopis,
+			);
+			
+			@each $class, $img in $full{
+				.#{$class} a{
+					background-image: url('media/ikony/#{$img}.png');
+					font-size: 0 !important;
+					
+				}
+				
+			}
+			
+			@each $class, $img in $icons{
+				.#{$class} a::before{
+					background-image: url('media/ikony/#{$img}.png');
+					
+				}
+				
+			}
+			
+		}
+		
+		&.falkross{
+			
+			$full:(
+				// cofee: cofee,
+			);
+			
+			$icons:(
+				bawełna_organiczna: bawełna,
+				bielizna: bielizna,
+				bistro: fartuch,
+				bluzy: bluza_z_kapturem,
+				buty: but_sportowy,
+				czapki_i_akcesoria: czapka,
+				dom_i_wnętrze: ręcznik,
+				kurtki: kurtka,
+				materiały_eksploatacyjne: papier,
+				new: nowość2,
+				odzież_biznesowa: koszula,
+				odzież_dziecięca: dziecięce,
+				odzież_robocza: robocze,
+				odzież_sportowa: koszulka_piłkarska,
+				outlet: outlet,
+				polary: bluza_polarowa,
+				polo: koszula_polo,
+				promocje: promocja,
+				ręczniki_i_szlafroki: ręcznik,
+				reflektierende_und_neon-farben: kamizelka_odblaskowa,
+				softshelle: softshelle,
+				spodnie: spodnie,
+				sublimation: znakowanie,
+				t-shirty: t-shirt,
+				torby: torby,
+				web_exclusives: exclusive,
+				zdrowie_i_uroda: masaż,
+			);
+			
+			@each $class, $img in $full{
+				.#{$class} a{
+					background-image: url('media/ikony/#{$img}.png');
+					font-size: 0 !important;
+					
+				}
+				
+			}
+			
+			@each $class, $img in $icons{
+				.#{$class} a::before{
+					background-image: url('media/ikony/#{$img}.png');
+					
+				}
+				
+			}
+			
+		}
+		
+		&.jaguargift{
+			
+			$full:(
+				// cofee: cofee,
+			);
+			
+			$icons:(
+				breloki: brelok,
+				etui_na_dokumenty_i_karty: karty_kredytowe,
+				etui_na_wizytówki: karty_kredytowe,
+				gifts_of_the_year: prezent,
+				hotele_i_restauracje: restauracja,
+				Inne: dymek,
+				kalendarze: książka,
+				kosmetyczki: kosmetyczka,
+				made_in_poland: polska,
+				materiały_promocyjne: megafon,
+				notesy: zeszyt,
+				nowości: nowość2,
+				opakowania: pudło,
+				organizery: teczka,
+				paski: pasek,
+				piersiówki: piersiówka,
+				plecaki: plecak,
+				portfele: portfel,
+				powerbags: powerbags,
+				produkty_z_filcu: filc,
+				produkty_z_filmami_video: film,
+				promocje: promocja,
+				rfid: rfid,
+				teczki: aktówka,
+				torby: torba,
+				travel: glob,
+				wyprzedaż: wyprzedaż2,
+				zestawy: plus,
+				zestawy_piór: pióra,
+				znakowanie: znakowanie2,
 			);
 			
 			@each $class, $img in $full{
@@ -1697,6 +2106,41 @@ body{
 	
 	@media(min-width: 1200px){
 		max-width: 330px;
+		
+	}
+	
+}
+
+#fb_box
+{
+	position: fixed;
+	top: calc( ( 100vh - 200px )/2 );
+	left: 0;
+	min-height: 200px;
+	transform: translate( -100%, 0 );
+	transition: transform .3s linear;
+	z-index: 500;
+	background-color: #fff;
+	
+	.btn{
+		position: absolute;
+		width: 140px;
+		height: 30px;
+		top: 0;
+		left: 100%;
+		transform-origin: bottom left;
+		transform: translate( 0%, -100% ) rotate( 90deg );
+		background:{
+			position: center;
+			size: cover;
+			repeat: no-repeat;
+			image: url(media/facebook-logo.jpg);
+		};
+		
+	}
+	
+	&:hover{
+		transform: translate( 0, 0 );
 		
 	}
 	

@@ -104,7 +104,7 @@ ORDER BY cat_name ASC";
 					
 					foreach( $grid as $cat => $subcats ):
 					/* ukrywane kategorie */
-					if( in_array( $cat, array( 'cacharel', 'cerruti 1881', 'christian lacroix', 'jean-louis scherrer', 'nina ricci', 'ungaro', 'Power of brands - oferta specjalna 24h', 'power of brands – oferta specjalna 24h', 'wenger - bagaże biznesowe i akcesoria podróżne', 'wenger - bestsellery' ) ) ) continue;
+					if( in_array( $cat, array( 'cacharel', 'cerruti 1881', 'christian lacroix', 'jean-louis scherrer', 'nina ricci', 'ungaro', 'Power of brands - oferta specjalna 24h', 'power of brands – oferta specjalna 24h', 'wenger - bagaże biznesowe i akcesoria podróżne', 'wenger - bestsellery', 'voyager plus', 'Voyager XD' ) ) ) continue;
 					
 					/* dodawanie klas do kategorii */
 					/* $class = "";

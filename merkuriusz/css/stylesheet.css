@@ -188,8 +188,8 @@ body
 }
 .main-content-section .dropdown-menu li:hover,
 .main-content-section .dropdown-menu li:hover a{
-    background-color:#2a2d3a;
-    color:#d5d6d7;
+    /* background-color:#2a2d3a;
+    color:#d5d6d7; */
 }
 .main-content-section .dropdown-menu li:last-child{
     border-bottom: 1px solid #ebebeb !important;
@@ -697,8 +697,8 @@ a.button-show-item{
     border-left:3px solid #36ff36;
 }
 .list-unstyled li:hover{
-    background:#f8f8f8;
-    color:#6c6c6c;
+   /*  background:#f8f8f8;
+    color:#6c6c6c; */
 
 }
 .menu-section li:first-child .green-bar{

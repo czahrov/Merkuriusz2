@@ -44,19 +44,49 @@ $(function(){
 	
 	/* slider - partnerzy */
 	(function(){
+		var itrv;
 		var owl = $("#owl-demo");
-		owl.owlCarousel({
+		owl
+		.on({
+			start: function( e ){
+				$( this ).triggerHandler( 'stop' );
+				itrv = window.setInterval( function(){
+					owl.trigger('owl.next');
+					
+				}, 3000 );
+			},
+			stop: function( e ){
+				window.clearInterval( itrv );
+			},
+			mouseenter: function( e ){
+				owl.triggerHandler( 'stop' );
+			},
+			mouseleave: function( e ){
+				owl.triggerHandler( 'start' );
+			},
+			
+		})
+		.owlCarousel({
+			/* autoplay: true,
+			autoplayHoverPause: true,
+			autoplaySpeed: 1000,
+			autoplayTimeout: 3000, */
+			loop: true,
 			items: 7,
 			itemsDesktop: [1184, 4],
 			itemsDesktopSmall: [976, 3],
 			pagination: false,
 		});
+		
 		$(".next").click(function () {
 			owl.trigger('owl.next');
-		})
+		});
+		
 		$(".prev").click(function () {
 			owl.trigger('owl.prev');
-		})
+		});
+		
+		owl.triggerHandler( 'start' );
 		
 	})();
 	

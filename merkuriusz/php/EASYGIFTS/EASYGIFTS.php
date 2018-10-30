@@ -58,12 +58,14 @@ class EASYGIFTS extends XMLAbstract{
 				}
 				$photos = json_encode( $photo_a );
 				
-				$price = $item->baseinfo->price;
+				/* $price = $item->baseinfo->price;
 				$price_promo = $item->baseinfo->price_promotion;
 				$price_sellout = $item->baseinfo->price_sellout;
 				$netto = (float)str_replace( ",", ".", empty( $s = $price_sellout )?( empty( $p = $price_promo )?( $price ):( $p ) ):( $s ) );
 				// if( (int)$item->additional_offer === 1 ) $netto = $this->_priceMod( $netto );
-				$brutto = $netto * ( 1 + $this->_vat );
+				$brutto = $netto * ( 1 + $this->_vat ); */
+				$netto = 0;
+				$brutto = 0;
 				
 				$product = array(
 					'code' => (string)$item->baseinfo->code_full,
@@ -83,6 +85,8 @@ class EASYGIFTS extends XMLAbstract{
 					'currency' => 'PLN',
 					'netto' => $netto,
 					'brutto' => $brutto,
+					// 'netto' => 0,
+					// 'brutto' => 0,
 					'price_alt' => '',
 					'price_before' => !empty( $price_promo )?( (float)str_replace( ",", ".", $price ) ):( 0 ),
 					'instock' => $stock_a[ (string)$item->baseinfo->code_full ]['num'],

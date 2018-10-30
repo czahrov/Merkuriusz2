@@ -405,24 +405,186 @@ body.shop-page #fourth-container-content {
 body.shop-page #kafelki {
   margin-bottom: 120px; }
 
-body #Nav-container .dropdown-menu li[role=presentation] a {
-  background-color: transparent; }
-
-body #Nav-container .dropdown-menu li[role=presentation].img {
+body #Nav-container .dropdown-menu li[role=presentation] {
+  background-position: center left;
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center; }
-  body #Nav-container .dropdown-menu li[role=presentation].img a {
-    opacity: 0; }
-
-body #Nav-container .dropdown-menu li[role=presentation].shop_jg a::after {
-  content: '- skóra';
-  padding-left: 0.5em; }
-
-body #Nav-container .dropdown-menu li[role=presentation]:hover {
-  background-color: #2a2d3a; }
-  body #Nav-container .dropdown-menu li[role=presentation]:hover a {
+  min-height: 60px;
+  /* &:hover{
+					background-color: #2a2d3a;
+					
+					a{
+						background-color: transparent;
+					}
+					
+				} */ }
+  body #Nav-container .dropdown-menu li[role=presentation] a {
     background-color: transparent; }
+  body #Nav-container .dropdown-menu li[role=presentation].img {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center; }
+    body #Nav-container .dropdown-menu li[role=presentation].img a {
+      opacity: 0; }
+  body #Nav-container .dropdown-menu li[role=presentation].shop_anda {
+    position: relative;
+    padding: 16px 20px;
+    background-image: url("media/logo/logo_anda.png");
+    background-origin: content-box; }
+    body #Nav-container .dropdown-menu li[role=presentation].shop_anda a {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      font-size: 0 !important; }
+  body #Nav-container .dropdown-menu li[role=presentation].shop_asg {
+    position: relative;
+    padding: 16px 20px;
+    background-image: url("media/logo/logo_bluecollection.png");
+    background-origin: content-box; }
+    body #Nav-container .dropdown-menu li[role=presentation].shop_asg a {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      font-size: 0 !important; }
+  body #Nav-container .dropdown-menu li[role=presentation].shop_axp {
+    position: relative;
+    padding: 16px 20px;
+    background-image: url("media/logo/logo_voyager.png");
+    background-origin: content-box; }
+    body #Nav-container .dropdown-menu li[role=presentation].shop_axp a {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      font-size: 0 !important; }
+  body #Nav-container .dropdown-menu li[role=presentation].shop_axp_fofcio {
+    position: relative;
+    padding: 16px 20px;
+    background-image: url("media/logo/logo_fofcio.png");
+    background-origin: content-box; }
+    body #Nav-container .dropdown-menu li[role=presentation].shop_axp_fofcio a {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      font-size: 0 !important; }
+  body #Nav-container .dropdown-menu li[role=presentation].shop_axp_vine {
+    position: relative;
+    padding: 16px 20px;
+    background-image: url("media/logo/logo_vineclub.png");
+    background-origin: content-box; }
+    body #Nav-container .dropdown-menu li[role=presentation].shop_axp_vine a {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      font-size: 0 !important; }
+  body #Nav-container .dropdown-menu li[role=presentation].shop_axp_xd {
+    position: relative;
+    padding: 16px 20px;
+    background-image: url("media/logo/logo_voyagerxd.png");
+    background-origin: content-box; }
+    body #Nav-container .dropdown-menu li[role=presentation].shop_axp_xd a {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      font-size: 0 !important; }
+  body #Nav-container .dropdown-menu li[role=presentation].shop_axp_plus {
+    position: relative;
+    padding: 16px 20px;
+    background-image: url("media/logo/logo_voyager_plus.png");
+    background-origin: content-box; }
+    body #Nav-container .dropdown-menu li[role=presentation].shop_axp_plus a {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      font-size: 0 !important; }
+  body #Nav-container .dropdown-menu li[role=presentation].shop_eg {
+    position: relative;
+    padding: 16px 20px;
+    background-image: url("media/logo/logo_easygifts.png");
+    background-origin: content-box; }
+    body #Nav-container .dropdown-menu li[role=presentation].shop_eg a {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      font-size: 0 !important; }
+  body #Nav-container .dropdown-menu li[role=presentation].shop_fr {
+    position: relative;
+    padding: 16px 20px;
+    background-image: url("media/logo/logo_falkross.png");
+    background-origin: content-box; }
+    body #Nav-container .dropdown-menu li[role=presentation].shop_fr a {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      font-size: 0 !important; }
+  body #Nav-container .dropdown-menu li[role=presentation].shop_ins {
+    position: relative;
+    padding: 16px 20px;
+    background-image: url("media/logo/logo_tops.png");
+    background-origin: content-box; }
+    body #Nav-container .dropdown-menu li[role=presentation].shop_ins a {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      font-size: 0 !important; }
+  body #Nav-container .dropdown-menu li[role=presentation].shop_jg {
+    position: relative;
+    padding: 16px 20px;
+    background-image: url("media/logo/logo_jaguargift.png");
+    background-origin: content-box; }
+    body #Nav-container .dropdown-menu li[role=presentation].shop_jg a {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      font-size: 0 !important; }
+  body #Nav-container .dropdown-menu li[role=presentation].shop_mcm {
+    position: relative;
+    padding: 16px 20px;
+    background-image: url("media/logo/logo_macma.png");
+    background-origin: content-box; }
+    body #Nav-container .dropdown-menu li[role=presentation].shop_mcm a {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      font-size: 0 !important; }
+  body #Nav-container .dropdown-menu li[role=presentation].shop_par {
+    position: relative;
+    padding: 16px 20px;
+    background-image: url("media/logo/logo_royaldesign.png");
+    background-origin: content-box; }
+    body #Nav-container .dropdown-menu li[role=presentation].shop_par a {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      font-size: 0 !important; }
+  body #Nav-container .dropdown-menu li[role=presentation].shop_jg a::after {
+    content: '- skóra';
+    padding-left: 0.5em; }
 
 body #Nav-container .title {
   text-transform: uppercase;
@@ -441,7 +603,7 @@ body #fourth-container-content .category a {
   position: relative;
   background-size: auto 80%;
   background-position: 10px 50%;
-  background-position: contain;
+  background-size: contain;
   background-repeat: no-repeat; }
   body #fourth-container-content .category a::before {
     content: '';
@@ -797,6 +959,14 @@ body #fourth-container-content.macma .schwarzwolf a {
   background-image: url("media/ikony/schwarzwolf.png");
   font-size: 0 !important; }
 
+body #fourth-container-content.macma .devia a {
+  background-image: url("media/ikony/devia.png");
+  font-size: 0 !important; }
+
+body #fourth-container-content.macma .tescoma a {
+  background-image: url("media/ikony/tescoma.png");
+  font-size: 0 !important; }
+
 body #fourth-container-content.macma .and_more a::before {
   background-image: url("media/ikony/dymek.png"); }
 
@@ -874,6 +1044,822 @@ body #fourth-container-content.macma .sport_i_rekreacja a::before {
 
 body #fourth-container-content.macma .torby_worki_plecaki a::before {
   background-image: url("media/ikony/torby.png"); }
+
+body #fourth-container-content.anda .ładowarki_usb a::before {
+  background-image: url("media/ikony/ladowarka_usb.png"); }
+
+body #fourth-container-content.anda .ładowarki_usb_samochodowe a::before {
+  background-image: url("media/ikony/ladowarka_samochodowa.png"); }
+
+body #fourth-container-content.anda .ściereczki a::before {
+  background-image: url("media/ikony/sciereczka.png"); }
+
+body #fourth-container-content.anda .świece_i_kadzidełka a::before {
+  background-image: url("media/ikony/swieca.png"); }
+
+body #fourth-container-content.anda .akcesoria_łazienkowe a::before {
+  background-image: url("media/ikony/wanna.png"); }
+
+body #fourth-container-content.anda .akcesoria_bbq a::before {
+  background-image: url("media/ikony/grill.png"); }
+
+body #fourth-container-content.anda .akcesoria_coffe__tea a::before {
+  background-image: url("media/ikony/kawa.png"); }
+
+body #fourth-container-content.anda .akcesoria_dla_biegaczy a::before {
+  background-image: url("media/ikony/biegacz.png"); }
+
+body #fourth-container-content.anda .akcesoria_do_telefonów_i_tabletów a::before {
+  background-image: url("media/ikony/mobile.png"); }
+
+body #fourth-container-content.anda .akcesoria_events__sport a::before {
+  background-image: url("media/ikony/golf.png"); }
+
+body #fourth-container-content.anda .akcesoria_koktajlowe a::before {
+  background-image: url("media/ikony/bar.png"); }
+
+body #fourth-container-content.anda .akcesoria_komputerowe a::before {
+  background-image: url("media/ikony/pc.png"); }
+
+body #fourth-container-content.anda .akcesoria_kuchenne a::before {
+  background-image: url("media/ikony/czapka_kucharska.png"); }
+
+body #fourth-container-content.anda .akcesoria_piłkarskie a::before {
+  background-image: url("media/ikony/piłka.png"); }
+
+body #fourth-container-content.anda .akcesoria_plażowe a::before {
+  background-image: url("media/ikony/leżak_plażowy.png"); }
+
+body #fourth-container-content.anda .akcesoria_podróżne a::before {
+  background-image: url("media/ikony/glob.png"); }
+
+body #fourth-container-content.anda .akcesoria_rowerowe a::before {
+  background-image: url("media/ikony/rower.png"); }
+
+body #fourth-container-content.anda .akcesoria_samochodowe a::before {
+  background-image: url("media/ikony/samochód.png"); }
+
+body #fourth-container-content.anda .aluminiowe_sportowe_butelki a::before {
+  background-image: url("media/ikony/bidony.png"); }
+
+body #fourth-container-content.anda .antystresy a::before {
+  background-image: url("media/ikony/antystres.png"); }
+
+body #fourth-container-content.anda .Be_Creative a::before {
+  background-image: url("media/ikony/magia.png"); }
+
+body #fourth-container-content.anda .bezrękawniki a::before {
+  background-image: url("media/ikony/bezrękawnik.png"); }
+
+body #fourth-container-content.anda .biżuteria_i_bransoletki a::before {
+  background-image: url("media/ikony/biżuteria.png"); }
+
+body #fourth-container-content.anda .bluzy a::before {
+  background-image: url("media/ikony/bluza.png"); }
+
+body #fourth-container-content.anda .butelki_i_kubki_termiczne a::before {
+  background-image: url("media/ikony/termosy.png"); }
+
+body #fourth-container-content.anda .chusty_i_krawaty a::before {
+  background-image: url("media/ikony/krawat.png"); }
+
+body #fourth-container-content.anda .czapki_baseballowe a::before {
+  background-image: url("media/ikony/czapka.png"); }
+
+body #fourth-container-content.anda .czapki_zimowe a::before {
+  background-image: url("media/ikony/czapka_zimowa.png"); }
+
+body #fourth-container-content.anda .długopisy_drewniane_i_bambusowe a::before {
+  background-image: url("media/ikony/długopisy_drewniane.png"); }
+
+body #fourth-container-content.anda .długopisy_ekologiczne a::before {
+  background-image: url("media/ikony/długopisy_ekologiczne.png"); }
+
+body #fourth-container-content.anda .długopisy_i_ołówki_dla_dzieci a::before {
+  background-image: url("media/ikony/długopisy_dla_dzieci.png"); }
+
+body #fourth-container-content.anda .długopisy_metalowe a::before {
+  background-image: url("media/ikony/długopisy.png"); }
+
+body #fourth-container-content.anda .długopisy_plastikowe a::before {
+  background-image: url("media/ikony/długopisy.png"); }
+
+body #fourth-container-content.anda .długopisy_wielokolorowe a::before {
+  background-image: url("media/ikony/długopisy.png"); }
+
+body #fourth-container-content.anda .dekoracje a::before {
+  background-image: url("media/ikony/dekoracja.png"); }
+
+body #fourth-container-content.anda .deski_do_krojenia a::before {
+  background-image: url("media/ikony/deska_do_krojenia.png"); }
+
+body #fourth-container-content.anda .drewniane_breloki a::before {
+  background-image: url("media/ikony/brelok.png"); }
+
+body #fourth-container-content.anda .etui_i_uchwyty_do_telefonów a::before {
+  background-image: url("media/ikony/mobile.png"); }
+
+body #fourth-container-content.anda .fartuchy a::before {
+  background-image: url("media/ikony/fartuch.png"); }
+
+body #fourth-container-content.anda .foldery_na_tablety a::before {
+  background-image: url("media/ikony/mobile.png"); }
+
+body #fourth-container-content.anda .futerały a::before {
+  background-image: url("media/ikony/pudło.png"); }
+
+body #fourth-container-content.anda .głośniki a::before {
+  background-image: url("media/ikony/głośnik.png"); }
+
+body #fourth-container-content.anda .gumki_i_ostrzynki a::before {
+  background-image: url("media/ikony/gumki_i_ostrzynki.png"); }
+
+body #fourth-container-content.anda .kable_usb a::before {
+  background-image: url("media/ikony/usb.png"); }
+
+body #fourth-container-content.anda .kalkulatory a::before {
+  background-image: url("media/ikony/kalkulator.png"); }
+
+body #fourth-container-content.anda .kapelusze a::before {
+  background-image: url("media/ikony/kapelusz.png"); }
+
+body #fourth-container-content.anda .klapki a::before {
+  background-image: url("media/ikony/japonki.png"); }
+
+body #fourth-container-content.anda .koce_polarowe a::before {
+  background-image: url("media/ikony/koc.png"); }
+
+body #fourth-container-content.anda .kosmetyczki a::before {
+  background-image: url("media/ikony/kosmetyczka.png"); }
+
+body #fourth-container-content.anda .koszule_i_koszulki_polo a::before {
+  background-image: url("media/ikony/polo.png"); }
+
+body #fourth-container-content.anda .kredki a::before {
+  background-image: url("media/ikony/kredki.png"); }
+
+body #fourth-container-content.anda .kubki a::before {
+  background-image: url("media/ikony/kubki.png"); }
+
+body #fourth-container-content.anda .kubki_termiczne a::before {
+  background-image: url("media/ikony/termosy.png"); }
+
+body #fourth-container-content.anda .kubki_filiżanki_i_szklanki a::before {
+  background-image: url("media/ikony/kubek_i_filiżanka.png"); }
+
+body #fourth-container-content.anda .kurtki a::before {
+  background-image: url("media/ikony/kurtka.png"); }
+
+body #fourth-container-content.anda .latarki a::before {
+  background-image: url("media/ikony/latarka.png"); }
+
+body #fourth-container-content.anda .linijki_i_zakładki a::before {
+  background-image: url("media/ikony/linijka.png"); }
+
+body #fourth-container-content.anda .lornetki_i_kompasy a::before {
+  background-image: url("media/ikony/lornetka.png"); }
+
+body #fourth-container-content.anda .lusterka_i_grzebienie a::before {
+  background-image: url("media/ikony/lusterko.png"); }
+
+body #fourth-container-content.anda .młynki a::before {
+  background-image: url("media/ikony/młynek.png"); }
+
+body #fourth-container-content.anda .magnesy_na_lodówkę a::before {
+  background-image: url("media/ikony/magnes.png"); }
+
+body #fourth-container-content.anda .metalowe_breloki a::before {
+  background-image: url("media/ikony/brelok.png"); }
+
+body #fourth-container-content.anda .miary a::before {
+  background-image: url("media/ikony/miarka.png"); }
+
+body #fourth-container-content.anda .minutniki a::before {
+  background-image: url("media/ikony/klepsydra.png"); }
+
+body #fourth-container-content.anda .monety_do_wózków_zakupowych a::before {
+  background-image: url("media/ikony/brelok_zakupowy.png"); }
+
+body #fourth-container-content.anda .myszki_i_podkładki a::before {
+  background-image: url("media/ikony/podkładka_pod_mysz.png"); }
+
+body #fourth-container-content.anda .nadmuchiwane a::before {
+  background-image: url("media/ikony/powietrze.png"); }
+
+body #fourth-container-content.anda .noże_i_narzędzia a::before {
+  background-image: url("media/ikony/narzędzia.png"); }
+
+body #fourth-container-content.anda .notatniki_i_kartki_samoprzylepne a::before {
+  background-image: url("media/ikony/karteczki.png"); }
+
+body #fourth-container-content.anda .notesy a::before {
+  background-image: url("media/ikony/zeszyt.png"); }
+
+body #fourth-container-content.anda .ołówki a::before {
+  background-image: url("media/ikony/ołówek.png"); }
+
+body #fourth-container-content.anda .ołówki_automatyczne a::before {
+  background-image: url("media/ikony/ołówek_automatyczny.png"); }
+
+body #fourth-container-content.anda .ołówki_grafitowe a::before {
+  background-image: url("media/ikony/ołówek.png"); }
+
+body #fourth-container-content.anda .odświeżacze_samochodowe a::before {
+  background-image: url("media/ikony/zawieszka.png"); }
+
+body #fourth-container-content.anda .odzież_sportowa a::before {
+  background-image: url("media/ikony/koszulka_piłkarska.png"); }
+
+body #fourth-container-content.anda .ogrzewacze a::before {
+  background-image: url("media/ikony/kaloryfer.png"); }
+
+body #fourth-container-content.anda .okulary_przeciwsłoneczne a::before {
+  background-image: url("media/ikony/okulary_przeciwsłoneczne.png"); }
+
+body #fourth-container-content.anda .okulary_vr_i_zestawy_słuchawkowe a::before {
+  background-image: url("media/ikony/vr.png"); }
+
+body #fourth-container-content.anda .opaski_na_oczy_i_zatyczki_do_uszu a::before {
+  background-image: url("media/ikony/zatyczki.png"); }
+
+body #fourth-container-content.anda .osłony_przeciwsłoneczne a::before {
+  background-image: url("media/ikony/osłony_przeciwsłoneczne.png"); }
+
+body #fourth-container-content.anda .otwieracze_do_butelek a::before {
+  background-image: url("media/ikony/otwieracz.png"); }
+
+body #fourth-container-content.anda .outdoor_i_piesze_wycieczki a::before {
+  background-image: url("media/ikony/outdoor.png"); }
+
+body #fourth-container-content.anda .płaszcze_przeciwdeszczowe a::before {
+  background-image: url("media/ikony/płaszcz_przeciwdeszczowy.png"); }
+
+body #fourth-container-content.anda .papierowe_torby_na_zakupy a::before {
+  background-image: url("media/ikony/torba_papierowa.png"); }
+
+body #fourth-container-content.anda .parasole_pełnowymiarowe a::before {
+  background-image: url("media/ikony/parasol.png"); }
+
+body #fourth-container-content.anda .parasole_składane a::before {
+  background-image: url("media/ikony/parasol.png"); }
+
+body #fourth-container-content.anda .paski a::before {
+  background-image: url("media/ikony/pasek.png"); }
+
+body #fourth-container-content.anda .piłki_plażowe a::before {
+  background-image: url("media/ikony/piłka_plażowa.png"); }
+
+body #fourth-container-content.anda .plastikowe_breloki a::before {
+  background-image: url("media/ikony/brelok.png"); }
+
+body #fourth-container-content.anda .plastikowe_sportowe_butelki a::before {
+  background-image: url("media/ikony/bidony.png"); }
+
+body #fourth-container-content.anda .plecaki a::before {
+  background-image: url("media/ikony/plecak.png"); }
+
+body #fourth-container-content.anda .pluszaki a::before {
+  background-image: url("media/ikony/pluszak.png"); }
+
+body #fourth-container-content.anda .podkładki a::before {
+  background-image: url("media/ikony/spinacz2.png"); }
+
+body #fourth-container-content.anda .podstawki a::before {
+  background-image: url("media/ikony/talerzyki.png"); }
+
+body #fourth-container-content.anda .poduszki_i_materace a::before {
+  background-image: url("media/ikony/poduszki_dmuchane.png"); }
+
+body #fourth-container-content.anda .poncza a::before {
+  background-image: url("media/ikony/płaszcz_przeciwdeszczowy.png"); }
+
+body #fourth-container-content.anda .portfele_i_portmonetki a::before {
+  background-image: url("media/ikony/portfel.png"); }
+
+body #fourth-container-content.anda .power_banki a::before {
+  background-image: url("media/ikony/power bank.png"); }
+
+body #fourth-container-content.anda .power_banki_i_ładowarki_usb a::before {
+  background-image: url("media/ikony/power bank.png"); }
+
+body #fourth-container-content.anda .produkty_dla_zwierząt a::before {
+  background-image: url("media/ikony/łapa.png"); }
+
+body #fourth-container-content.anda .produkty_do_dopingu a::before {
+  background-image: url("media/ikony/kibice.png"); }
+
+body #fourth-container-content.anda .produkty_fluoroscencyjne a::before {
+  background-image: url("media/ikony/kamizelka_odblaskowa.png"); }
+
+body #fourth-container-content.anda .produkty_medyczne a::before {
+  background-image: url("media/ikony/stetoskop.png"); }
+
+body #fourth-container-content.anda .przybory_stołowe a::before {
+  background-image: url("media/ikony/stołowe.png"); }
+
+body #fourth-container-content.anda .przywieszki_i_paski_bagażowe a::before {
+  background-image: url("media/ikony/bagaż.png"); }
+
+body #fourth-container-content.anda .pudełka_śniadaniowe_i_pojemniki a::before {
+  background-image: url("media/ikony/launchbox.png"); }
+
+body #fourth-container-content.anda .pudełka_na_tabletki a::before {
+  background-image: url("media/ikony/pudełko_na_tabletki.png"); }
+
+body #fourth-container-content.anda .puzzle a::before {
+  background-image: url("media/ikony/puzzle.png"); }
+
+body #fourth-container-content.anda .ramki a::before {
+  background-image: url("media/ikony/ramka.png"); }
+
+body #fourth-container-content.anda .ręczniki_frotté a::before {
+  background-image: url("media/ikony/ręcznik.png"); }
+
+body #fourth-container-content.anda .ręczniki_z_mikrofibry a::before {
+  background-image: url("media/ikony/ręcznik.png"); }
+
+body #fourth-container-content.anda .rękawice_kuchenne a::before {
+  background-image: url("media/ikony/rękawica_kuchenna.png"); }
+
+body #fourth-container-content.anda .rękawiczki_i_rysiki_do_ekranów_dotykowych a::before {
+  background-image: url("media/ikony/touchpen.png"); }
+
+body #fourth-container-content.anda .rośliny a::before {
+  background-image: url("media/ikony/roślina.png"); }
+
+body #fourth-container-content.anda .rozgałęźnik_uniwersalny a::before {
+  background-image: url("media/ikony/adapter.png"); }
+
+body #fourth-container-content.anda .rysowania_i_kolorowanie a::before {
+  background-image: url("media/ikony/kredki.png"); }
+
+body #fourth-container-content.anda .słuchawki a::before {
+  background-image: url("media/ikony/słuchawki.png"); }
+
+body #fourth-container-content.anda .słuchawki_douszne a::before {
+  background-image: url("media/ikony/słuchawki_douszne.png"); }
+
+body #fourth-container-content.anda .selfie_sticki_i_mobilna_fotografia a::before {
+  background-image: url("media/ikony/selfie stick.png"); }
+
+body #fourth-container-content.anda .składane_torby_na_zakupy a::before {
+  background-image: url("media/ikony/torby.png"); }
+
+body #fourth-container-content.anda .skarbonki a::before {
+  background-image: url("media/ikony/skarbonka.png"); }
+
+body #fourth-container-content.anda .skrobaczki_do_szyb a::before {
+  background-image: url("media/ikony/skrobaczka.png"); }
+
+body #fourth-container-content.anda .smartwatche a::before {
+  background-image: url("media/ikony/smartwatch.png"); }
+
+body #fourth-container-content.anda .smycze_i_uchwyty a::before {
+  background-image: url("media/ikony/identyfikator.png"); }
+
+body #fourth-container-content.anda .stacje_pogodowe a::before {
+  background-image: url("media/ikony/termometr.png"); }
+
+body #fourth-container-content.anda .stojaki_na_długopisy a::before {
+  background-image: url("media/ikony/stojak_na_długopisy.png"); }
+
+body #fourth-container-content.anda .szaliki_i_rękawiczki a::before {
+  background-image: url("media/ikony/szalik_i_rękawiczki.png"); }
+
+body #fourth-container-content.anda .szczoteczki_do_zębów a::before {
+  background-image: url("media/ikony/szczoteczka_do_zębów.png"); }
+
+body #fourth-container-content.anda .szklane_trofea a::before {
+  background-image: url("media/ikony/trofeum.png"); }
+
+body #fourth-container-content.anda .szklanki a::before {
+  background-image: url("media/ikony/szklanka.png"); }
+
+body #fourth-container-content.anda .t-shirty_z_długim_rękawem a::before {
+  background-image: url("media/ikony/długi_rękaw.png"); }
+
+body #fourth-container-content.anda .t-shirty_z_krótkim_rękawem a::before {
+  background-image: url("media/ikony/t-shirt.png"); }
+
+body #fourth-container-content.anda .teczki_na_dokumenty a::before {
+  background-image: url("media/ikony/teczka.png"); }
+
+body #fourth-container-content.anda .torby_na_kółkach a::before {
+  background-image: url("media/ikony/walizki.png"); }
+
+body #fourth-container-content.anda .torby_na_laptopa_i_dokumenty a::before {
+  background-image: url("media/ikony/aktówka.png"); }
+
+body #fourth-container-content.anda .torby_na_plażę a::before {
+  background-image: url("media/ikony/torba_plażowa.png"); }
+
+body #fourth-container-content.anda .torby_na_ramię a::before {
+  background-image: url("media/ikony/torba.png"); }
+
+body #fourth-container-content.anda .torby_na_zakupy a::before {
+  background-image: url("media/ikony/torby.png"); }
+
+body #fourth-container-content.anda .torby_podróżne a::before {
+  background-image: url("media/ikony/torbopas.png"); }
+
+body #fourth-container-content.anda .torby_sportowe a::before {
+  background-image: url("media/ikony/torba_sportowa.png"); }
+
+body #fourth-container-content.anda .torby_termiczne a::before {
+  background-image: url("media/ikony/torby_termiczne.png"); }
+
+body #fourth-container-content.anda .torby_ze_sznurkiem a::before {
+  background-image: url("media/ikony/worek.png"); }
+
+body #fourth-container-content.anda .uchwyty_na_karty_kredytowe a::before {
+  background-image: url("media/ikony/karty_kredytowe.png"); }
+
+body #fourth-container-content.anda .uchywyty_samochodowe a::before {
+  background-image: url("media/ikony/uchwyt_samochodowy.png"); }
+
+body #fourth-container-content.anda .usb_hub a::before {
+  background-image: url("media/ikony/usb_hub.png"); }
+
+body #fourth-container-content.anda .usb_pendrive a::before {
+  background-image: url("media/ikony/pendrive.png"); }
+
+body #fourth-container-content.anda .wagi_bagażowe a::before {
+  background-image: url("media/ikony/waga_bagażowa.png"); }
+
+body #fourth-container-content.anda .wiatraki a::before {
+  background-image: url("media/ikony/wentylator.png"); }
+
+body #fourth-container-content.anda .wizytowniki a::before {
+  background-image: url("media/ikony/karty_kredytowe.png"); }
+
+body #fourth-container-content.anda .wodoodporne_pokrowce_na_telefony a::before {
+  background-image: url("media/ikony/wodoodporne.png"); }
+
+body #fourth-container-content.anda .zabawki a::before {
+  background-image: url("media/ikony/zabawki.png"); }
+
+body #fourth-container-content.anda .zabawki_do_kolorowania a::before {
+  background-image: url("media/ikony/zabawki_do_kolorowania.png"); }
+
+body #fourth-container-content.anda .zabawki_plażowe a::before {
+  background-image: url("media/ikony/drink.png"); }
+
+body #fourth-container-content.anda .zaciski_na_banknoty a::before {
+  background-image: url("media/ikony/banknoty.png"); }
+
+body #fourth-container-content.anda .zakreślacze a::before {
+  background-image: url("media/ikony/zakreślacz.png"); }
+
+body #fourth-container-content.anda .zapalniczki a::before {
+  background-image: url("media/ikony/zapalniczka.png"); }
+
+body #fourth-container-content.anda .zegarki a::before {
+  background-image: url("media/ikony/zegarek.png"); }
+
+body #fourth-container-content.anda .zegary a::before {
+  background-image: url("media/ikony/zegar.png"); }
+
+body #fourth-container-content.anda .zegary_ścienne a::before {
+  background-image: url("media/ikony/zegar.png"); }
+
+body #fourth-container-content.anda .zestawy_do_manicure__makeup a::before {
+  background-image: url("media/ikony/kosmetyki.png"); }
+
+body #fourth-container-content.anda .zestawy_do_wina_i_akcesoria a::before {
+  background-image: url("media/ikony/wino.png"); }
+
+body #fourth-container-content.anda .zestawy_piśmiennicze a::before {
+  background-image: url("media/ikony/długopis.png"); }
+
+body #fourth-container-content.par .akcesoria_komputerowe_i_smartfonowe a::before {
+  background-image: url("media/ikony/mobile.png"); }
+
+body #fourth-container-content.par .akcesoria_samochodowe a::before {
+  background-image: url("media/ikony/samochód.png"); }
+
+body #fourth-container-content.par .artykuły_świąteczne a::before {
+  background-image: url("media/ikony/bombki.png"); }
+
+body #fourth-container-content.par .bidony a::before {
+  background-image: url("media/ikony/bidony.png"); }
+
+body #fourth-container-content.par .breloki_antystresowe a::before {
+  background-image: url("media/ikony/brelok_antystres.png"); }
+
+body #fourth-container-content.par .czapki a::before {
+  background-image: url("media/ikony/czapka.png"); }
+
+body #fourth-container-content.par .długopisy_aluminiowe a::before {
+  background-image: url("media/ikony/długopisy.png"); }
+
+body #fourth-container-content.par .długopisy_eco a::before {
+  background-image: url("media/ikony/długopisy_ekologiczne.png"); }
+
+body #fourth-container-content.par .długopisy_metalowe a::before {
+  background-image: url("media/ikony/długopisy.png"); }
+
+body #fourth-container-content.par .długopisy_plastikowe a::before {
+  background-image: url("media/ikony/długopisy.png"); }
+
+body #fourth-container-content.par .dla_fanów a::before {
+  background-image: url("media/ikony/kibice.png"); }
+
+body #fourth-container-content.par .do_łazienki a::before {
+  background-image: url("media/ikony/wanna.png"); }
+
+body #fourth-container-content.par .do_kuchni a::before {
+  background-image: url("media/ikony/czapka_kucharska.png"); }
+
+body #fourth-container-content.par .etui a::before {
+  background-image: url("media/ikony/pudło.png"); }
+
+body #fourth-container-content.par .etui_na_laptopa_i_smartfon a::before {
+  background-image: url("media/ikony/pudło.png"); }
+
+body #fourth-container-content.par .gry a::before {
+  background-image: url("media/ikony/zabawki.png"); }
+
+body #fourth-container-content.par .izotermiczne a::before {
+  background-image: url("media/ikony/termosy.png"); }
+
+body #fourth-container-content.par .kosze a::before {
+  background-image: url("media/ikony/koszyk_sklepowy.png"); }
+
+body #fourth-container-content.par .kubki a::before {
+  background-image: url("media/ikony/kubki.png"); }
+
+body #fourth-container-content.par .latarki a::before {
+  background-image: url("media/ikony/latarka.png"); }
+
+body #fourth-container-content.par .leak_proof a::before {
+  background-image: url("media/ikony/nieprzemakalne.png"); }
+
+body #fourth-container-content.par .metalowe_aluminiowe a::before {
+  background-image: url("media/ikony/brelok.png"); }
+
+body #fourth-container-content.par .miarki_ołówki_stolarskie a::before {
+  background-image: url("media/ikony/miarka.png"); }
+
+body #fourth-container-content.par .na_biurko a::before {
+  background-image: url("media/ikony/spinacz.png"); }
+
+body #fourth-container-content.par .niezbędne_w_podróży a::before {
+  background-image: url("media/ikony/glob.png"); }
+
+body #fourth-container-content.par .notesy_notatniki a::before {
+  background-image: url("media/ikony/notesy.png"); }
+
+body #fourth-container-content.par .ołówki a::before {
+  background-image: url("media/ikony/ołówek.png"); }
+
+body #fourth-container-content.par .odblaski a::before {
+  background-image: url("media/ikony/kamizelka_odblaskowa.png"); }
+
+body #fourth-container-content.par .opaski_do_r08394 a::before {
+  background-image: url("media/ikony/kubek.png"); }
+
+body #fourth-container-content.par .ozdoby_domowe a::before {
+  background-image: url("media/ikony/swieca.png"); }
+
+body #fourth-container-content.par .parasole a::before {
+  background-image: url("media/ikony/parasol.png"); }
+
+body #fourth-container-content.par .piłki_antystresowe a::before {
+  background-image: url("media/ikony/antystres.png"); }
+
+body #fourth-container-content.par .pióra_wieczne_i_kulkowe a::before {
+  background-image: url("media/ikony/pióro2.png"); }
+
+body #fourth-container-content.par .plecaki a::before {
+  background-image: url("media/ikony/plecak.png"); }
+
+body #fourth-container-content.par .pluszaki_i_maskotki a::before {
+  background-image: url("media/ikony/pluszak.png"); }
+
+body #fourth-container-content.par .Pozostałe a::before {
+  background-image: url("media/ikony/antystres.png"); }
+
+body #fourth-container-content.par .rowerowe a::before {
+  background-image: url("media/ikony/rower.png"); }
+
+body #fourth-container-content.par .szkoła_i_dom a::before {
+  background-image: url("media/ikony/samolocik.png"); }
+
+body #fourth-container-content.par .teczki_i_torby_na_dokumenty a::before {
+  background-image: url("media/ikony/teczka2.png"); }
+
+body #fourth-container-content.par .teczki_konferencyjne a::before {
+  background-image: url("media/ikony/teczka.png"); }
+
+body #fourth-container-content.par .termosy a::before {
+  background-image: url("media/ikony/termosy.png"); }
+
+body #fourth-container-content.par .torby_i_plecaki_na_laptopa a::before {
+  background-image: url("media/ikony/aktówka.png"); }
+
+body #fourth-container-content.par .torby_na_prezenty a::before {
+  background-image: url("media/ikony/torba_papierowa.png"); }
+
+body #fourth-container-content.par .torby_na_zakupy a::before {
+  background-image: url("media/ikony/torby.png"); }
+
+body #fourth-container-content.par .torby_podróżne a::before {
+  background-image: url("media/ikony/torba2.png"); }
+
+body #fourth-container-content.par .wizytowniki a::before {
+  background-image: url("media/ikony/karty_kredytowe.png"); }
+
+body #fourth-container-content.par .worki_na_prezenty a::before {
+  background-image: url("media/ikony/worek2.png"); }
+
+body #fourth-container-content.par .z_żetonem_z_otwieraczem a::before {
+  background-image: url("media/ikony/brelok.png"); }
+
+body #fourth-container-content.par .z_miarką_latarką_diodą a::before {
+  background-image: url("media/ikony/brelok.png"); }
+
+body #fourth-container-content.par .zegary_i_kalkulatory a::before {
+  background-image: url("media/ikony/zegar_i_kalkulator.png"); }
+
+body #fourth-container-content.par .zestawy_do_wina a::before {
+  background-image: url("media/ikony/wino.png"); }
+
+body #fourth-container-content.par .zestawy_narzędzi_scyzoryki a::before {
+  background-image: url("media/ikony/narzędzia.png"); }
+
+body #fourth-container-content.par .zestawy_piśmiennicze a::before {
+  background-image: url("media/ikony/długopis.png"); }
+
+body #fourth-container-content.falkross .bawełna_organiczna a::before {
+  background-image: url("media/ikony/bawełna.png"); }
+
+body #fourth-container-content.falkross .bielizna a::before {
+  background-image: url("media/ikony/bielizna.png"); }
+
+body #fourth-container-content.falkross .bistro a::before {
+  background-image: url("media/ikony/fartuch.png"); }
+
+body #fourth-container-content.falkross .bluzy a::before {
+  background-image: url("media/ikony/bluza_z_kapturem.png"); }
+
+body #fourth-container-content.falkross .buty a::before {
+  background-image: url("media/ikony/but_sportowy.png"); }
+
+body #fourth-container-content.falkross .czapki_i_akcesoria a::before {
+  background-image: url("media/ikony/czapka.png"); }
+
+body #fourth-container-content.falkross .dom_i_wnętrze a::before {
+  background-image: url("media/ikony/ręcznik.png"); }
+
+body #fourth-container-content.falkross .kurtki a::before {
+  background-image: url("media/ikony/kurtka.png"); }
+
+body #fourth-container-content.falkross .materiały_eksploatacyjne a::before {
+  background-image: url("media/ikony/papier.png"); }
+
+body #fourth-container-content.falkross .new a::before {
+  background-image: url("media/ikony/nowość2.png"); }
+
+body #fourth-container-content.falkross .odzież_biznesowa a::before {
+  background-image: url("media/ikony/koszula.png"); }
+
+body #fourth-container-content.falkross .odzież_dziecięca a::before {
+  background-image: url("media/ikony/dziecięce.png"); }
+
+body #fourth-container-content.falkross .odzież_robocza a::before {
+  background-image: url("media/ikony/robocze.png"); }
+
+body #fourth-container-content.falkross .odzież_sportowa a::before {
+  background-image: url("media/ikony/koszulka_piłkarska.png"); }
+
+body #fourth-container-content.falkross .outlet a::before {
+  background-image: url("media/ikony/outlet.png"); }
+
+body #fourth-container-content.falkross .polary a::before {
+  background-image: url("media/ikony/bluza_polarowa.png"); }
+
+body #fourth-container-content.falkross .polo a::before {
+  background-image: url("media/ikony/koszula_polo.png"); }
+
+body #fourth-container-content.falkross .promocje a::before {
+  background-image: url("media/ikony/promocja.png"); }
+
+body #fourth-container-content.falkross .ręczniki_i_szlafroki a::before {
+  background-image: url("media/ikony/ręcznik.png"); }
+
+body #fourth-container-content.falkross .reflektierende_und_neon-farben a::before {
+  background-image: url("media/ikony/kamizelka_odblaskowa.png"); }
+
+body #fourth-container-content.falkross .softshelle a::before {
+  background-image: url("media/ikony/softshelle.png"); }
+
+body #fourth-container-content.falkross .spodnie a::before {
+  background-image: url("media/ikony/spodnie.png"); }
+
+body #fourth-container-content.falkross .sublimation a::before {
+  background-image: url("media/ikony/znakowanie.png"); }
+
+body #fourth-container-content.falkross .t-shirty a::before {
+  background-image: url("media/ikony/t-shirt.png"); }
+
+body #fourth-container-content.falkross .torby a::before {
+  background-image: url("media/ikony/torby.png"); }
+
+body #fourth-container-content.falkross .web_exclusives a::before {
+  background-image: url("media/ikony/exclusive.png"); }
+
+body #fourth-container-content.falkross .zdrowie_i_uroda a::before {
+  background-image: url("media/ikony/masaż.png"); }
+
+body #fourth-container-content.jaguargift .breloki a::before {
+  background-image: url("media/ikony/brelok.png"); }
+
+body #fourth-container-content.jaguargift .etui_na_dokumenty_i_karty a::before {
+  background-image: url("media/ikony/karty_kredytowe.png"); }
+
+body #fourth-container-content.jaguargift .etui_na_wizytówki a::before {
+  background-image: url("media/ikony/karty_kredytowe.png"); }
+
+body #fourth-container-content.jaguargift .gifts_of_the_year a::before {
+  background-image: url("media/ikony/prezent.png"); }
+
+body #fourth-container-content.jaguargift .hotele_i_restauracje a::before {
+  background-image: url("media/ikony/restauracja.png"); }
+
+body #fourth-container-content.jaguargift .Inne a::before {
+  background-image: url("media/ikony/dymek.png"); }
+
+body #fourth-container-content.jaguargift .kalendarze a::before {
+  background-image: url("media/ikony/książka.png"); }
+
+body #fourth-container-content.jaguargift .kosmetyczki a::before {
+  background-image: url("media/ikony/kosmetyczka.png"); }
+
+body #fourth-container-content.jaguargift .made_in_poland a::before {
+  background-image: url("media/ikony/polska.png"); }
+
+body #fourth-container-content.jaguargift .materiały_promocyjne a::before {
+  background-image: url("media/ikony/megafon.png"); }
+
+body #fourth-container-content.jaguargift .notesy a::before {
+  background-image: url("media/ikony/zeszyt.png"); }
+
+body #fourth-container-content.jaguargift .nowości a::before {
+  background-image: url("media/ikony/nowość2.png"); }
+
+body #fourth-container-content.jaguargift .opakowania a::before {
+  background-image: url("media/ikony/pudło.png"); }
+
+body #fourth-container-content.jaguargift .organizery a::before {
+  background-image: url("media/ikony/teczka.png"); }
+
+body #fourth-container-content.jaguargift .paski a::before {
+  background-image: url("media/ikony/pasek.png"); }
+
+body #fourth-container-content.jaguargift .piersiówki a::before {
+  background-image: url("media/ikony/piersiówka.png"); }
+
+body #fourth-container-content.jaguargift .plecaki a::before {
+  background-image: url("media/ikony/plecak.png"); }
+
+body #fourth-container-content.jaguargift .portfele a::before {
+  background-image: url("media/ikony/portfel.png"); }
+
+body #fourth-container-content.jaguargift .powerbags a::before {
+  background-image: url("media/ikony/powerbags.png"); }
+
+body #fourth-container-content.jaguargift .produkty_z_filcu a::before {
+  background-image: url("media/ikony/filc.png"); }
+
+body #fourth-container-content.jaguargift .produkty_z_filmami_video a::before {
+  background-image: url("media/ikony/film.png"); }
+
+body #fourth-container-content.jaguargift .promocje a::before {
+  background-image: url("media/ikony/promocja.png"); }
+
+body #fourth-container-content.jaguargift .rfid a::before {
+  background-image: url("media/ikony/rfid.png"); }
+
+body #fourth-container-content.jaguargift .teczki a::before {
+  background-image: url("media/ikony/aktówka.png"); }
+
+body #fourth-container-content.jaguargift .torby a::before {
+  background-image: url("media/ikony/torba.png"); }
+
+body #fourth-container-content.jaguargift .travel a::before {
+  background-image: url("media/ikony/glob.png"); }
+
+body #fourth-container-content.jaguargift .wyprzedaż a::before {
+  background-image: url("media/ikony/wyprzedaż2.png"); }
+
+body #fourth-container-content.jaguargift .zestawy a::before {
+  background-image: url("media/ikony/plus.png"); }
+
+body #fourth-container-content.jaguargift .zestawy_piór a::before {
+  background-image: url("media/ikony/pióra.png"); }
+
+body #fourth-container-content.jaguargift .znakowanie a::before {
+  background-image: url("media/ikony/znakowanie2.png"); }
 
 #owl-demo .owl-item img {
   max-width: 100%; }
@@ -1098,5 +2084,36 @@ body #fourth-container-content.macma .torby_worki_plecaki a::before {
 @media (min-width: 1200px) {
   #Nav-container {
     max-width: 330px; } }
+
+#fb_box {
+  position: fixed;
+  top: calc( ( 100vh - 200px )/2);
+  left: 0;
+  min-height: 200px;
+  -webkit-transform: translate(-100%, 0);
+          transform: translate(-100%, 0);
+  -webkit-transition: -webkit-transform .3s linear;
+  transition: -webkit-transform .3s linear;
+  transition: transform .3s linear;
+  transition: transform .3s linear, -webkit-transform .3s linear;
+  z-index: 500;
+  background-color: #fff; }
+  #fb_box .btn {
+    position: absolute;
+    width: 140px;
+    height: 30px;
+    top: 0;
+    left: 100%;
+    -webkit-transform-origin: bottom left;
+            transform-origin: bottom left;
+    -webkit-transform: translate(0%, -100%) rotate(90deg);
+            transform: translate(0%, -100%) rotate(90deg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(media/facebook-logo.jpg); }
+  #fb_box:hover {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); }
 
 /*# sourceMappingURL=style.css.map */
